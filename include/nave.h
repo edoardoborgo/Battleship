@@ -1,0 +1,5 @@
+
+#ifndef BATTLESHIP_NAVE_H
+#define BATTLESHIP_NAVE_H
+
+#endif //BATTLESHIP_NAVE_H
