@@ -55,6 +55,12 @@ build CMakeFiles/Battleship.dir/source/main.cpp.obj: CXX_COMPILER__Battleship_De
   OBJECT_DIR = CMakeFiles\Battleship.dir
   OBJECT_FILE_DIR = CMakeFiles\Battleship.dir\source
 
+build CMakeFiles/Battleship.dir/lib/nave.cpp.obj: CXX_COMPILER__Battleship_Debug C$:/Users/borgo/Documents/GitHub/Battleship/lib/nave.cpp || cmake_object_order_depends_target_Battleship
+  DEP_FILE = CMakeFiles\Battleship.dir\lib\nave.cpp.obj.d
+  FLAGS = -g -fdiagnostics-color=always -std=gnu++11
+  OBJECT_DIR = CMakeFiles\Battleship.dir
+  OBJECT_FILE_DIR = CMakeFiles\Battleship.dir\lib
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target Battleship
@@ -63,7 +69,7 @@ build CMakeFiles/Battleship.dir/source/main.cpp.obj: CXX_COMPILER__Battleship_De
 #############################################
 # Link the executable Battleship.exe
 
-build Battleship.exe: CXX_EXECUTABLE_LINKER__Battleship_Debug CMakeFiles/Battleship.dir/source/main.cpp.obj
+build Battleship.exe: CXX_EXECUTABLE_LINKER__Battleship_Debug CMakeFiles/Battleship.dir/source/main.cpp.obj CMakeFiles/Battleship.dir/lib/nave.cpp.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\Battleship.dir
