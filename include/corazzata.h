@@ -3,7 +3,7 @@
 
 namespace battleship{
 
-    class corazzata : 
+    class corazzata :
 
 }
 

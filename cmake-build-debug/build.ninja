@@ -79,6 +79,18 @@ build CMakeFiles/Battleship.dir/lib/sottomarino.cpp.obj: CXX_COMPILER__Battleshi
   OBJECT_DIR = CMakeFiles\Battleship.dir
   OBJECT_FILE_DIR = CMakeFiles\Battleship.dir\lib
 
+build CMakeFiles/Battleship.dir/utilities/coordinata.cpp.obj: CXX_COMPILER__Battleship_Debug C$:/Users/borgo/Documents/GitHub/Battleship/utilities/coordinata.cpp || cmake_object_order_depends_target_Battleship
+  DEP_FILE = CMakeFiles\Battleship.dir\utilities\coordinata.cpp.obj.d
+  FLAGS = -g -fdiagnostics-color=always -std=gnu++11
+  OBJECT_DIR = CMakeFiles\Battleship.dir
+  OBJECT_FILE_DIR = CMakeFiles\Battleship.dir\utilities
+
+build CMakeFiles/Battleship.dir/utilities/griglia.cpp.obj: CXX_COMPILER__Battleship_Debug C$:/Users/borgo/Documents/GitHub/Battleship/utilities/griglia.cpp || cmake_object_order_depends_target_Battleship
+  DEP_FILE = CMakeFiles\Battleship.dir\utilities\griglia.cpp.obj.d
+  FLAGS = -g -fdiagnostics-color=always -std=gnu++11
+  OBJECT_DIR = CMakeFiles\Battleship.dir
+  OBJECT_FILE_DIR = CMakeFiles\Battleship.dir\utilities
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target Battleship
@@ -87,7 +99,7 @@ build CMakeFiles/Battleship.dir/lib/sottomarino.cpp.obj: CXX_COMPILER__Battleshi
 #############################################
 # Link the executable Battleship.exe
 
-build Battleship.exe: CXX_EXECUTABLE_LINKER__Battleship_Debug CMakeFiles/Battleship.dir/source/main.cpp.obj CMakeFiles/Battleship.dir/lib/nave.cpp.obj CMakeFiles/Battleship.dir/lib/corazzata.cpp.obj CMakeFiles/Battleship.dir/lib/supporto.cpp.obj CMakeFiles/Battleship.dir/lib/sottomarino.cpp.obj
+build Battleship.exe: CXX_EXECUTABLE_LINKER__Battleship_Debug CMakeFiles/Battleship.dir/source/main.cpp.obj CMakeFiles/Battleship.dir/lib/nave.cpp.obj CMakeFiles/Battleship.dir/lib/corazzata.cpp.obj CMakeFiles/Battleship.dir/lib/supporto.cpp.obj CMakeFiles/Battleship.dir/lib/sottomarino.cpp.obj CMakeFiles/Battleship.dir/utilities/coordinata.cpp.obj CMakeFiles/Battleship.dir/utilities/griglia.cpp.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\Battleship.dir
