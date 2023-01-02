@@ -1,7 +1,3 @@
-//
-// Created by borgo on 02/01/2023.
-//
-
 #ifndef BATTLESHIP_SOTTOMARINO_H
 #define BATTLESHIP_SOTTOMARINO_H
 

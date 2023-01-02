@@ -1,9 +1,9 @@
 #ifndef BATTLESHIP_CORAZZATA_H
 #define BATTLESHIP_CORAZZATA_H
 
-namespace Battleship{
+namespace battleship{
 
-    class 
+    class corazzata : 
 
 }
 
