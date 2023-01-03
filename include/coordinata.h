@@ -11,7 +11,6 @@ namespace battaglia_navale{
     public:
         int x;
         int y;
-        std::string nome;
 
         Coordinate()
             : x{-1}, y{-1}

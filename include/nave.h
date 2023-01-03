@@ -10,15 +10,7 @@ namespace Nave_lib{
         int dimensione;
         //todo risolvere bool corazza[dimensione];
         bool is_orizzontale;
-
-    private:
-        /*
-         *  is_nave: controlla se le coordinate di prua e poppa costituiscono una nave.
-         *  Il controllo è basato sulle specifiche richieste dal progetto di Laboratorio di programmazione:
-         *      -le navi devono essere ortogonali al piano, non ci possono essere navi in obliquo
-         *      -le dimensioni di ogni tipo di nave devono essere rispettate: corazzata=5, sottomarino=1, supporto=3.
-         */
-        bool is_nave(coordinata &prua, coordinata &poppa);
+        //bool is_nave;
 
         /*
          *  calcolo_verso: date le coordinate di prua e poppa calcola il verso e setta @param is_orizzontale: true=orizzontale, false=verticale.
@@ -36,7 +28,7 @@ namespace Nave_lib{
          */
         Nave(coordinata &prua, coordinata &poppa);
         /*
-         *  costruttore utilizzato per la creazione di oggetti nave con dimensione maggiore uguale a 1.
+         *  costruttore utilizzato per la creazione di oggetti nave con dimensione uguale a 1.
          */
         Nave(coordinata &prua);
     public:
