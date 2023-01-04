@@ -249,30 +249,6 @@ lib/supporto.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Battleship.dir/build.make CMakeFiles/Battleship.dir/lib/supporto.cpp.s
 .PHONY : lib/supporto.cpp.s
 
-source/main.o: source/main.cpp.o
-.PHONY : source/main.o
-
-# target to build an object file
-source/main.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Battleship.dir/build.make CMakeFiles/Battleship.dir/source/main.cpp.o
-.PHONY : source/main.cpp.o
-
-source/main.i: source/main.cpp.i
-.PHONY : source/main.i
-
-# target to preprocess a source file
-source/main.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Battleship.dir/build.make CMakeFiles/Battleship.dir/source/main.cpp.i
-.PHONY : source/main.cpp.i
-
-source/main.s: source/main.cpp.s
-.PHONY : source/main.s
-
-# target to generate assembly for a file
-source/main.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Battleship.dir/build.make CMakeFiles/Battleship.dir/source/main.cpp.s
-.PHONY : source/main.cpp.s
-
 utilities/coordinata.o: utilities/coordinata.cpp.o
 .PHONY : utilities/coordinata.o
 
@@ -345,9 +321,6 @@ help:
 	@echo "... lib/supporto.o"
 	@echo "... lib/supporto.i"
 	@echo "... lib/supporto.s"
-	@echo "... source/main.o"
-	@echo "... source/main.i"
-	@echo "... source/main.s"
 	@echo "... utilities/coordinata.o"
 	@echo "... utilities/coordinata.i"
 	@echo "... utilities/coordinata.s"

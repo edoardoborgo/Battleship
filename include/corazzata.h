@@ -3,11 +3,9 @@
 
 #include
 
-namespace battleship : {
+    class corazzata{
 
-    class corazzata :
-
-}
+    }
 
 #endif //BATTLESHIP_CORAZZATA_H
 

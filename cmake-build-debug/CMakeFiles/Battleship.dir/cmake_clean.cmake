@@ -11,8 +11,6 @@ file(REMOVE_RECURSE
   "CMakeFiles/Battleship.dir/lib/sottomarino.cpp.o.d"
   "CMakeFiles/Battleship.dir/lib/supporto.cpp.o"
   "CMakeFiles/Battleship.dir/lib/supporto.cpp.o.d"
-  "CMakeFiles/Battleship.dir/source/main.cpp.o"
-  "CMakeFiles/Battleship.dir/source/main.cpp.o.d"
   "CMakeFiles/Battleship.dir/utilities/coordinata.cpp.o"
   "CMakeFiles/Battleship.dir/utilities/coordinata.cpp.o.d"
   "CMakeFiles/Battleship.dir/utilities/griglia.cpp.o"

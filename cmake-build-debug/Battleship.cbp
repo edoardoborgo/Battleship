@@ -91,9 +91,6 @@
 		<Unit filename="/home/jnks/Battleship/Battleship/include/griglia.h">
 			<Option target="Battleship"/>
 		</Unit>
-		<Unit filename="/home/jnks/Battleship/Battleship/include/griglia_attacco.h">
-			<Option target="Battleship"/>
-		</Unit>
 		<Unit filename="/home/jnks/Battleship/Battleship/include/nave.h">
 			<Option target="Battleship"/>
 		</Unit>
@@ -116,9 +113,6 @@
 			<Option target="Battleship"/>
 		</Unit>
 		<Unit filename="/home/jnks/Battleship/Battleship/lib/supporto.cpp">
-			<Option target="Battleship"/>
-		</Unit>
-		<Unit filename="/home/jnks/Battleship/Battleship/source/main.cpp">
 			<Option target="Battleship"/>
 		</Unit>
 		<Unit filename="/home/jnks/Battleship/Battleship/utilities/coordinata.cpp">
