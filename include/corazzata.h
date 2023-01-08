@@ -1,11 +1,22 @@
+#include "nave.h"
+#include "coordinata.h"
+#include "giocatore.h"
+#include "griglia.h"
+
 #ifndef BATTLESHIP_CORAZZATA_H
 #define BATTLESHIP_CORAZZATA_H
 
 #include
 
-    class corazzata{
-
-    }
+class Corazzata : public Nave {
+private:
+    char simbolo_ = 'C';
+    int dimensione = 5;
+public:
+    Corazzata(battaglia_navale::Coordinate &prua, battaglia_navale::Coordinate &poppa); //costruttore con array di bool da 5
+    bool azione(Giocatore::player difensore, battaglia_navale::Coordinate &target); //recupero griglia del difensore, controllo se c'è una nave, se true diminuisco corazza e stampo 'X', se false 'O'
+    void set_corazza();
+};
 
 #endif //BATTLESHIP_CORAZZATA_H
 

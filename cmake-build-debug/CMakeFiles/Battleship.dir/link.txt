@@ -1,1 +1,0 @@
-/usr/bin/c++ -g CMakeFiles/Battleship.dir/lib/nave.cpp.o CMakeFiles/Battleship.dir/lib/corazzata.cpp.o CMakeFiles/Battleship.dir/lib/supporto.cpp.o CMakeFiles/Battleship.dir/lib/sottomarino.cpp.o CMakeFiles/Battleship.dir/utilities/coordinata.cpp.o CMakeFiles/Battleship.dir/utilities/griglia.cpp.o CMakeFiles/Battleship.dir/lib/griglia.cpp.o -o Battleship 
