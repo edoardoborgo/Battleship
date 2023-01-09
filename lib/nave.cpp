@@ -73,8 +73,10 @@ battaglia_navale::Coordinate Nave::calcolo_centro(battaglia_navale::Coordinate &
 
 void Nave::set_corazza(battaglia_navale::Coordinate &coord) {
     for(int i=0; i<corazza_.size(); i++){
-        if(corazza_[i].c==coord)
-            corazza_[i].stato='c';
+        if(corazza_[i].coord==coord){
+            if(corazza_[i].stato>=65 && corazza_[i].stato<=90)
+                corazza_[i].stato=simbolo_+32;
+        }
     }
 }
 

@@ -35,15 +35,15 @@ Corazzata::Corazzata(battaglia_navale::Coordinate &prua, battaglia_navale::Coord
 bool Corazzata::azione(Giocatore difensore, battaglia_navale::Coordinate &target) {
     std::vector<Nave *> navi = difensore.get_navi(); //recupero le navi dell'avversario
     //per ogni nave confronto l'entità Tupla che rappresenta un elemento di corazza per vedere se corrisponde al target scelto dall'attacante
-
     for (int i = 0; i < navi.size(); i++) {
         std::vector<Nave::Tupla> corazza = navi[i]->get_corazza();
         for (int j = 0; j < corazza.size(); j++) {
             if (corazza[i].coord == target) {
                 //target trovato
-                //accedo alla nave, tramite set_corazza cambio lo stato della Tupla in posizione coordinata target
-                corazza[i].stato = (char) (navi[i]->simbolo_ + 32);
-                navi[i]->set_corazza(target);
+                //accedo alla nave, tramite set_corazza cambio lo stato della Tupla in posizione coordinata target, lo metto in minuscolo solo se era maiuscolo
+                if(corazza[i].stato>=65 && corazza[i].stato<=90)
+                    corazza[i].stato = (char) (navi[i]->simbolo_ + 32);
+                navi[i]->set_corazza(target); //TODO set_corazza switcha lo stato o mette sempre a coplito? se switcha questa riga va inserita nell'if sopra
                 return true; //TODO stampare la X in griglia chiamante
             }
         }
