@@ -10,15 +10,16 @@ private:
     battaglia_navale::Griglia griglia_attacco;
     std::vector<Nave *> navi;
 public:
-    //costruttore su classi derivate
+    Giocatore();
+
     void add_nave(Nave nave);
-    //funzione che controlla se in una determinata coordinata c'è una nave
-    //
 
     //funzione che modifica la griglia di attacco
-    void set_risultato(){
-        griglia_attacco.
+    //oppure fare un metodo get griglia e tramite reference alla griglia chiamare set_risultato, evitando questa funzione
+    void set_risultato(battaglia_navale::Coordinate coord, char stato) {
+        griglia_attacco.set_risultato(coord, stato);
     }
+
     std::vector<Nave *> get_navi() {
         return navi;
     }

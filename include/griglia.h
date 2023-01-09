@@ -10,28 +10,25 @@ namespace battaglia_navale {
     class Griglia {
 
     private:
-        const static int righe=12;
-        const static int colonne=12;
-        std::vector<std::vector<char>> tabellone {righe, std::vector<char>{colonne}};
+        const static int righe = 12;
+        const static int colonne = 12;
+        std::vector<std::vector<char>> tabellone;
+        //vector<vector<int>> myVector(num_of_items, vector<int>(2, 3));
 
     public:
-
-        //costruttore di default della griglia
-        //Griglia() {
-            /*tabellone[righe][colonne];
-            for(int i=0; i<righe; i++){
-                for(int j=0; j<colonne; j++){
-                    tabellone[i][j]=' ';
+        Griglia() {
+            //inizializzazione vector_char<vector_char>
+            for (int col = 0; col < colonne; col++) {
+                std::vector<char> appo_vector;
+                for (int row = 0; row < righe; row++) {
+                    appo_vector.push_back(' ');
                 }
-            }*/
-       // };
-
-        void set_risultato(battaglia_navale::Coordinate coord, bool is_colpito){
-            if(is_colpito){
-                //tabellone[coord.get_x(),coord.get_y()]='X';
-            }else{
-                //tabellone[coord.get_x(),coord.get_y()]='X';
+                tabellone.push_back(appo_vector);
             }
+        };
+
+        void set_risultato(battaglia_navale::Coordinate coord, char stato) {
+            tabellone[coord.get_x()][coord.get_y()]=stato;
         }
 
         /*
