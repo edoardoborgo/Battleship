@@ -2,6 +2,7 @@
 #include "coordinata.h"
 #include "giocatore.h"
 #include "griglia.h"
+#include "giocatore.h"
 
 #ifndef BATTLESHIP_CORAZZATA_H
 #define BATTLESHIP_CORAZZATA_H

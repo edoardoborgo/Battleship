@@ -13,7 +13,7 @@ public:
     bool is_orizzontale_;
 
     struct Tupla{
-        battaglia_navale::Coordinate c;
+        battaglia_navale::Coordinate coord;
         char stato;
     };
     std::vector<Tupla> corazza_;
@@ -73,6 +73,8 @@ public:
      *  azione: data una coordinata deve andare ad agire sulla griglia difensiva dell'avversario
      */
     virtual bool azione(Giocatore::player difensore, battaglia_navale::Coordinate &target);
+
+    std::vector<Tupla> get_corazza();
 };
 
 #endif NAVE_H
