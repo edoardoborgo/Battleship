@@ -3,109 +3,40 @@
 #ifndef BATTLESHIP_COORDINATA_H
 #define BATTLESHIP_COORDINATA_H
 
-#include <string>
+namespace battaglia_navale {
 
-namespace battaglia_navale{
-
-    class Coordinate{
+    class Coordinate {
+    private:
+        int x_;
+        char y_;
     public:
-        int x;
-        int y;
-
         Coordinate()
-            : x{-1}, y{-1}
-        {
+                : x_{-1}, y_{} {}
 
+        Coordinate(const int x, const char y)
+                : x_{x}, y_{y} {}
+
+        //TODO definizione inline?
+        bool operator==(const battaglia_navale::Coordinate &coord);
+
+        int get_x() const {
+            return x_;
         }
 
-        Coordinate(const int x_nave, const int y_nave)
-            :x{x_nave}, y{y_nave}
-        {
-
+        int get_y() const {
+            return y_;
         }
 
+        //TODO controllo che i nuovi valori siano accettabili cioè interni alla griglia
+        void set_x(int x){
+            x_= x;
+        }
+
+        void set_y(int y){
+            y_= y;
+        }
     };
 
 }
 
 #endif //BATTLESHIP_COORDINATA_H
-
-/*
-        class Coordinates
-            public:
-                int x;
-                int y;
-                std::string symbol;
-
-            @brief Construct a new Coordinates object, initializing it to (-1, -1) as default (Invalid pair)
-
-    Coordinates() : Coordinates(-1, -1) {};
-
-     * @brief Construct a new Coordinates object
-     *
-     * @param x
-     * @param y
-
-    Coordinates(int x, int y);
-
-    Coordinate c = new Coordinate("e");
-    Coordinate c1 = new Coordinate(5, 7);
-    c(C);
-
-     * @brief Construct a new Coordinates object
-     *
-     * @param symbol chessboard coordinates representation
-
-    Coordinates(std::string symbol);
-
-     * @brief Construct a new Coordinates object (copy constructor)
-     *
-     * @param coord
-
-    Coordinates(const Coordinates &coord)
-    {
-        this->x = coord.x;
-        this->y = coord.y;
-        this->symbol = coord.symbol;
-    }
-
-     * @brief Assignment operator overloading
-     *
-     * @param coord
-     * @return Coordinates&
-
-    Coordinates &operator=(const Coordinates &coord)
-    {
-        this->x = coord.x;
-        this->y = coord.y;
-        this->symbol = coord.symbol;
-        return *this;
-    }
-
-     * @brief "Equal to" operator overloading
-     *
-     * @param other_coord
-     * @return true
-     * @return false
-
-    bool operator==(const Coordinates &other_coord) const
-    {
-        return this->x == other_coord.x && this->y == other_coord.y;
-    }
-
-     * @brief "Different than" operator overloading
-     *
-     * @param other_coord
-     * @return true
-     * @return false
-
-    bool operator!=(const Coordinates &other__coord) const
-    {
-        return !(*this == other__coord);
-    }
-    // increment and decrement operators disabled
-    Coordinates &operator++() = delete;
-    Coordinates &operator--() = delete;
-};
-}
-*/

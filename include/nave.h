@@ -1,4 +1,5 @@
 #include "coordinata.h"
+#include <vector>
 
 #ifndef NAVE_H
 #define NAVE_H
@@ -12,11 +13,15 @@ public:
     bool is_orizzontale_;
 
     struct Tupla{
-        Coordinata c;
-        is_colpito = 'S';
+        battaglia_navale::Coordinate c;
+        char stato;
     };
+    std::vector<Tupla> corazza_;
 
-
+    /*
+     *  costruttore di default
+    */
+    Nave();
     /*
      *  costruttore utilizzato per la creazione di oggetti nave con dimensione maggiore di 1.
      */
@@ -67,7 +72,7 @@ public:
     /*
      *  azione: data una coordinata deve andare ad agire sulla griglia difensiva dell'avversario
      */
-    virtual bool azione(battaglia_navale::Coordinate &target);
+    virtual bool azione(Giocatore::player difensore, battaglia_navale::Coordinate &target);
 };
 
 #endif NAVE_H
