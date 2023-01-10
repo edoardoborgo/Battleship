@@ -153,6 +153,30 @@ lib/corazzata.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Battleship.dir/build.make CMakeFiles/Battleship.dir/lib/corazzata.cpp.s
 .PHONY : lib/corazzata.cpp.s
 
+lib/game.o: lib/game.cpp.o
+.PHONY : lib/game.o
+
+# target to build an object file
+lib/game.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Battleship.dir/build.make CMakeFiles/Battleship.dir/lib/game.cpp.o
+.PHONY : lib/game.cpp.o
+
+lib/game.i: lib/game.cpp.i
+.PHONY : lib/game.i
+
+# target to preprocess a source file
+lib/game.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Battleship.dir/build.make CMakeFiles/Battleship.dir/lib/game.cpp.i
+.PHONY : lib/game.cpp.i
+
+lib/game.s: lib/game.cpp.s
+.PHONY : lib/game.s
+
+# target to generate assembly for a file
+lib/game.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Battleship.dir/build.make CMakeFiles/Battleship.dir/lib/game.cpp.s
+.PHONY : lib/game.cpp.s
+
 lib/griglia.o: lib/griglia.cpp.o
 .PHONY : lib/griglia.o
 
@@ -309,6 +333,9 @@ help:
 	@echo "... lib/corazzata.o"
 	@echo "... lib/corazzata.i"
 	@echo "... lib/corazzata.s"
+	@echo "... lib/game.o"
+	@echo "... lib/game.i"
+	@echo "... lib/game.s"
 	@echo "... lib/griglia.o"
 	@echo "... lib/griglia.i"
 	@echo "... lib/griglia.s"

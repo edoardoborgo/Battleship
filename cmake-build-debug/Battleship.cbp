@@ -82,16 +82,28 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/home/jnks/Battleship/Battleship/include/computer.h">
+			<Option target="Battleship"/>
+		</Unit>
 		<Unit filename="/home/jnks/Battleship/Battleship/include/coordinata.h">
 			<Option target="Battleship"/>
 		</Unit>
 		<Unit filename="/home/jnks/Battleship/Battleship/include/corazzata.h">
 			<Option target="Battleship"/>
 		</Unit>
+		<Unit filename="/home/jnks/Battleship/Battleship/include/game.h">
+			<Option target="Battleship"/>
+		</Unit>
+		<Unit filename="/home/jnks/Battleship/Battleship/include/giocatore.h">
+			<Option target="Battleship"/>
+		</Unit>
 		<Unit filename="/home/jnks/Battleship/Battleship/include/griglia.h">
 			<Option target="Battleship"/>
 		</Unit>
 		<Unit filename="/home/jnks/Battleship/Battleship/include/nave.h">
+			<Option target="Battleship"/>
+		</Unit>
+		<Unit filename="/home/jnks/Battleship/Battleship/include/persona.h">
 			<Option target="Battleship"/>
 		</Unit>
 		<Unit filename="/home/jnks/Battleship/Battleship/include/sottomarino.h">
@@ -101,6 +113,9 @@
 			<Option target="Battleship"/>
 		</Unit>
 		<Unit filename="/home/jnks/Battleship/Battleship/lib/corazzata.cpp">
+			<Option target="Battleship"/>
+		</Unit>
+		<Unit filename="/home/jnks/Battleship/Battleship/lib/game.cpp">
 			<Option target="Battleship"/>
 		</Unit>
 		<Unit filename="/home/jnks/Battleship/Battleship/lib/griglia.cpp">
