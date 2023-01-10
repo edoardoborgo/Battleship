@@ -6,7 +6,7 @@
 
 class Persona : public Giocatore {
 private:
-    std::string nome
+    std::string nome;
 public:
     //costruttore
     Persona();

@@ -1,31 +1,38 @@
 #include "../include/nave.h"
 #include "../include/coordinata.h"
 #include "../include/griglia.h"
-#include <iostream>
-#include <string>
+#include <vector>
+
+Nave::Nave(){
+
+}
 
 bool Nave::is_nave(battaglia_navale::Coordinate &prua, battaglia_navale::Coordinate &poppa, int ideal_length) {
-    if (prua.x == poppa.x && prua.y == poppa.y) {
-        return true;
-    } else {
-        if (prua.x == poppa.x || prua.y == poppa.y) {
-            if (prua.x < poppa.x || prua.x > poppa.x) {
-                if ((poppa.x - prua.x) == ideal_length || (prua.x - poppa.x) == ideal_length) {
-                    return true;
-                } else {
-                    return false;
-                }
-            }
-            if (prua.y < poppa.y || prua.y > poppa.y) {
-                if ((poppa.y - prua.y) == ideal_length || (prua.y - poppa.y) == ideal_length) {
-                    return true;
-                } else {
-                    return false;
-                }
-            }
+    if((prua.x_ >= 0 && poppa.x_ >= 0) && (prua.x_ < 12 && poppa.x_ < 12) && (prua.x_ >= 0 && poppa.y_ >= 0) && (prua.y_ < 12 && poppa.y_ < 12)){
+        if (prua.x_ == poppa.x_ && prua.y_ == poppa.y_) {
+            return true;
         } else {
-            return false;
+            if (prua.x_ == poppa.x_ || prua.y_ == poppa.y_) {
+                if (prua.x_ < poppa.x_ || prua.x_ > poppa.x_) {
+                    if ((poppa.x_ - prua.x_) == ideal_length || (prua.x_ - poppa.x_) == ideal_length) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+                if (prua.y_ < poppa.y_ || prua.y_ > poppa.y_) {
+                    if ((poppa.y_ - prua.y_) == ideal_length || (prua.y_ - poppa.y_) == ideal_length) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+            } else {
+                return false;
+            }
         }
+    } else {
+        throw std::invalid_argument("Coordinate non valide");
     }
 }
 
@@ -44,32 +51,36 @@ battaglia_navale::Coordinate Nave::calcolo_centro(battaglia_navale::Coordinate &
             coordinata_centro_.y_ = prua.y_;
             return coordinata_centro_;
         }
-        if (prua.get_y() < poppa.get_y()) {
-            centro.set_y((poppa.get_y() - prua.get_y()) / 2);
-            centro.set_x((poppa.get_x() - prua.get_x()) / 2);
+        if (prua.y_ < poppa.y_) {
+            coordinata_centro_.y_ = (poppa.y_ - prua.y_) / 2;
+            coordinata_centro_.x_ = (poppa.x_ - prua.x_) / 2;
+            return coordinata_centro_;
         } else {
-            centro.set_y((prua.get_y() - poppa.get_y()) / 2);
-            centro.set_x((prua.get_x() - poppa.get_x()) / 2);
+            coordinata_centro_.y_ = (prua.y_ - poppa.y_) / 2;
+            coordinata_centro_.x_ = (prua.x_ - poppa.x_) / 2;
+            return coordinata_centro_;
         }
-    } else { //altrimenti se e orizzontale lavora con le x
-        if (prua.x == poppa.x && prua.y == poppa.y) {
-            centro.set_x(prua.get_x());
-            centro.set_y(prua.get_y());
+    } else { //altrimenti se e orizzontale lavora con le x_
+        if (prua.x_ == poppa.x_ && prua.y_ == poppa.y_) {
+            coordinata_centro_.x_ = prua.x_;
+            coordinata_centro_.y_ = prua.y_;
+            return coordinata_centro_;
         }
         if (prua.get_x() < poppa.get_x()) {
-            centro.set_x((poppa.get_x() - prua.get_x()) / 2);
-            centro.set_y((poppa.get_y() - prua.get_y()) / 2);
+            coordinata_centro_.x_ = (poppa.get_x() - prua.get_x()) / 2;
+            coordinata_centro_.y_ = (poppa.get_y() - prua.get_y()) / 2;
+            return coordinata_centro_;
         } else {
-            centro.set_y((prua.get_x() - poppa.get_x()) / 2);
-            centro.set_x((prua.get_y() - poppa.get_y()) / 2);
+            coordinata_centro_.y_ = (prua.x_ - poppa.x_) / 2;
+            coordinata_centro_.x_ = (prua.y_ - poppa.y_) / 2;
+            return coordinata_centro_;
         }
     }
 }
 
-    void nave::sposta_centro(Coordinate &nuovo_centro) {
-      centro.x = nuovo_centro.x;
-      centro.y = nuovo_centro.y;
-    }
+/*void nave::sposta_centro(Coordinate &nuovo_centro) {
+
+}*/
 
 void Nave::set_corazza(battaglia_navale::Coordinate &coord) {
     for(int i=0; i<corazza_.size(); i++){

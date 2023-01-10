@@ -48,7 +48,7 @@ public:
     /*
      *  calcolo_centro: date le coordinate di prua e poppa calcola la coordinata centrale e setta @param centro.
      */
-    void calcolo_centro(battaglia_navale::Coordinate &prua, battaglia_navale::Coordinate &poppa);
+    battaglia_navale::Coordinate calcolo_centro(battaglia_navale::Coordinate &prua, battaglia_navale::Coordinate &poppa);
 
     /*
      *  sposta_centro: sposta la coordinata centrale di una nave controllando che lo spostamento sia lecito, cioè senza sovrapposizioni con altre navi.
