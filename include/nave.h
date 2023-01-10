@@ -9,7 +9,6 @@ public:
     char simbolo_;
     battaglia_navale::Coordinate coordinata_centro_;
     int dimensione_;
-    //todo risolvere <Tupla> corazza[dimensione];
     bool is_orizzontale_;
 
     struct Tupla{

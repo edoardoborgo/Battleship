@@ -37,7 +37,7 @@ bool Nave::is_nave(battaglia_navale::Coordinate &prua, battaglia_navale::Coordin
 }
 
 void Nave::calcolo_verso(battaglia_navale::Coordinate &prua, battaglia_navale::Coordinate &poppa) {
-    if (prua.x == poppa.x) {
+    if (prua.x_ == poppa.x_) {
         is_orizzontale_ = false; //verticale
     } else {
         is_orizzontale_ = true; //orizontale

@@ -6,12 +6,14 @@
 #ifndef BATTLESHIP_CORAZZATA_H
 #define BATTLESHIP_CORAZZATA_H
 
-#include
-
 class Corazzata : public Nave {
 private:
     char simbolo_ = 'C';
-    int dimensione = 5;
+    int dimensione_;
+    struct Tupla {
+        battaglia_navale::Coordinate coord;
+        char stato = 'C';
+    };
 public:
     Corazzata(battaglia_navale::Coordinate &prua, battaglia_navale::Coordinate &poppa);
 

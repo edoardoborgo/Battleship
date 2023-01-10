@@ -18,6 +18,8 @@ namespace battaglia_navale {
 
         //TODO definizione inline?
         bool operator==(const battaglia_navale::Coordinate &coord);
+        bool operator>=(const battaglia_navale::Coordinate &coord);
+        bool operator<=(const battaglia_navale::Coordinate &coord);
 
         int get_x() const {
             return x_;
