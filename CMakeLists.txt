@@ -3,4 +3,4 @@ project(Battleship)
 
 set(CMAKE_CXX_STANDARD 11)
 
-add_executable(Battleship include/nave.h lib/nave.cpp include/corazzata.h include/supporto.h include/sottomarino.h lib/corazzata.cpp lib/supporto.cpp lib/sottomarino.cpp utilities/coordinata.cpp include/coordinata.h include/griglia.h utilities/griglia.cpp lib/griglia.cpp lib/game.cpp include/game.h include/giocatore.h include/computer.h include/persona.h lib/giocatore.cpp)
+add_executable(Battleship include/nave.h lib/nave.cpp include/corazzata.h include/supporto.h include/sottomarino.h lib/corazzata.cpp lib/supporto.cpp lib/sottomarino.cpp utilities/coordinata.cpp include/coordinata.h include/griglia.h utilities/griglia.cpp lib/griglia.cpp lib/game.cpp include/game.h include/giocatore.h include/computer.h include/persona.h lib/giocatore.cpp include/gioco.h lib/gioco.cpp)

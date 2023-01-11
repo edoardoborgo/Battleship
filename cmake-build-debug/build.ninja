@@ -103,6 +103,12 @@ build CMakeFiles/Battleship.dir/lib/giocatore.cpp.obj: CXX_COMPILER__Battleship_
   OBJECT_DIR = CMakeFiles\Battleship.dir
   OBJECT_FILE_DIR = CMakeFiles\Battleship.dir\lib
 
+build CMakeFiles/Battleship.dir/lib/Gioco.cpp.obj: CXX_COMPILER__Battleship_Debug C$:/Users/borgo/Documents/GitHub/Battleship/lib/Gioco.cpp || cmake_object_order_depends_target_Battleship
+  DEP_FILE = CMakeFiles\Battleship.dir\lib\Gioco.cpp.obj.d
+  FLAGS = -g -fdiagnostics-color=always -std=gnu++11
+  OBJECT_DIR = CMakeFiles\Battleship.dir
+  OBJECT_FILE_DIR = CMakeFiles\Battleship.dir\lib
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target Battleship
@@ -111,7 +117,7 @@ build CMakeFiles/Battleship.dir/lib/giocatore.cpp.obj: CXX_COMPILER__Battleship_
 #############################################
 # Link the executable Battleship.exe
 
-build Battleship.exe: CXX_EXECUTABLE_LINKER__Battleship_Debug CMakeFiles/Battleship.dir/lib/nave.cpp.obj CMakeFiles/Battleship.dir/lib/corazzata.cpp.obj CMakeFiles/Battleship.dir/lib/supporto.cpp.obj CMakeFiles/Battleship.dir/lib/sottomarino.cpp.obj CMakeFiles/Battleship.dir/utilities/coordinata.cpp.obj CMakeFiles/Battleship.dir/utilities/griglia.cpp.obj CMakeFiles/Battleship.dir/lib/griglia.cpp.obj CMakeFiles/Battleship.dir/lib/game.cpp.obj CMakeFiles/Battleship.dir/lib/giocatore.cpp.obj
+build Battleship.exe: CXX_EXECUTABLE_LINKER__Battleship_Debug CMakeFiles/Battleship.dir/lib/nave.cpp.obj CMakeFiles/Battleship.dir/lib/corazzata.cpp.obj CMakeFiles/Battleship.dir/lib/supporto.cpp.obj CMakeFiles/Battleship.dir/lib/sottomarino.cpp.obj CMakeFiles/Battleship.dir/utilities/coordinata.cpp.obj CMakeFiles/Battleship.dir/utilities/griglia.cpp.obj CMakeFiles/Battleship.dir/lib/griglia.cpp.obj CMakeFiles/Battleship.dir/lib/game.cpp.obj CMakeFiles/Battleship.dir/lib/giocatore.cpp.obj CMakeFiles/Battleship.dir/lib/Gioco.cpp.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\Battleship.dir

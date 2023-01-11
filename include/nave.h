@@ -8,17 +8,15 @@
 class Giocatore;
 
 class Nave {
-
+public:
+    struct Tupla;
 private:
     char simbolo_;
     battaglia_navale::Coordinate coordinata_centro_;
     int dimensione_;
     bool orizzontale_;
     bool affondata_;
-    struct Tupla {
-        battaglia_navale::Coordinate coord;
-        char stato;
-    };
+
     std::vector<Tupla> corazza_;
 
     /*
@@ -33,6 +31,11 @@ private:
     calcolo_centro(battaglia_navale::Coordinate &prua, battaglia_navale::Coordinate &poppa);
 
 public:
+    struct Tupla {
+        battaglia_navale::Coordinate coord;
+        char stato;
+    };
+
     /*
      *  costruttore di default
      */
