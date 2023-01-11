@@ -23,8 +23,8 @@ void Supporto::set_corazza(battaglia_navale::Coordinate &coord) {
   }
 }
 
-bool Supporto::azione(Giocatore difensore, battaglia_navale::Coordinate &target) {
-  /* battaglia_navale::Coordinate start_heal(target.get_x()-1,target.get_y()-1);
+/*bool Supporto::azione(Giocatore difensore, battaglia_navale::Coordinate &target) {
+   battaglia_navale::Coordinate start_heal(target.get_x()-1,target.get_y()-1);
    battaglia_navale::Coordinate finish_heal(target.get_x()+1,target.get_y()+1);
 
    if(start_heal <= battaglia_navale::Coordinate{0,0})
@@ -39,15 +39,14 @@ bool Supporto::azione(Giocatore difensore, battaglia_navale::Coordinate &target)
                }
            }
        }
-   }*/
-}
+   }
+}*/
 
 bool Supporto::muovi(battaglia_navale::Coordinate &origin, battaglia_navale::Coordinate &target) {
   try {
     if (griglia_difesa[target.get_x(), target.get_y()] == "") {
       if (is_orizzontale_) {
-        if (griglia_difesa[target.get_x() - 1][target.get_y()] == " "
-            && griglia_difesa[target.get_x() + 1][target.get_y()] == " ") {
+        if (griglia_difesa[target.get_x() - 1][target.get_y()] == " "&& griglia_difesa[target.get_x() + 1][target.get_y()] == " ") {
           aggiorna_griglia(origin, target);
           return true;
         }
@@ -65,8 +64,8 @@ bool Supporto::muovi(battaglia_navale::Coordinate &origin, battaglia_navale::Coo
 
 }
 
-/*
-bool Supporto::azione(Giocatore difensore,battaglia_navale::Coordinate &target){
+
+/*bool Supporto::azione(Giocatore difensore,battaglia_navale::Coordinate &target){
     battaglia_navale::Coordinate start_heal(target.get_x()-1,target.get_y()-1);
     battaglia_navale::Coordinate finish_heal(target.get_x()+1,target.get_y()+1);
 
@@ -76,7 +75,7 @@ bool Supporto::azione(Giocatore difensore,battaglia_navale::Coordinate &target){
     if(muovi(coordinatacentro,target)){  // se la nave puo spostarsi, faccio l azione
         for (int i = start_heal.get_y(); i < finish_heal.get_y() ; ++i) {
             for (int j = start_heal.get_x(); j < finish_heal.get_x(); ++j) {
-                if()                                                            // todo devo verificare che nn si autocuri
+                if()                                                      // todo devo verificare che nn si autocuri
                 if(tabella[j,i] >96)
                 {
                     difensore.set_risultato(battaglia_navale::Coordinate{j,i},tabella[j,i]-=32)
@@ -88,36 +87,42 @@ bool Supporto::azione(Giocatore difensore,battaglia_navale::Coordinate &target){
     else{
         return false;
     }
-}
-----------------------------------------------------------------
-----------------------------------------------------------------
-----------------------------------------------------------------
-
- * il metodo modifica le coordinate di finish e start heal se la nave si trova in una dei quattro lati della tabella
+}*/
+ //* il metodo modifica le coordinate di finish e start heal se la nave si trova in una dei quattro lati della tabella
 
 
 // il metodo verrebbe chiamato sempre e si entrerebbe sempre o nell if o nell esle perchè la nave sicuramente è o orizzontale o verticale, non so se ce un modo migliore per farlo
 
-void Supporto::modifica_range(coord_limite,&start_heal,&finish_heal)  //todo rifare il metodo con le variabili giuste e dare un nome sensato
+void Supporto::modifica_range(centro,&start_heal,&finish_heal)  //todo rifare il metodo con le variabili giuste e dare un nome sensato
 //todo verificare se il metodo è giusto anche sul lato logico
 {
   if(is_orizzontale)
   {
-    if(coord_limite.get_y()==12)
+    if(centro.get_y()==12)
     {
       //finish_heal.get_y() -=1;
-      finish_heal.set_y(finish_heal.get_y()-1);
+      start_heal.set_y(centro.get_y()-1);
+      start_heal.set_x(centro.get_x()-1);
+      finish_heal.set_y(entro.get_y()-1);
+      finish_heal.set_x(centro.get_x()+1);
+
     }
     else if(coord_limite.get_y() == 1){
       //start_heal.get_y() +=1;
-      start_heal.set_y(start_heal.get_y()+1)
+      start_heal.set_y(centro.get_y()+1);
+      start_heal.set_x(centro.get_x()-1);
+      finish_heal.set_y(centro.get_y()+1);
+      finish_heal.set_x(centro.get_x()+1);
     }
   }
   else{
-    if(coord_limite.get_x() == 1)
+    if(centro.get_x() == 1)
     {
       //start_heal.get_x() +=1;
-      start_heal.set_x(start_heal.get_x()+1)
+      start_heal.set_x(centro.get_x()+1);
+      start_heal.set_y(centro.get_y()-1);
+      finish_heal.set_y(centro.get_y()+1);
+      finish_hela.set_x(centro.get_x()+1);
     }
     else if(coord_limite.get_x() ==12)
     {
