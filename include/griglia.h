@@ -13,8 +13,7 @@ namespace battaglia_navale {
         const static int righe = 12;
         const static int colonne = 12;
         std::vector<std::vector<char>> tabellone;
-        //vector<vector<int>> myVector(num_of_items, vector<int>(2, 3));
-
+  
     public:
         Griglia() {
             //inizializzazione vector_char<vector_char>

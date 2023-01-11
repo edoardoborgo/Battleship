@@ -41,13 +41,14 @@ bool Corazzata::azione(Giocatore difensore, battaglia_navale::Coordinate &target
             if (corazza[i].coord == target) {
                 //target trovato
                 //accedo alla nave, tramite set_corazza cambio lo stato della Tupla in posizione coordinata target, lo metto in minuscolo solo se era maiuscolo
-                if(corazza[i].stato>=65 && corazza[i].stato<=90)
-                    corazza[i].stato = (char) (navi[i]->simbolo_ + 32);
-                navi[i]->set_corazza(target); //TODO set_corazza switcha lo stato o mette sempre a coplito? se switcha questa riga va inserita nell'if sopra
-                return true; //TODO stampare la X in griglia chiamante
+                /* codice già presente in nave.cpp
+                 * if (corazza[i].stato >= 65 && corazza[i].stato <= 90)
+                    corazza[i].stato = (char) (navi[i]->simbolo_ + 32);*/
+                navi[i]->set_corazza(target);
+                return true; //TODO stampare la X in griglia chiamante, va fatto nel main
             }
         }
     }
     //target non trovato
-    return false; //TODO stampare la O in griglia chiamante
+    return false; //TODO stampare la O in griglia chiamante, va fatto nel main
 }
