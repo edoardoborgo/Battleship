@@ -19,10 +19,12 @@ void battaglia_navale::Griglia::set_risultato(battaglia_navale::Coordinate coord
 
 
 void battaglia_navale::Griglia::print_griglia(){
+  int num = 0;
     for (int i = 0; i < tabellone.size(); i++){
+      
         for(int j = 0; j < tabellone[i].size(); j++){
-            cout << tabellone[i][j] << '|';
+            std::cout << tabellone[i][j] << '|';
         }
-        cout << endl;
+        std::cout << std::endl;
     }
 }

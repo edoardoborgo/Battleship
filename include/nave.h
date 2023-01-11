@@ -72,5 +72,5 @@ public:
 
 #include "giocatore.h"
 
-#endif NAVE_H
+#endif //NAVE_H
 
