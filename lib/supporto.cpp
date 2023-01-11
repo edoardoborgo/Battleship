@@ -5,7 +5,7 @@
 Supporto::Supporto(battaglia_navale::Coordinate &prua, battaglia_navale::Coordinate &poppa) {
   dimensione_ = 3;
   simbolo_ = 'S';
-  if (Nave::is_nave(prua, coord_limite, dimensione_)) {
+  if (Nave::is_nave(prua, poppa, dimensione_)) {
     corazza_.push_back(Nave::Tupla{prua, 'S'});
     corazza_.push_back(Nave::Tupla{Nave::calcolo_centro(prua, poppa), 'S'});
     corazza_.push_back(Nave::Tupla{poppa, 'S'});
@@ -128,9 +128,8 @@ void Supporto::modifica_range(coord_limite,&start_heal,&finish_heal)  //todo rif
 }
 */
 
-, , S -> prua (12, 1)   S S S
-                        c c c
-, , S ^
+, , S -> prua | poppa (12, 1)  S S S
+, , S ^                c c c
 , , S |
 
 a

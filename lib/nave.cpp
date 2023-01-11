@@ -8,20 +8,23 @@ Nave::Nave() {
 }
 
 bool Nave::is_nave(battaglia_navale::Coordinate &prua, battaglia_navale::Coordinate &poppa, int ideal_length) {
-    if((prua.x_ >= 0 && poppa.x_ >= 0) && (prua.x_ < 12 && poppa.x_ < 12) && (prua.x_ >= 0 && poppa.y_ >= 0) && (prua.y_ < 12 && poppa.y_ < 12)){
-        if (prua.x_ == poppa.x_ && prua.y_ == poppa.y_) {
+    if ((prua.get_x() >= 0 && poppa.get_x() >= 0) && (prua.get_x() < 12 && poppa.get_x() < 12) &&
+        (prua.get_y() >= 0 && poppa.get_y() >= 0) && (prua.get_y() < 12 && poppa.get_y() < 12)) {
+        if (prua.get_x() == poppa.get_x() && prua.get_y() == poppa.get_y()) {
             return true;
         } else {
-            if (prua.x_ == poppa.x_ || prua.y_ == poppa.y_) {
-                if (prua.x_ < poppa.x_ || prua.x_ > poppa.x_) {
-                    if ((poppa.x_ - prua.x_) == ideal_length || (prua.x_ - poppa.x_) == ideal_length) {
+            if (prua.get_x() == poppa.get_x() || prua.get_y() == poppa.get_y()) {
+                if (prua.get_x() < poppa.get_x() || prua.get_x() > poppa.get_x()) {
+                    if ((poppa.get_x() - prua.get_x()) == ideal_length ||
+                        (prua.get_x() - poppa.get_x()) == ideal_length) {
                         return true;
                     } else {
                         return false;
                     }
                 }
-                if (prua.y_ < poppa.y_ || prua.y_ > poppa.y_) {
-                    if ((poppa.y_ - prua.y_) == ideal_length || (prua.y_ - poppa.y_) == ideal_length) {
+                if (prua.get_y() < poppa.get_y() || prua.get_y() > poppa.get_y()) {
+                    if ((poppa.get_y() - prua.get_y()) == ideal_length ||
+                        (prua.get_y() - poppa.get_y()) == ideal_length) {
                         return true;
                     } else {
                         return false;
@@ -37,42 +40,43 @@ bool Nave::is_nave(battaglia_navale::Coordinate &prua, battaglia_navale::Coordin
 }
 
 void Nave::calcolo_verso(battaglia_navale::Coordinate &prua, battaglia_navale::Coordinate &poppa) {
-    if (prua.x_ == poppa.x_) {
+    if (prua.get_x() == poppa.get_x()) {
         is_orizzontale_ = false; //verticale
     } else {
         is_orizzontale_ = true; //orizontale
     }
 }
 
-battaglia_navale::Coordinate Nave::calcolo_centro(battaglia_navale::Coordinate &prua, battaglia_navale::Coordinate &poppa) {
-    if (is_orizzontale_ == false) { //se la nave e verticale lavora con le y_
-        if (prua.x_ == poppa.x_ && prua.y_ == poppa.y_) {
-            coordinata_centro_.x_ = prua.x_;
-            coordinata_centro_.y_ = prua.y_;
+battaglia_navale::Coordinate
+Nave::calcolo_centro(battaglia_navale::Coordinate &prua, battaglia_navale::Coordinate &poppa) {
+    if (is_orizzontale_ == false) { //se la nave e verticale lavora con le get_y()
+        if (prua.get_x() == poppa.get_x() && prua.get_y() == poppa.get_y()) {
+            coordinata_centro_.set_x(prua.get_x());
+            coordinata_centro_.set_y(prua.get_y());
             return coordinata_centro_;
         }
-        if (prua.y_ < poppa.y_) {
-            coordinata_centro_.y_ = (poppa.y_ - prua.y_) / 2;
-            coordinata_centro_.x_ = (poppa.x_ - prua.x_) / 2;
+        if (prua.get_y() < poppa.get_y()) {
+            coordinata_centro_.set_y((poppa.get_y() - prua.get_y()) / 2);
+            coordinata_centro_.set_x((poppa.get_x() - prua.get_x()) / 2);
             return coordinata_centro_;
         } else {
-            coordinata_centro_.y_ = (prua.y_ - poppa.y_) / 2;
-            coordinata_centro_.x_ = (prua.x_ - poppa.x_) / 2;
+            coordinata_centro_.set_y((prua.get_y() - poppa.get_y()) / 2);
+            coordinata_centro_.set_x((prua.get_x() - poppa.get_x()) / 2);
             return coordinata_centro_;
         }
-    } else { //altrimenti se e orizzontale lavora con le x_
-        if (prua.x_ == poppa.x_ && prua.y_ == poppa.y_) {
-            coordinata_centro_.x_ = prua.x_;
-            coordinata_centro_.y_ = prua.y_;
+    } else { //altrimenti se e orizzontale lavora con le get_x()
+        if (prua.get_x() == poppa.get_x() && prua.get_y() == poppa.get_y()) {
+            coordinata_centro_.set_x(prua.get_x());
+            coordinata_centro_.set_y(prua.get_y());
             return coordinata_centro_;
         }
         if (prua.get_x() < poppa.get_x()) {
-            coordinata_centro_.x_ = (poppa.get_x() - prua.get_x()) / 2;
-            coordinata_centro_.y_ = (poppa.get_y() - prua.get_y()) / 2;
+            coordinata_centro_.set_x((poppa.get_x() - prua.get_x()) / 2);
+            coordinata_centro_.set_y((poppa.get_y() - prua.get_y()) / 2);
             return coordinata_centro_;
         } else {
-            coordinata_centro_.y_ = (prua.x_ - poppa.x_) / 2;
-            coordinata_centro_.x_ = (prua.y_ - poppa.y_) / 2;
+            coordinata_centro_.set_y((prua.get_x() - poppa.get_x()) / 2);
+            coordinata_centro_.set_x((prua.get_y() - poppa.get_y()) / 2);
             return coordinata_centro_;
         }
     }

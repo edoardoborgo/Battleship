@@ -1,3 +1,5 @@
+
+
 #ifndef BATTLESHIP_GRIGLIA_H
 #define BATTLESHIP_GRIGLIA_H
 
@@ -17,9 +19,9 @@ namespace battaglia_navale {
     public:
         Griglia();
 
-        void set_risultato(battaglia_navale::Coordinate coord, char stato) {
-            tabellone[coord.get_x()][coord.get_y()]=stato;
-        }
+        void set_risultato(battaglia_navale::Coordinate coord, char stato);
+
+        void print_griglia();
 
         /*
           @brief inizializza la nave all'interno della griglia

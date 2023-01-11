@@ -4,6 +4,8 @@
 #ifndef NAVE_H
 #define NAVE_H
 
+class Giocatore;
+
 class Nave {
 private:
     char simbolo_;
@@ -68,4 +70,7 @@ public:
     std::vector<Tupla> get_corazza();
 };
 
+#include "giocatore.h"
+
 #endif NAVE_H
+
