@@ -7,7 +7,7 @@ Corazzata::Corazzata(battaglia_navale::Coordinate &prua, battaglia_navale::Coord
     if (Nave::is_nave(prua, poppa, dimensione_)) {
         battaglia_navale::Coordinate appo_coord;
         for (int i = 0; i < dimensione_; i++) {
-            if (is_orizzontale_) {
+            if (is_orizzontale()) {
                 if (prua.get_x() < poppa.get_x()) {
                     appo_coord.set_x(prua.get_x() + i);
                     appo_coord.set_y(prua.get_y());

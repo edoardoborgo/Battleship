@@ -1,8 +1,11 @@
 #include "../include/nave.h"
-#include "../include/coordinata.h"
-#include "../include/griglia.h"
-#include <vector>
+//TODO rimuovere include
+//#include "../include/coordinata.h"
+//#include "../include/griglia.h"
+//#include <vector>
 
+
+//TODO manca un return da qualche parte
 bool Nave::is_nave(battaglia_navale::Coordinate &prua, battaglia_navale::Coordinate &poppa, int ideal_length) {
     if ((prua.get_x() >= 0 && poppa.get_x() >= 0) && (prua.get_x() < 12 && poppa.get_x() < 12) &&
         (prua.get_y() >= 0 && poppa.get_y() >= 0) && (prua.get_y() < 12 && poppa.get_y() < 12)) {
@@ -45,7 +48,7 @@ void Nave::calcolo_verso(battaglia_navale::Coordinate &prua, battaglia_navale::C
 
 battaglia_navale::Coordinate
 Nave::calcolo_centro(battaglia_navale::Coordinate &prua, battaglia_navale::Coordinate &poppa) {
-    if (orizzontale_ == false) { //se la nave e verticale lavora con le get_y()
+    if (!orizzontale_) { //se la nave e verticale lavora con le get_y()
         if (prua.get_x() == poppa.get_x() && prua.get_y() == poppa.get_y()) {
             coordinata_centro_.set_x(prua.get_x());
             coordinata_centro_.set_y(prua.get_y());
@@ -78,10 +81,6 @@ Nave::calcolo_centro(battaglia_navale::Coordinate &prua, battaglia_navale::Coord
     }
 }
 
-/*void nave::sposta_centro(Coordinate &nuovo_centro) {
-
-}*/
-
 void Nave::set_corazza(battaglia_navale::Coordinate &coord) {
     for (int i = 0; i < corazza_.size(); i++) {
         if (corazza_[i].coord == coord) {
@@ -91,10 +90,39 @@ void Nave::set_corazza(battaglia_navale::Coordinate &coord) {
     }
 }
 
-char Nave::get_simbolo() {
+//TODO sposta nave
+void Nave::sposta(battaglia_navale::Coordinate &centro) {
+    //controllo che non sia affondata
+    //controllo che la coordinata centrale di destinazione sia accettabile
+    //controllo che le caselle di destinazione siano libere
+    //se sono libere cambio i valori X,Y delle coordinate delle tuple
+
+    //nb: se chiamato da supporto: se è orizzontale il target deve essere compreso tra le colonne 1 e 10, se verticale tra le righe 1 e 10 (indici che partono da 0)
+    //nb: explorer può andare ovunque perchè sta sotto le navi
+    //nb: corazzata non si muove quindi va disabilitata la funzione nella derivata Corazzata
+}
+
+//getters
+char Nave::get_simbolo() const {
     return simbolo_;
 }
 
-std::vector<Nave::Tupla> Nave::get_corazza() {
+std::vector<Nave::Tupla> Nave::get_corazza() const {
     return Nave::corazza_;
+}
+
+battaglia_navale::Coordinate Nave::get_coordinata_centro() const {
+    return coordinata_centro_;
+}
+
+int Nave::get_dimensione() const {
+    return dimensione_;
+}
+
+bool Nave::is_orizzontale() const {
+    return orizzontale_;
+}
+
+bool Nave::is_affondata() const {
+    return affondata_;
 }

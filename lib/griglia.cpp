@@ -16,15 +16,16 @@ void battaglia_navale::Griglia::set_risultato(battaglia_navale::Coordinate coord
     tabellone[coord.get_x()][coord.get_y()] = stato;
 }
 
-
-
-void battaglia_navale::Griglia::print_griglia(){
-  int num = 0;
-    for (int i = 0; i < tabellone.size(); i++){
-      
-        for(int j = 0; j < tabellone[i].size(); j++){
+void battaglia_navale::Griglia::print_griglia() {
+    int num = 0;
+    for (int i = 0; i < tabellone.size(); i++) {
+        for (int j = 0; j < tabellone[i].size(); j++) {
             std::cout << tabellone[i][j] << '|';
         }
         std::cout << std::endl;
     }
+}
+
+std::vector<std::vector<char>> battaglia_navale::Griglia::get_griglia(){
+    return tabellone;
 }
