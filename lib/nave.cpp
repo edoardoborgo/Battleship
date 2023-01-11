@@ -3,10 +3,6 @@
 #include "../include/griglia.h"
 #include <vector>
 
-Nave::Nave() {
-
-}
-
 bool Nave::is_nave(battaglia_navale::Coordinate &prua, battaglia_navale::Coordinate &poppa, int ideal_length) {
     if ((prua.get_x() >= 0 && poppa.get_x() >= 0) && (prua.get_x() < 12 && poppa.get_x() < 12) &&
         (prua.get_y() >= 0 && poppa.get_y() >= 0) && (prua.get_y() < 12 && poppa.get_y() < 12)) {
@@ -41,15 +37,15 @@ bool Nave::is_nave(battaglia_navale::Coordinate &prua, battaglia_navale::Coordin
 
 void Nave::calcolo_verso(battaglia_navale::Coordinate &prua, battaglia_navale::Coordinate &poppa) {
     if (prua.get_x() == poppa.get_x()) {
-        is_orizzontale_ = false; //verticale
+        orizzontale_ = false; //verticale
     } else {
-        is_orizzontale_ = true; //orizontale
+        orizzontale_ = true; //orizontale
     }
 }
 
 battaglia_navale::Coordinate
 Nave::calcolo_centro(battaglia_navale::Coordinate &prua, battaglia_navale::Coordinate &poppa) {
-    if (is_orizzontale_ == false) { //se la nave e verticale lavora con le get_y()
+    if (orizzontale_ == false) { //se la nave e verticale lavora con le get_y()
         if (prua.get_x() == poppa.get_x() && prua.get_y() == poppa.get_y()) {
             coordinata_centro_.set_x(prua.get_x());
             coordinata_centro_.set_y(prua.get_y());
@@ -95,7 +91,7 @@ void Nave::set_corazza(battaglia_navale::Coordinate &coord) {
     }
 }
 
-char Nave::get_nome() {
+char Nave::get_simbolo() {
     return simbolo_;
 }
 

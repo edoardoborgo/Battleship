@@ -2,10 +2,7 @@
 	"artifacts" : 
 	[
 		{
-			"path" : "Battleship.exe"
-		},
-		{
-			"path" : "Battleship.pdb"
+			"path" : "Battleship"
 		}
 	],
 	"backtrace" : 1,
@@ -62,8 +59,7 @@
 				8,
 				11,
 				12,
-				13,
-				18
+				13
 			]
 		}
 	],
@@ -79,16 +75,12 @@
 			{
 				"fragment" : "",
 				"role" : "flags"
-			},
-			{
-				"fragment" : "-lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32",
-				"role" : "libraries"
 			}
 		],
 		"language" : "CXX"
 	},
 	"name" : "Battleship",
-	"nameOnDisk" : "Battleship.exe",
+	"nameOnDisk" : "Battleship",
 	"paths" : 
 	{
 		"build" : ".",
@@ -123,8 +115,7 @@
 				8,
 				11,
 				12,
-				13,
-				18
+				13
 			]
 		}
 	],
@@ -227,12 +218,6 @@
 			"backtrace" : 1,
 			"path" : "include/persona.h",
 			"sourceGroupIndex" : 0
-		},
-		{
-			"backtrace" : 1,
-			"compileGroupIndex" : 0,
-			"path" : "lib/giocatore.cpp",
-			"sourceGroupIndex" : 1
 		}
 	],
 	"type" : "EXECUTABLE"
