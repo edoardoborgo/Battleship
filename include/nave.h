@@ -5,31 +5,17 @@
 #define NAVE_H
 
 class Nave {
-public:
+private:
     char simbolo_;
     battaglia_navale::Coordinate coordinata_centro_;
     int dimensione_;
-    bool is_orizzontale_;
-
+    bool orizzontale_;
+    bool affondata_;
     struct Tupla{
         battaglia_navale::Coordinate coord;
         char stato;
     };
     std::vector<Tupla> corazza_;
-
-    /*
-     *  costruttore di default
-    */
-    Nave();
-    /*
-     *  costruttore utilizzato per la creazione di oggetti nave con dimensione maggiore di 1.
-     */
-    Nave(battaglia_navale::Coordinate &prua, battaglia_navale::Coordinate &poppa);
-
-    /*
-     *  costruttore utilizzato per la creazione di oggetti nave con dimensione uguale a 1.
-     */
-    Nave(battaglia_navale::Coordinate &prua);
 
     /*
      *  is_nave: controlla se le coordinate di prua e poppa costituiscono una nave.
@@ -49,15 +35,19 @@ public:
      */
     battaglia_navale::Coordinate calcolo_centro(battaglia_navale::Coordinate &prua, battaglia_navale::Coordinate &poppa);
 
+public:
+
+    Nave(){};
+
+    Nave(battaglia_navale::Coordinate &prua, battaglia_navale::Coordinate &poppa);
+
+    Nave(battaglia_navale::Coordinate &prua);
+
     /*
      *  sposta_centro: sposta la coordinata centrale di una nave controllando che lo spostamento sia lecito, cioè senza sovrapposizioni con altre navi.
      *  //todo: creare un metodo che controlla data una coordinata se nelle vicinanze, in base al verso della nave da spostare, ci sono sufficienti caselle libere.
      */
-    /*void sposta_centro(battaglia_navale::Coordinate &centro);
-
-     *  set_corazza: data una posizione (entro i limiti della nave) segna come colpita quella posizione di corazza.
-     */
-    void set_corazza(int position);
+    void sposta_centro(battaglia_navale::Coordinate &centro);
 
     /*
      *  set_corazza: data una coordinata controlla che faccia effettivamente parte della nave e segna come colpita quella posizione di corazza.
@@ -65,14 +55,16 @@ public:
     void set_corazza(battaglia_navale::Coordinate &coord);
 
     /*
-     *  get_nome: restituisce il simbolo di una nave, serve per riprodurre graficamente la nave nella griglia.
-     */
-    char get_nome();
-    /*
      *  azione: data una coordinata deve andare ad agire sulla griglia difensiva dell'avversario
      */
-    virtual bool azione(Giocatore::player difensore, battaglia_navale::Coordinate &target);
+    virtual bool azione(Giocatore difensore, battaglia_navale::Coordinate &target);
 
+
+    char get_simbolo();
+    battaglia_navale::Coordinate get_coordinata_centro();
+    int get_dimensione();
+    bool is_orizzontale();
+    bool is_affondata();
     std::vector<Tupla> get_corazza();
 };
 

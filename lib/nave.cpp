@@ -3,7 +3,7 @@
 #include "../include/griglia.h"
 #include <vector>
 
-Nave::Nave(){
+Nave::Nave() {
 
 }
 
@@ -83,10 +83,10 @@ battaglia_navale::Coordinate Nave::calcolo_centro(battaglia_navale::Coordinate &
 }*/
 
 void Nave::set_corazza(battaglia_navale::Coordinate &coord) {
-    for(int i=0; i<corazza_.size(); i++){
-        if(corazza_[i].coord==coord){
-            if(corazza_[i].stato>=65 && corazza_[i].stato<=90)
-                corazza_[i].stato=simbolo_+32;
+    for (int i = 0; i < corazza_.size(); i++) {
+        if (corazza_[i].coord == coord) {
+            if (corazza_[i].stato >= 65 && corazza_[i].stato <= 90)
+                corazza_[i].stato = simbolo_ + 32;
         }
     }
 }
@@ -95,6 +95,6 @@ char Nave::get_nome() {
     return simbolo_;
 }
 
-std::vector<Nave::Tupla> Nave::get_corazza(){
+std::vector<Nave::Tupla> Nave::get_corazza() {
     return Nave::corazza_;
 }

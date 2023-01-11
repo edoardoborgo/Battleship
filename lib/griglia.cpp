@@ -1,14 +1,28 @@
 #include "../include/griglia.h"
 
-class griglia{
-
-  griglia(){
-    for(int i = 0; i < righe; i++)
-    {
-      for (int j = 0; j < colonne; j++)
-      {
-        tabellone[i][j] = ' ';
-      }
+battaglia_navale::Griglia::Griglia() {
+    //inizializzazione vector_char<vector_char>
+    char c = ' ';
+    for (int col = 0; col < colonne; col++) {
+        std::vector<char> v_righe;
+        for (int row = 0; row < righe; row++) {
+            v_righe.push_back(c);
+        }
+        tabellone.push_back(v_righe);
     }
-  }
-};
+}
+
+void battaglia_navale::Griglia::set_risultato(battaglia_navale::Coordinate coord, char stato) {
+    tabellone[coord.get_x()][coord.get_y()] = stato;
+}
+
+
+
+void battaglia_navale::Griglia::print_griglia(){
+    for (int i = 0; i < tabellone.size(); i++){
+        for(int j = 0; j < tabellone[i].size(); j++){
+            cout << tabellone[i][j] << '|';
+        }
+        cout << endl;
+    }
+}

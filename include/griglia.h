@@ -10,21 +10,12 @@ namespace battaglia_navale {
     class Griglia {
 
     private:
-        const static int righe = 12;
-        const static int colonne = 12;
+        int righe = 12;
+        int colonne = 12;
         std::vector<std::vector<char>> tabellone;
-  
+
     public:
-        Griglia() {
-            //inizializzazione vector_char<vector_char>
-            for (int col = 0; col < colonne; col++) {
-                std::vector<char> appo_vector;
-                for (int row = 0; row < righe; row++) {
-                    appo_vector.push_back(' ');
-                }
-                tabellone.push_back(appo_vector);
-            }
-        };
+        Griglia();
 
         void set_risultato(battaglia_navale::Coordinate coord, char stato) {
             tabellone[coord.get_x()][coord.get_y()]=stato;
@@ -39,7 +30,6 @@ namespace battaglia_navale {
         //void set_centro();
 
     };
-
 }
 
 #endif //BATTLESHIP_GRIGLIA_H
