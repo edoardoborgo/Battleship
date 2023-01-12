@@ -12,9 +12,10 @@ class Supporto : public Nave {
   int dimensione_;
  public:
   Supporto(battaglia_navale::Coordinate &prua, battaglia_navale::Coordinate &poppa);
-  bool azione(Giocatore difensore, battaglia_navale::Coordinate &target);
+  void azione(Giocatore difensore, battaglia_navale::Coordinate &target);
   void set_corazza(battaglia_navale::Coordinate &coord);
-  bool muovi(battaglia_navale::Coordinate &origin, battaglia_navale::Coordinate &target);
+  void muovi(battaglia_navale::Coordinate &origin, battaglia_navale::Coordinate &target,Giocatore &difensore);
+  void modifica_range(battaglia_navale::Coordinate centro, battaglia_navale::Coordinate &start_heal,battaglia_navale::Coordinate &finish_heal);
 };
 
 #endif //BATTLESHIP_SUPPORTO_H
