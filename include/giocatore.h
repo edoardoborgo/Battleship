@@ -26,6 +26,12 @@ public:
 
     //restituisce le navi
     std::vector<Nave *> get_navi();
+
+    void cancella_avvistamenti();
+
+    std::vector<std::vector<char>> get_griglia_attacco();
+
+    std::vector<std::vector<char>> get_griglia_difesa();
 };
 
 #include "nave.h"

@@ -29,3 +29,10 @@ void battaglia_navale::Griglia::print_griglia() {
 std::vector<std::vector<char>> battaglia_navale::Griglia::get_griglia(){
     return tabellone;
 }
+
+void battaglia_navale::Griglia::cancella_avvistamenti(){
+    for(int col=0; col<colonne; col++)
+        for(int row=0; row<righe; row++)
+            if(tabellone[col][row]=='Y')
+                tabellone[col][row]=' ';
+}

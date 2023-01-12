@@ -38,3 +38,26 @@ void Giocatore::set_risultato(battaglia_navale::Coordinate coord, char stato) {
 std::vector<Nave *> Giocatore::get_navi() {
     return navi;
 }
+
+void Giocatore::cancella_avvistamenti(){
+    griglia_attacco.battaglia_navale::Griglia::cancella_avvistamenti();
+}
+
+std::vector<std::vector<char>> Giocatore::get_griglia_attacco(){
+    return griglia_attacco.get_griglia();
+}
+
+std::vector<std::vector<char>> Giocatore::get_griglia_difesa(){
+    std::vector<std::vector<char>> appo_tabellone;
+    for(int i=0; i<navi.size(); i++){
+        if(!navi[i]->is_affondata()) {
+            std::vector<Nave::Tupla> corazza = navi[i]->get_corazza();
+            for (int j = 0; j < corazza.size(); j++) {
+                int x_coord = corazza[j].coord.get_x();
+                int y_coord = corazza[j].coord.get_y();
+                appo_tabellone[x_coord][y_coord] = corazza[j].stato;
+            }
+        }
+    }
+    return appo_tabellone;
+}

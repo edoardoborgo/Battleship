@@ -17,7 +17,7 @@ private:
 public:
     Corazzata(battaglia_navale::Coordinate &prua, battaglia_navale::Coordinate &poppa);
 
-    bool azione(Giocatore difensore, battaglia_navale::Coordinate &target);
+    bool azione(Giocatore *difensore, battaglia_navale::Coordinate &target);
 };
 
 #endif //BATTLESHIP_CORAZZATA_H

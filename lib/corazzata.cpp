@@ -32,8 +32,8 @@ Corazzata::Corazzata(battaglia_navale::Coordinate &prua, battaglia_navale::Coord
 }
 
 //recupero griglia del difensore, controllo se c'è una nave, se true diminuisco corazza e stampo 'X', se false 'O'
-bool Corazzata::azione(Giocatore difensore, battaglia_navale::Coordinate &target) {
-    std::vector<Nave *> navi = difensore.get_navi(); //recupero le navi dell'avversario
+bool Corazzata::azione(Giocatore *difensore, battaglia_navale::Coordinate &target) {
+    std::vector<Nave *> navi = difensore->get_navi(); //recupero le navi dell'avversario
     //per ogni nave confronto l'entità Tupla che rappresenta un elemento di corazza per vedere se corrisponde al target scelto dall'attacante
     for (int i = 0; i < navi.size(); i++) {
         std::vector<Nave::Tupla> corazza_attaccata = navi[i]->get_corazza();
