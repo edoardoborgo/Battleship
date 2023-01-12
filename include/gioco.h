@@ -15,6 +15,8 @@ private:
 
     void prossimo_turno();
 
+    void check(std::string parametro);
+
 public:
     Gioco(bool scelta_bot_game, Giocatore *G1, Giocatore *G2);
 

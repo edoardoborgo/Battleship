@@ -5,39 +5,43 @@
 
 namespace battaglia_navale {
 
-class Coordinate {
- private:
-  int x_;
-  char y_;
- public:
-  Coordinate()
-      : x_{-1}, y_{} {}
+    class Coordinate {
+    private:
+        int x_;
+        int y_;
 
-  Coordinate(const int x, const char y)
-      : x_{x}, y_{y} {}
+    public:
+        Coordinate(){}
 
-  //TODO definizione inline?
-  bool operator==(const battaglia_navale::Coordinate &coord);
-  bool operator>=(const battaglia_navale::Coordinate &coord);
-  bool operator<=(const battaglia_navale::Coordinate &coord);
+        //TODO controllo
+        Coordinate(const int x, const char y);
 
-  int get_x() const {
-    return x_;
-  }
+        //TODO definizione inline?
+        bool operator==(const battaglia_navale::Coordinate &coord);
 
-  int get_y() const {
-    return y_;
-  }
+        bool operator>=(const battaglia_navale::Coordinate &coord);
 
-  //TODO controllo che i nuovi valori siano accettabili cioè interni alla griglia
-  void set_x(int x) {
-    x_ = x;
-  }
+        bool operator<=(const battaglia_navale::Coordinate &coord);
 
-  void set_y(int y) {
-    y_ = y;
-  }
-};
+        bool controllo(const int x, const char y);
+
+        int get_x() const {
+            return x_;
+        }
+
+        int get_y() const {
+            return y_;
+        }
+
+        //TODO controllo che i nuovi valori siano accettabili cioè interni alla griglia
+        void set_x(int x) {
+            x_ = x;
+        }
+
+        void set_y(int y) {
+            y_ = y;
+        }
+    };
 
 }
 

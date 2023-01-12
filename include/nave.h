@@ -12,9 +12,7 @@ public:
     struct Tupla;
 private:
     char simbolo_;
-
     int dimensione_;
-    bool orizzontale_;
     bool affondata_;
 
 
@@ -27,6 +25,7 @@ private:
 
 
 protected:
+    bool orizzontale_;
     std::vector<Tupla> corazza_;
     battaglia_navale::Coordinate coordinata_centro_;
     /*

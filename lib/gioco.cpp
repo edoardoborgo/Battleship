@@ -5,7 +5,7 @@
 void Gioco::start_casuale() {
     srand(time(0));
     int numero_casuale = rand();
-    if(numero_casuale%2==0)
+    if (numero_casuale % 2 == 0)
         turno_g1_ = true;
     else
         turno_g1_ = false;
@@ -55,23 +55,28 @@ void Gioco::azione(std::string origin, std::string target) {
             prossimo_turno();
         } else {
             //azione di nave origin
+            //controllo sui parametri
+            check(origin);
+            check(target);
             //controllo che in origin di giocatore attaccante ci sia una nave
             std::vector<Nave *> navi = giocatore_attaccante->get_navi();
             //TODO funzione in giocatore che mi dice se esiste una nave in coordinata origin
             bool trovato = false;
             Nave *nave_scelta;
             for (int i = 0; i < navi.size() && !trovato; i++) {
-                if (navi[i]->get_coordinata_centro() == battaglia_navale::Coordinate(origin[0], origin[1])) {
+                std::string num; num.push_back(origin[1]);num.push_back(origin[2]);
+                if (navi[i]->get_coordinata_centro() == battaglia_navale::Coordinate(origin[0], stoi(num))) {
                     nave_scelta = navi[i];
                     trovato = true;
                 }
             }
             if (!trovato) {
                 //non ci sono navi in origin
-                //eccezione, nave non trovata, nel main viene chiesto di reinserire origin e target
+                //TODO eccezione, nave non trovata, nel main viene chiesto di reinserire origin e target
             } else {
                 //nave origin trovata
-                battaglia_navale::Coordinate coord(target[0], target[1]);
+                std::string num; num.push_back(origin[1]);num.push_back(origin[2]);
+                battaglia_navale::Coordinate coord(target[0], stoi(num));
                 if (nave_scelta->azione(giocatore_difensore, coord)) {
                     //colpita, stampo X in griglia attacco
                     giocatore_attaccante->set_risultato(coord, 'X');
@@ -83,8 +88,6 @@ void Gioco::azione(std::string origin, std::string target) {
             }
         }
     }
-
-    //aggiorno il turno in tutti i casi tranne che per AA/AA
 }
 
 void Gioco::print_griglie(Giocatore *G) {
@@ -141,25 +144,16 @@ void Gioco::print_griglie(Giocatore *G) {
             std::cout << std::endl;
         }
         row++;
-
-        /*
-        //stampa riga righe-esima di griglia attacco
-        for (int colonne = 0; colonne < 12; colonne++) { //12 colonne
-            //stampa colonna colonne-iesima di griglia attacco
-            std::cout << " " << griglia_attacco[colonne][righe];
-        }
-        //spazio tra le due griglie
-        for (int i = 0; i < 3; i++)
-            std::cout << " ";
-        //stampa riga righe-esima di griglia difesa
-        for (int colonne = 0; colonne < 12; colonne++) { //12 colonne
-            //stampa colonna colonne-iesima di griglia difesa
-            std::cout << " " << griglia_difesa[colonne][righe];
-        }
-        std::cout << std::endl;*/
     }
 }
 
-bool Gioco::is_turno_g1(){
+bool Gioco::is_turno_g1() {
     return turno_g1_;
+}
+
+void Gioco::check(std::string parametro) {
+    if (!(parametro[0] >= 65 && parametro[0] <= 90 || parametro[0] >= 97 && parametro[0] <= 122)){
+        //TODO eccezione da gestire nel main
+    }
+    std::string num; num.push_back(parametro[1])
 }

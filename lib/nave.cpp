@@ -91,7 +91,7 @@ void Nave::set_corazza(battaglia_navale::Coordinate &coord) {
 }
 
 //TODO sposta nave
-void Nave::sposta(battaglia_navale::Coordinate &centro) {
+void Nave::sposta(battaglia_navale::Coordinate &target) {
     //controllo che non sia affondata
     //controllo che la coordinata centrale di destinazione sia accettabile
     //controllo che le caselle di destinazione siano libere
