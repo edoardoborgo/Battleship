@@ -42,10 +42,10 @@ bool Corazzata::azione(Giocatore *difensore, battaglia_navale::Coordinate &targe
                 //target trovato
                 //accedo alla nave, tramite set_corazza cambio lo stato della Tupla in posizione coordinata target: diventa minuscolo solo se era maiuscolo
                 navi[i]->set_corazza(target);
-                return true; //TODO stampare la X in griglia chiamante, va fatto nel main
+                return true;
             }
         }
     }
     //target non trovato
-    return false; //TODO stampare la O in griglia chiamante, va fatto nel main
+    return false;
 }

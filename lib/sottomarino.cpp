@@ -10,6 +10,8 @@ Sottomarino::Sottomarino(battaglia_navale::Coordinate &prua) {
 std::vector<std::vector<char>> Sottomarino::azione(Giocatore difensore, battaglia_navale::Coordinate &target) { //bozza di come dovrebbe essere il metodo (scritto malissimo)
   if(muovi(corazza_[0].coord, target)){ //passo corazza_[0].coord perche' ho bisogno la
     return scan_(difensore, target);
+  }else{
+      //qualcosa, altrimenti manca il return
   }
 }
 
@@ -25,8 +27,8 @@ std::vector<std::vector<char>> Sottomarino::scan_(Giocatore difensore,
       if (start_scan_.get_y() >= 0) {
         for (int j = start_scan_.get_x(); j < finish_scan_.get_x() && finish_scan_.get_x() <= 11; j++) {
           if (start_scan_.get_x() >= 0) {
-            if (difensore.griglia_difesa[i, j]
-                != ' ') {         //problema con la visione della coordinata corrispondente a target nella griglia di difesa del player avversario
+              std::vector<std::vector<char>> griglia = difensore.get_griglia_difesa();
+            if (griglia[i][j] != ' ') {         //problema con la visione della coordinata corrispondente a target nella griglia di difesa del player avversario
               griglia_scan_[col][row] = 'Y';
             } else {
               griglia_scan_[col][row] = ' ';
@@ -61,7 +63,7 @@ bool Sottomarino::muovi(battaglia_navale::Coordinate &origin,
       aggiorna_griglia(origin, target);
       return true;
     } else {
-      throw std::invalid_argument("non e' possibile muovere in questo punto/coordinate errate");
+        return false;
     }
 }
 

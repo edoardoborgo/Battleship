@@ -18,13 +18,13 @@ bool Giocatore::is_posizionabile(Nave &nave) {
 void Giocatore::add_nave(Nave nave) { //TODO initializer list
     //so già che mi viene passata una nave perchè le condizioni di nave vengono controllate nel costruttore
     //controllo che non si sovrapponga ad altre navi usando la funzione is_posizionabile che mi dice se il posizionamento è andato a buon fine o no
-    if(navi.size()==5){
+    if (navi.size() < 8) {
         //le navi sono già state tutte aggiunte
         if (is_posizionabile(nave)) {
             //posizionamento corretto, aggiungo la nave
             navi.push_back(&nave);
         } else {
-            //posizionamento scorretto, lancio un'eccezione da gestire alla chiamata della funzione; la nave viene eliminata e cicreata nel main
+            //posizionamento scorretto, lancio un'eccezione da gestire alla chiamata della funzione; la nave viene eliminata e ricreata nel main
             //TODO creare eccezione personalizzata
             throw std::invalid_argument("Aggiunta di nave non andata a buon fine.");
         }
@@ -39,18 +39,18 @@ std::vector<Nave *> Giocatore::get_navi() {
     return navi;
 }
 
-void Giocatore::cancella_avvistamenti(){
+void Giocatore::cancella_avvistamenti() {
     griglia_attacco.battaglia_navale::Griglia::cancella_avvistamenti();
 }
 
-std::vector<std::vector<char>> Giocatore::get_griglia_attacco(){
+std::vector<std::vector<char>> Giocatore::get_griglia_attacco() {
     return griglia_attacco.get_griglia();
 }
 
-std::vector<std::vector<char>> Giocatore::get_griglia_difesa(){
+std::vector<std::vector<char>> Giocatore::get_griglia_difesa() {
     std::vector<std::vector<char>> appo_tabellone;
-    for(int i=0; i<navi.size(); i++){
-        if(!navi[i]->is_affondata()) {
+    for (int i = 0; i < navi.size(); i++) {
+        if (!navi[i]->is_affondata()) {
             std::vector<Nave::Tupla> corazza = navi[i]->get_corazza();
             for (int j = 0; j < corazza.size(); j++) {
                 int x_coord = corazza[j].coord.get_x();

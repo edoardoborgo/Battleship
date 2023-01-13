@@ -105,8 +105,8 @@ void Supporto::modifica_range(battaglia_navale::Coordinate target,battaglia_nava
 
 void Supporto::azione(Giocatore difensore, battaglia_navale::Coordinate &target){
 
-    battaglia_navale::Coordinate start_heal(target.get_x()-1,target.get_y()-1);
-    battaglia_navale::Coordinate finish_heal(target.get_x()+1,target.get_y()+1);
+    battaglia_navale::Coordinate start_heal(target.get_x()-1,(char)(target.get_y()-1+65));
+    battaglia_navale::Coordinate finish_heal(target.get_x()+1,(char)(target.get_y()+1+65));
 
     modifica_range(target,start_heal,finish_heal);
 

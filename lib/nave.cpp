@@ -1,11 +1,5 @@
 #include "../include/nave.h"
-//TODO rimuovere include
-//#include "../include/coordinata.h"
-//#include "../include/griglia.h"
-//#include <vector>
 
-
-//TODO manca un return da qualche parte
 bool Nave::is_nave(battaglia_navale::Coordinate &prua, battaglia_navale::Coordinate &poppa, int ideal_length) {
     if ((prua.get_x() >= 0 && poppa.get_x() >= 0) && (prua.get_x() < 12 && poppa.get_x() < 12) &&
         (prua.get_y() >= 0 && poppa.get_y() >= 0) && (prua.get_y() < 12 && poppa.get_y() < 12)) {
@@ -28,6 +22,8 @@ bool Nave::is_nave(battaglia_navale::Coordinate &prua, battaglia_navale::Coordin
                     } else {
                         return false;
                     }
+                }else{
+                    return false;
                 }
             } else {
                 return false;

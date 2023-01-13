@@ -48,7 +48,7 @@ void Gioco::azione(std::string origin, std::string target) {
     } else {
         //controllo mosse speciali altriementi invoco la funzione azione di origin chiamata da giocatore attivo
         if (origin == "AA" && target == "AA") {
-            //cancella gli avvistamenti sonar, cioè le Y //TODO controllare se sonar usa Y o y
+            //cancella gli avvistamenti sonar, cioè le Y
             giocatore_attaccante->cancella_avvistamenti();
         } else if (origin == "XX" && target == "XX") {
             print_griglie(giocatore_attaccante);
@@ -60,12 +60,13 @@ void Gioco::azione(std::string origin, std::string target) {
             check(target);
             //controllo che in origin di giocatore attaccante ci sia una nave
             std::vector<Nave *> navi = giocatore_attaccante->get_navi();
-            //TODO funzione in giocatore che mi dice se esiste una nave in coordinata origin
             bool trovato = false;
             Nave *nave_scelta;
             for (int i = 0; i < navi.size() && !trovato; i++) {
-                std::string num; num.push_back(origin[1]);num.push_back(origin[2]);
-                if (navi[i]->get_coordinata_centro() == battaglia_navale::Coordinate(origin[0], stoi(num))) {
+                std::string num;
+                for(int j=0; j<origin.length(); j++)
+                    num.push_back(origin[j]);
+                if (navi[i]->get_coordinata_centro() == battaglia_navale::Coordinate(stoi(num), origin[0])) {
                     nave_scelta = navi[i];
                     trovato = true;
                 }
@@ -152,8 +153,16 @@ bool Gioco::is_turno_g1() {
 }
 
 void Gioco::check(std::string parametro) {
-    if (!(parametro[0] >= 65 && parametro[0] <= 90 || parametro[0] >= 97 && parametro[0] <= 122)){
-        //TODO eccezione da gestire nel main
+    for(int i=0; i<parametro.length(); i++){
+        if(i==0){
+            if (!(parametro[0] >= 65 && parametro[0] <= 90)){
+                //TODO eccezione da gestire nel main
+            }
+        }else{
+            if (!(parametro[0] >= 48 && parametro[0] <= 57)){
+                //TODO eccezione da gestire nel main
+            }
+        }
     }
-    std::string num; num.push_back(parametro[1])
+    std::string num; num.push_back(parametro[1]);
 }

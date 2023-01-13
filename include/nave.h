@@ -15,19 +15,17 @@ private:
     int dimensione_;
     bool affondata_;
 
-
-
     /*
      *  calcolo_verso: date le coordinate di prua e poppa calcola il verso e setta orizzontale: true=orizzontale, false=verticale.
+     *  //TODO non serve, si può rimuovere
      */
     void calcolo_verso(battaglia_navale::Coordinate &prua, battaglia_navale::Coordinate &poppa);
-
-
 
 protected:
     bool orizzontale_;
     std::vector<Tupla> corazza_;
     battaglia_navale::Coordinate coordinata_centro_;
+
     /*
      *  calcolo_centro: date le coordinate di prua e poppa calcola la coordinata centrale e setta coordinata_centro_
      */
