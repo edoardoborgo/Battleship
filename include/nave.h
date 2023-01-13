@@ -1,5 +1,4 @@
 #include "coordinata.h"
-//TODO vector: meglio includerlo qua o nel .cpp?
 #include <vector>
 
 #ifndef NAVE_H
@@ -78,6 +77,11 @@ public:
      */
     virtual bool azione(Giocatore *difensore, battaglia_navale::Coordinate &target);
 
+    /*
+     * aggiorna_griglia: metodo che aggiorna tutte le coordinate della nave, per poi
+    */
+    void aggiorna_coord(const battaglia_navale::Coordinate& target);
+
 
     //getters
     char get_simbolo() const;
@@ -96,3 +100,7 @@ public:
 #include "giocatore.h"
 
 #endif //NAVE_H
+
+/*
+    occupate_coord =
+*/

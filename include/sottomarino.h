@@ -15,8 +15,8 @@ class Sottomarino : public Nave {
   std::vector<std::vector<char>> azione(Giocatore difensore, battaglia_navale::Coordinate &target);
   std::vector<std::vector<char>> scan_(Giocatore difensore, battaglia_navale::Coordinate &target);
   bool muovi(battaglia_navale::Coordinate &origin, battaglia_navale::Coordinate &target);
-  void set_corazza(battaglia_navale::Coordinate &coord);
   battaglia_navale::Coordinate get_centro();
+  void aggiorna_griglia(battaglia_navale::Coordinate& origin, const battaglia_navale::Coordinate& target);
 };
 
 #endif //BATTLESHIP_SOTTOMARINO_H

@@ -21,8 +21,8 @@ std::vector<std::vector<char>> Sottomarino::scan_(Giocatore difensore,
   int row = 0, col = 0;
   //battaglia_navale::Coordinate help_(start_scan_.get_x(), start_scan_.get_y());
   if (muovi(coordinata_centro_, target)) {
-    battaglia_navale::Coordinate start_scan_(target.get_x() - 2, target.get_y() - 2);
-    battaglia_navale::Coordinate finish_scan_(target.get_x() + 2, target.get_y() + 2);
+    battaglia_navale::Coordinate start_scan_(target.get_x() - 2, (char)(target.get_y() - 2 + 65));
+    battaglia_navale::Coordinate finish_scan_(target.get_x() + 2, (char)(target.get_y() + 2 + 65));
     for (int i = start_scan_.get_y(); i < finish_scan_.get_y() && finish_scan_.get_y() <= 11; i++) {
       if (start_scan_.get_y() >= 0) {
         for (int j = start_scan_.get_x(); j < finish_scan_.get_x() && finish_scan_.get_x() <= 11; j++) {
@@ -58,8 +58,6 @@ y (row)
 bool Sottomarino::muovi(battaglia_navale::Coordinate &origin,
                         battaglia_navale::Coordinate &target) { //chiarimento sulla derivazione di griglia_difesa se "gia' presente" o devo inserire un parametro da cui la derivo
     if ((target.get_x() >= 0 && target.get_x() <= 11) && (target.get_y() >= 0 && target.get_y() <= 11)) {
-      origin.set_x(target.get_x());
-      origin.set_y(target.get_y());
       aggiorna_griglia(origin, target);
       return true;
     } else {
@@ -67,15 +65,16 @@ bool Sottomarino::muovi(battaglia_navale::Coordinate &origin,
     }
 }
 
-void Sottomarino::set_corazza(battaglia_navale::Coordinate &coord) {
-  for (int i = 0; i < corazza_.size(); i++) {
-    if (corazza_[i].coord == coord) {
-      if (corazza_[i].stato = 'E') {
-        corazza_[i].stato = 'e';
-      }
+/*
+ * funzione che mi cambia tutte le coordinate di ogni Tupla (ogni "parte" della nave)
+*/
+
+void Sottomarino::aggiorna_griglia(battaglia_navale::Coordinate& origin, const battaglia_navale::Coordinate& target){
+    if(is_orizzontale()){
+
     }
-  }
 }
+
 
 /*battaglia_navale::Coordinate Sottomarino::get_centro(){
   //return Nave::coordinata_centro_;

@@ -15,7 +15,7 @@ bool Nave::is_nave(battaglia_navale::Coordinate &prua, battaglia_navale::Coordin
                         return false;
                     }
                 }
-                if (prua.get_y() < poppa.get_y() || prua.get_y() > poppa.get_y()) {
+                else if (prua.get_y() < poppa.get_y() || prua.get_y() > poppa.get_y()) {
                     if ((poppa.get_y() - prua.get_y()) == ideal_length ||
                         (prua.get_y() - poppa.get_y()) == ideal_length) {
                         return true;
@@ -30,7 +30,7 @@ bool Nave::is_nave(battaglia_navale::Coordinate &prua, battaglia_navale::Coordin
             }
         }
     } else {
-        throw std::invalid_argument("Coordinate non valide");
+        return false;
     }
 }
 
@@ -122,3 +122,47 @@ bool Nave::is_orizzontale() const {
 bool Nave::is_affondata() const {
     return affondata_;
 }
+//todo controllare se serve battaglia_navale::Coordinate& origin (rimosso perchè già presente nelle celle di corazza)
+void Nave::aggiorna_coord(const battaglia_navale::Coordinate& target){
+    int indice = 0;
+    if(is_orizzontale()){
+        for (int i = -((dimensione_-1)/2); i <= +((dimensione_-1)/2) && indice < dimensione_; i++){
+            corazza_[indice].coord.set_x(target.get_x()+i);
+            corazza_[indice].coord.set_y(target.get_y());
+            indice++;
+        }
+    } else {
+        for (int i = -((dimensione_-1)/2); i <= +((dimensione_-1)/2) && indice < dimensione_; i++){
+            corazza_[indice].coord.set_x(target.get_x());
+            corazza_[indice].coord.set_y(target.get_y()+i);
+            indice++;
+        }
+    }
+}
+
+
+
+/*
+#include <iostream>
+#include <string>
+
+#include "../include/Replay.h"
+
+int main(int argc,char** argv) {
+    // if screen print
+    if (argc < 3 || argc >4)
+        throw std::invalid_argument("Invalid number of argumensts");
+    if(argc == 3)
+    {
+        replay_game::Replay replay {argv[2]};
+        replay.print();
+    }
+    // else file print
+    else if(argc == 4)
+    {
+        replay_game::Replay replay {argv[2],argv[3]};
+        replay.print();
+    }
+    return 0;
+}
+*/

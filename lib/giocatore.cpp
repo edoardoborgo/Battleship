@@ -61,3 +61,6 @@ std::vector<std::vector<char>> Giocatore::get_griglia_difesa() {
     }
     return appo_tabellone;
 }
+
+
+

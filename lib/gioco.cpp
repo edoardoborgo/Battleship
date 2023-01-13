@@ -166,3 +166,4 @@ void Gioco::check(std::string parametro) {
     }
     std::string num; num.push_back(parametro[1]);
 }
+
