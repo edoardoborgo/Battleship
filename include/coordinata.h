@@ -23,7 +23,7 @@ namespace battaglia_navale {
 
         bool operator<=(const battaglia_navale::Coordinate &coord);
 
-        bool controllo(const int x, const char y);
+        bool controllo(const int x);
 
         int get_x() const {
             return x_;
@@ -33,14 +33,9 @@ namespace battaglia_navale {
             return y_;
         }
 
-        //TODO controllo che i nuovi valori siano accettabili cioè interni alla griglia
-        void set_x(int x) {
-            x_ = x;
-        }
+        void set_x(int x);
 
-        void set_y(int y) {
-            y_ = y;
-        }
+        void set_y(int y);
     };
 
 }

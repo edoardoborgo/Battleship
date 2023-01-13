@@ -14,8 +14,10 @@ class Supporto : public Nave {
   Supporto(battaglia_navale::Coordinate &prua, battaglia_navale::Coordinate &poppa);
   void azione(Giocatore difensore, battaglia_navale::Coordinate &target);
   void set_corazza(battaglia_navale::Coordinate &coord);
-  void muovi(battaglia_navale::Coordinate &origin, battaglia_navale::Coordinate &target,Giocatore &difensore);
+  void muovi(/*battaglia_navale::Coordinate &origin,*/ battaglia_navale::Coordinate &target,Giocatore &difensore);
   void modifica_range(battaglia_navale::Coordinate centro, battaglia_navale::Coordinate &start_heal,battaglia_navale::Coordinate &finish_heal);
+  bool autocura(battaglia_navale::Coordinate coordinata);
+  void cura(Nave  * nave);
 };
 
 #endif //BATTLESHIP_SUPPORTO_H

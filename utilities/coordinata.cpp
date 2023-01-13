@@ -1,7 +1,7 @@
 #include "../include/coordinata.h"
 
 battaglia_navale::Coordinate::Coordinate(const int x, const char y){
-    if(controllo(x,y)){
+    if(controllo(x) && controllo(y-65)){
         x_ = x;
         y_ = y-65;
     }
@@ -27,9 +27,9 @@ bool battaglia_navale::Coordinate::operator<=(const battaglia_navale::Coordinate
         return false;
 }
 
-bool controllo(const int x, const char y)
+bool battaglia_navale::Coordinate::controllo(const int var)
 {
-    if(x>= 0 && x<=11 && y-65 >= 0 && y-65 <= 11)
+    if(var>= 0 && var<=11)
     {
         return true;
     }else{
@@ -37,3 +37,18 @@ bool controllo(const int x, const char y)
         return false;
     };
 }
+
+void battaglia_navale::Coordinate::set_y(int y) {
+    if(controllo(y))
+    {
+        y_ = y;
+    }
+}
+
+void battaglia_navale::Coordinate::set_x(int x) {
+    if(controllo(x))
+    {
+        x_=x;
+    }
+}
+
