@@ -51,30 +51,18 @@ y (row)
 , , , , ,
 , , , , ,
 , , E , ,
-, , , , ,
+, , , ,
 , , , , , x (col)
 */
-
 bool Sottomarino::muovi(battaglia_navale::Coordinate &origin,
-                        battaglia_navale::Coordinate &target) { //chiarimento sulla derivazione di griglia_difesa se "gia' presente" o devo inserire un parametro da cui la derivo
+                        battaglia_navale::Coordinate &target) {
     if ((target.get_x() >= 0 && target.get_x() <= 11) && (target.get_y() >= 0 && target.get_y() <= 11)) {
-      aggiorna_griglia(origin, target);
+      Nave::aggiorna_coord(target);
       return true;
     } else {
         return false;
     }
 }
-
-/*
- * funzione che mi cambia tutte le coordinate di ogni Tupla (ogni "parte" della nave)
-*/
-
-void Sottomarino::aggiorna_griglia(battaglia_navale::Coordinate& origin, const battaglia_navale::Coordinate& target){
-    if(is_orizzontale()){
-
-    }
-}
-
 
 /*battaglia_navale::Coordinate Sottomarino::get_centro(){
   //return Nave::coordinata_centro_;

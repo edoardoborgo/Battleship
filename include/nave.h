@@ -50,8 +50,7 @@ public:
      *  is_nave: controlla se le coordinate di prua e poppa costituiscono una nave.
      *  Il controllo è basato sulle specifiche richieste dalla consegna del progetto:
      *      -le navi devono essere ortogonali al piano, non ci possono essere navi in obliquo
-     *      -le dimensioni di ogni tipo di nave devono essere rispettate: corazzata=5, sottomarino=1, supporto=3.
-     *      //TODO is_nave dovrebbe essere protected così è accessibile dalle classi derivate ma non dall'esterno
+     *      -le dimensioni di ogni tipo di nave devono essere rispettate: corazzata=5, sottomarino=1, supporto=3
      */
     bool is_nave(battaglia_navale::Coordinate &prua, battaglia_navale::Coordinate &poppa, int ideal_length);
 

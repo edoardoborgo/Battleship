@@ -18,6 +18,7 @@ class Supporto : public Nave {
   void modifica_range(battaglia_navale::Coordinate centro, battaglia_navale::Coordinate &start_heal,battaglia_navale::Coordinate &finish_heal);
   bool autocura(battaglia_navale::Coordinate coordinata);
   void cura(Nave  * nave);
+  bool is_posizionabile(Nave &nave, Giocatore &attaccante);
 };
 
 #endif //BATTLESHIP_SUPPORTO_H

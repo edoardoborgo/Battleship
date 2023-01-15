@@ -86,18 +86,6 @@ void Nave::set_corazza(battaglia_navale::Coordinate &coord) {
     }
 }
 
-//TODO sposta nave
-void Nave::sposta(battaglia_navale::Coordinate &target) {
-    //controllo che non sia affondata
-    //controllo che la coordinata centrale di destinazione sia accettabile
-    //controllo che le caselle di destinazione siano libere
-    //se sono libere cambio i valori X,Y delle coordinate delle tuple
-
-    //nb: se chiamato da supporto: se è orizzontale il target deve essere compreso tra le colonne 1 e 10, se verticale tra le righe 1 e 10 (indici che partono da 0)
-    //nb: explorer può andare ovunque perchè sta sotto le navi
-    //nb: corazzata non si muove quindi va disabilitata la funzione nella derivata Corazzata
-}
-
 //getters
 char Nave::get_simbolo() const {
     return simbolo_;

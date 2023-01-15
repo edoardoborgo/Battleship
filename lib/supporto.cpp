@@ -23,6 +23,35 @@ void Supporto::set_corazza(battaglia_navale::Coordinate &coord) {
     }
 }
 
+/*
+serve per sapere se nelle coordinate in cui devo spostare la nave sono libere
+serve per sapere se nelle coordinate in cui devo spostare la nave sono libere
+recupero un vettore con tutte le mie navi per poi poter confrontare tutte le coordinate
+divido in due il controllo: se è orrizzontale oppure verticale
+passo tutte le navi all interno dell array navi
+prendo le coordinate della nave che sto prendendo in cosiderazione all`interno dell`array navi ,attraverso la funzione get_corazza e le salvo nell`array aux
+passo tutte le coordinate della nave che ho preso in considerazione
+come prima cose se è orizzontale vado a verificare che la coordinata presa in considerazione abbia la stessa y della coordinata target, se non ce l`ha non effettuo i controlli sulla coordinata x (essendo orizzontale tutte le coordinate hannno la stessa y)
+vado a verificare se le cooridinate a destra e a sinistra (essendo orizzontale) a quella della coordinata x della coordinata presa in considerazione della nave
+se il match avviene, non posso spostare la nave e quindi libero = false
+*/
+
+bool Supporto::is_posizionabile(Nave &nave, Giocatore &attaccante) {
+    bool flag = true;
+    std::vector<Nave::Tupla> corazza_input = nave.get_corazza();
+    for (int i = 0; i < corazza_input.size() && flag; i++) {
+        std::vector<Nave *> navi = attaccante.get_navi();
+        for (int j = 0; j < navi.size() && flag; j++) {
+            std::vector<Nave::Tupla> corazza_test = navi[j]->get_corazza();
+            for (int k = 0; k < navi[j]->get_corazza().size() && flag; k++) {
+                if (corazza_input[i].coord == corazza_test[k].coord)
+                    flag = false;
+            }
+        }
+    }
+    return flag;
+}
+
 void Supporto::muovi(battaglia_navale::Coordinate &target,
                      Giocatore &attaccante) {
     Nave *nave_origin;
@@ -120,32 +149,7 @@ void Supporto::cura(Nave *nave) {
             nave->get_corazza()[i].stato -= 32;
         }
     }
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /*bool Supporto::azione(Giocatore difensore,battaglia_navale::Coordinate &target){
     battaglia_navale::Coordinate start_heal(target.get_x()-1,target.get_y()-1);
