@@ -34,14 +34,6 @@ bool Nave::is_nave(battaglia_navale::Coordinate &prua, battaglia_navale::Coordin
     }
 }
 
-void Nave::calcolo_verso(battaglia_navale::Coordinate &prua, battaglia_navale::Coordinate &poppa) {
-    if (prua.get_x() == poppa.get_x()) {
-        orizzontale_ = false; //verticale
-    } else {
-        orizzontale_ = true; //orizontale
-    }
-}
-
 battaglia_navale::Coordinate
 Nave::calcolo_centro(battaglia_navale::Coordinate &prua, battaglia_navale::Coordinate &poppa) {
     if (!orizzontale_) { //se la nave e verticale lavora con le get_y()

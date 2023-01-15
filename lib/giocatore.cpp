@@ -60,3 +60,39 @@ std::vector<std::vector<char>> Giocatore::get_griglia_difesa() {
     }
     return appo_tabellone;
 }
+
+std::string Computer::choose_move(){
+    //variabile che indica il valore per passare dal valore int al char corrispondente nella tabella ascii
+    const int to_ascii_number = 48;
+    //variabile che indica
+    const int to_ascii_upper_case = 65;
+    //random tra 0 e 7, %8 genera 8 numeri a partire da zero
+    srand(time(NULL) + rand());
+    //scegli nave e poi scegli la mossa a seconda della nave
+    std::vector<Nave *> appo_navi = get_navi();
+    Nave * nave_scelta;
+    do{
+        nave_scelta = appo_navi[rand() % 8];
+    }while(nave_scelta->is_affondata());
+    //recupero coord centrale della nave i-esima
+    battaglia_navale::Coordinate coord_origin = nave_scelta->get_coordinata_centro();
+    battaglia_navale::Coordinate coord_target{rand()%12, (char) (rand()%12 + to_ascii_upper_case)};
+    std::string mossa = "";
+    mossa += (char)(coord_origin.get_y()+to_ascii_upper_case);
+    if (coord_target.get_x()<9){
+        mossa+="0";
+        mossa += (char)(coord_origin.get_x()+1+to_ascii_number);
+    }else{
+        mossa += std::to_string(coord_origin.get_x());
+    }
+    mossa += " ";
+    mossa += (char)(coord_target.get_y()+to_ascii_upper_case);
+    if (coord_target.get_x()<9){
+        mossa+="0";
+        mossa += (char)(coord_target.get_x()+1+to_ascii_number);
+    }else{
+        mossa += std::to_string(coord_target.get_x());
+    }
+    mossa += "K";
+    return mossa;
+}

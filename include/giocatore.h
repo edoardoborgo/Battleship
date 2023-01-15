@@ -34,6 +34,15 @@ public:
     std::vector<std::vector<char>> get_griglia_difesa();
 };
 
+class Computer : public Giocatore{
+    //metodo che restituisce origin e target
+    //origin scelto tra le navi disonibili
+    //target random
+    //nel main tramite computer. get origin e computer.get target si recuperano le coordinate da passare a game per eseguire l'azione
+    std::string choose_move();
+};
+
+
 #include "nave.h"
 
 #endif //BATTLESHIP_GIOCATORE_H

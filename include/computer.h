@@ -8,6 +8,8 @@ class Computer : public Giocatore{
     //origin scelto tra le navi disonibili
     //target random
     //nel main tramite computer. get origin e computer.get target si recuperano le coordinate da passare a game per eseguire l'azione
+
+    void
 };
 
 #endif //BATTLESHIP_COMPUTER_H
