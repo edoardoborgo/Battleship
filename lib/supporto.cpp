@@ -3,122 +3,97 @@
 #include <stdexcept>
 
 Supporto::Supporto(battaglia_navale::Coordinate &prua, battaglia_navale::Coordinate &poppa) {
-  dimensione_ = 3;
-  simbolo_ = 'S';
-  if (Nave::is_nave(prua, poppa, dimensione_)) {
-    corazza_.push_back(Nave::Tupla{prua, 'S'});
-    corazza_.push_back(Nave::Tupla{Nave::calcolo_centro(prua, poppa), 'S'});
-    corazza_.push_back(Nave::Tupla{poppa, 'S'});
+    dimensione_ = 3;
+    simbolo_ = 'S';
+    if (Nave::is_nave(prua, poppa, dimensione_)) {
+        corazza_.push_back(Nave::Tupla{prua, 'S'});
+        corazza_.push_back(Nave::Tupla{Nave::calcolo_centro(prua, poppa), 'S'});
+        corazza_.push_back(Nave::Tupla{poppa, 'S'});
 
-  }
+    }
 }
 
 void Supporto::set_corazza(battaglia_navale::Coordinate &coord) {
-  for (int i = 0; i < corazza_.size(); i++) {
-    if (corazza_[i].coord == coord) {
-      if (corazza_[i].stato == 'S') {
-        corazza_[i].stato = 's';
-      }
+    for (int i = 0; i < corazza_.size(); i++) {
+        if (corazza_[i].coord == coord) {
+            if (corazza_[i].stato == 'S') {
+                corazza_[i].stato = 's';
+            }
+        }
     }
-  }
 }
 
-void Supporto::muovi(/*battaglia_navale::Coordinate &origin, */battaglia_navale::Coordinate &target, Giocatore &difensore){     //todo passare origin non dovrebbe servire
-        bool libero = true;                                                                                                // serve per sapere se nelle coordinate in cui devo spostare la nave sono libere
-        std::vector<Nave *> navi = difensore.get_navi();                                                                   // recupero un vettore con tutte le mie navi per poi poter confrontare tutte le coordinate
-        if(orizzontale_){                                                                                                // divido in due il controllo: se è orrizzontale oppure verticale
-            for (int i = 0; i < navi.size(); ++i) {                                                                        // passo tutte le navi all interno dell array navi
-                std::vector<Tupla> aux = navi[i]->get_corazza();                                                            // prendo le coordinate della nave che sto prendendo in cosiderazione all`interno dell`array navi ,attraverso la funzione get_corazza e le salvo nell`array aux
-                for (int j = 0; j < aux.size(); ++j) {                                                                     // passo tutte le coordinate della nave che ho preso in considerazione
-                    if(aux[j].coord.get_y() == target.get_y()){                                                                  // come prima cose se è orizzontale vado a verificare che la coordinata presa in considerazione abbia la stessa y della coordinata target, se non ce l`ha non effettuo i controlli sulla coordinata x (essendo orizzontale tutte le coordinate hannno la stessa y)
-                        if(aux[j].coord.get_x() == target.get_x()+1  ||  aux[j].coord.get_x() == target.get_x()-1 ){                   // vado a verificare se le cooridinate a destra e a sinistra (essendo orizzontale) a quella della coordinata x della coordinata presa in considerazione della nave
-                            libero = false;                                                                                // se il match avviene, non posso spostare la nave e quindi libero = false
-                        }
-                    }
-                }
-            }
+void Supporto::muovi(battaglia_navale::Coordinate &target,
+                     Giocatore &attaccante) {
+    Nave *nave_origin;
+    std::vector<Nave::Tupla> corazza_input;
+    std::vector<Nave *> navi = attaccante.get_navi();
+    for (int i = 0; i < navi.size(); i++) {
+        battaglia_navale::Coordinate appo_coord = navi[i]->get_coordinata_centro();
+        if (appo_coord == coordinata_centro_)
+            nave_origin = navi[i];
+        else {
+            throw std::invalid_argument("BoatNotFoundException");
         }
-        else{                                                                                                              // se la nave è verticale l`unica cosa che vado a cambiare è il controllo che effettuo sulla coordinata presa in considerazione
-            for (int i = 0; i < navi.size(); ++i) {
-                std::vector<Tupla> aux = navi[i]->get_corazza();
-                for (int j = 0; j < aux.size(); ++j) {
-                    if(aux[j].coord.get_x() == target.get_x()){                                                                  // verifico la coordinata x (essendo veritcale non cambia)
-                        if(aux[j].coord.get_y() == target.get_y()+1  ||  aux[j].coord.get_y() == target.get_y()-1 ){                   //vado a verificare le coordinate sopra e sotto (essendo verticale)
-                            libero = false;
-                        }
-                    }
-                }
-            }
-        }
-
-        if(libero)
-        {
-            aggiorna_griglia(target);                                                                                            // ho ipotizzato un metodo che è da definire// la nave si è potuta spostare
-        }
-        else{
-            //todo lanciare eccezione
-        }
-                                                                                                              // la nave non si è potuta spostar
+    }
+    Nave appo_nave = *nave_origin;
+    if (is_posizionabile(appo_nave, attaccante)) {
+        //il posto è libero
+        aggiorna_coord(target);
+    } else {
+        throw std::invalid_argument("InvalidCoordinateException");
+    }
 }
 
-void Supporto::modifica_range(battaglia_navale::Coordinate target,battaglia_navale::Coordinate &start_heal, battaglia_navale::Coordinate &finish_heal)  //todo rifare il metodo con le variabili giuste e dare un nome sensato
+void Supporto::modifica_range(battaglia_navale::Coordinate target, battaglia_navale::Coordinate &start_heal,
+                              battaglia_navale::Coordinate &finish_heal)  //todo rifare il metodo con le variabili giuste e dare un nome sensato
 //todo verificare se il metodo è giusto anche sul lato logico
 {
-    if(is_orizzontale())
-    {
-        if(target.get_y()==12)
-        {
-            //finish_heal.get_y() -=1;
-            start_heal.set_y(target.get_y()-1);
-            start_heal.set_x(target.get_x()-1);
-            finish_heal.set_y(target.get_y()-1);
-            finish_heal.set_x(target.get_x()+1);
-
+    if (is_orizzontale()) {
+        if (target.get_y() == 12) {
+            start_heal.set_y(target.get_y() - 1);
+            start_heal.set_x(target.get_x() - 1);
+            finish_heal.set_y(target.get_y() - 1);
+            finish_heal.set_x(target.get_x() + 1);
+        } else if (target.get_y() == 1) {
+            start_heal.set_y(target.get_y() + 1);
+            start_heal.set_x(target.get_x() - 1);
+            finish_heal.set_y(target.get_y() + 1);
+            finish_heal.set_x(target.get_x() + 1);
         }
-        else if(target.get_y() == 1){
-            //start_heal.get_y() +=1;
-            start_heal.set_y(target.get_y()+1);
-            start_heal.set_x(target.get_x()-1);
-            finish_heal.set_y(target.get_y()+1);
-            finish_heal.set_x(target.get_x()+1);
-        }
-    }
-    else{
-        if(target.get_x() == 1)
-        {
-            //start_heal.get_x() +=1;
-            start_heal.set_x(target.get_x()+1);
-            start_heal.set_y(target.get_y()-1);
-            finish_heal.set_y(target.get_y()+1);
-            finish_heal.set_x(target.get_x()+1);
-        }
-        else if(target.get_x() ==12)
-        {
-            //finish_heal.get_x() -=1;
-            start_heal.set_x(target.get_x()-1);
-            start_heal.set_y(target.get_y()-1);
-            finish_heal.set_y(target.get_y()+1);
-            finish_heal.set_x(target.get_x()-1);
+    } else {
+        if (target.get_x() == 1) {
+            start_heal.set_x(target.get_x() + 1);
+            start_heal.set_y(target.get_y() - 1);
+            finish_heal.set_y(target.get_y() + 1);
+            finish_heal.set_x(target.get_x() + 1);
+        } else if (target.get_x() == 12) {
+            start_heal.set_x(target.get_x() - 1);
+            start_heal.set_y(target.get_y() - 1);
+            finish_heal.set_y(target.get_y() + 1);
+            finish_heal.set_x(target.get_x() - 1);
         }
     }
 }
 
-void Supporto::azione(Giocatore difensore, battaglia_navale::Coordinate &target){
+void Supporto::azione(Giocatore difensore, battaglia_navale::Coordinate &target) {
 
-    muovi(target,difensore);
+    muovi(target, difensore);
 
-    battaglia_navale::Coordinate start_heal(target.get_x()-1,(char)(target.get_y()-1+65));
-    battaglia_navale::Coordinate finish_heal(target.get_x()+1,(char)(target.get_y()+1+65));
+    battaglia_navale::Coordinate start_heal(target.get_x() - 1, (char) (target.get_y() - 1 + 65));
+    battaglia_navale::Coordinate finish_heal(target.get_x() + 1, (char) (target.get_y() + 1 + 65));
 
-    modifica_range(target,start_heal,finish_heal);
+    modifica_range(target, start_heal, finish_heal);
 
     std::vector<Nave *> navi = difensore.get_navi(); //recupero le navi dell'avversario
 
     for (int i = 0; i < navi.size(); ++i) {
         std::vector<Tupla> aux = navi[i]->get_corazza();
         for (int j = 0; j < navi[i]->get_dimensione(); ++j) {
-            battaglia_navale::Coordinate Coordinata_da_verificare = battaglia_navale::Coordinate{aux[j].coord.get_x(),(char)(aux[j].coord.get_y()+65)};  //todo non so se sia giusto
-            if( Coordinata_da_verificare >= start_heal && Coordinata_da_verificare <= finish_heal ) {
+            battaglia_navale::Coordinate Coordinata_da_verificare = battaglia_navale::Coordinate{aux[j].coord.get_x(),
+                                                                                                 (char) (aux[j].coord.get_y() +
+                                                                                                    65)};  //todo non so se sia giusto
+            if (Coordinata_da_verificare >= start_heal && Coordinata_da_verificare <= finish_heal) {
                 if (!autocura(Coordinata_da_verificare)) {
                     cura(navi[i]);
                 }
@@ -129,21 +104,20 @@ void Supporto::azione(Giocatore difensore, battaglia_navale::Coordinate &target)
 }
 
 
-bool Supporto::autocura(battaglia_navale::Coordinate coordinata)
-{
+bool Supporto::autocura(battaglia_navale::Coordinate coordinata) {
     for (int i = 0; i < get_dimensione(); ++i) {
-        if(coordinata.get_y() == get_corazza()[i].coord.get_y() && coordinata.get_x() == get_corazza()[i].coord.get_x())
-        {
+        if (coordinata.get_y() == get_corazza()[i].coord.get_y() &&
+            coordinata.get_x() == get_corazza()[i].coord.get_x()) {
             return true;
         }
     }
     return false;
 }
 
-void Supporto::cura(Nave * nave){
+void Supporto::cura(Nave *nave) {
     for (int i = 0; i < nave->get_dimensione(); ++i) {
-        if(nave->get_corazza()[i].stato > 96){
-            nave->get_corazza()[i].stato -=32;
+        if (nave->get_corazza()[i].stato > 96) {
+            nave->get_corazza()[i].stato -= 32;
         }
     }
 

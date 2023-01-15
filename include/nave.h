@@ -14,12 +14,6 @@ private:
     int dimensione_;
     bool affondata_;
 
-    /*
-     *  calcolo_verso: date le coordinate di prua e poppa calcola il verso e setta orizzontale: true=orizzontale, false=verticale.
-     *  //TODO non serve, si può rimuovere
-     */
-    void calcolo_verso(battaglia_navale::Coordinate &prua, battaglia_navale::Coordinate &poppa);
-
 protected:
     bool orizzontale_;
     std::vector<Tupla> corazza_;
@@ -63,7 +57,6 @@ public:
 
     /*
      *  sposta_centro: sposta la coordinata centrale di una nave controllando che lo spostamento sia lecito, cioè senza sovrapposizioni con altre navi.
-     *  //todo: creare un metodo che controlla data una coordinata se nelle vicinanze, in base al verso della nave da spostare, ci sono sufficienti caselle libere.
      */
     void sposta(battaglia_navale::Coordinate &centro);
 

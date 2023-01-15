@@ -13,10 +13,8 @@ namespace battaglia_navale {
     public:
         Coordinate(){}
 
-        //TODO controllo
         Coordinate(const int x, const char y);
 
-        //TODO definizione inline?
         bool operator==(const battaglia_navale::Coordinate &coord);
 
         bool operator>=(const battaglia_navale::Coordinate &coord);
@@ -37,7 +35,6 @@ namespace battaglia_navale {
 
         void set_y(int y);
     };
-
 }
 
 #endif //BATTLESHIP_COORDINATA_H

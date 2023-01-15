@@ -25,7 +25,6 @@ void Giocatore::add_nave(Nave nave) { //TODO initializer list
             navi.push_back(&nave);
         } else {
             //posizionamento scorretto, lancio un'eccezione da gestire alla chiamata della funzione; la nave viene eliminata e ricreata nel main
-            //TODO creare eccezione personalizzata
             throw std::invalid_argument("Aggiunta di nave non andata a buon fine.");
         }
     }
@@ -61,6 +60,3 @@ std::vector<std::vector<char>> Giocatore::get_griglia_difesa() {
     }
     return appo_tabellone;
 }
-
-
-

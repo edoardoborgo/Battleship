@@ -74,6 +74,7 @@ void Gioco::azione(std::string origin, std::string target) {
             if (!trovato) {
                 //non ci sono navi in origin
                 //TODO eccezione, nave non trovata, nel main viene chiesto di reinserire origin e target
+                throw std::invalid_argument("")
             } else {
                 //nave origin trovata
                 std::string num; num.push_back(origin[1]);num.push_back(origin[2]);
