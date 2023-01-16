@@ -15,7 +15,7 @@ bool Giocatore::is_posizionabile(Nave &nave) {
     return flag;
 }
 
-void Giocatore::add_nave(Nave nave) { //TODO initializer list
+void Giocatore::add_nave(Nave * nave) { //TODO initializer list
     //so già che mi viene passata una nave perchè le condizioni di nave vengono controllate nel costruttore
     //controllo che non si sovrapponga ad altre navi usando la funzione is_posizionabile che mi dice se il posizionamento è andato a buon fine o no
     if (navi.size() < 8) {

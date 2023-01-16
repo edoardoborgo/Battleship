@@ -1,6 +1,6 @@
-cmake_minimum_required(VERSION 3.24)
-project(Battleship)
+cmake_minimum_required(VERSION 3.1)
+project(Battleship LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 11)
 
-add_executable(Battleship include/nave.h lib/nave.cpp include/corazzata.h include/supporto.h include/sottomarino.h lib/corazzata.cpp lib/supporto.cpp lib/sottomarino.cpp utilities/coordinata.cpp include/coordinata.h include/griglia.h utilities/griglia.cpp lib/griglia.cpp lib/game.cpp include/game.h include/giocatore.h include/computer.h include/persona.h lib/giocatore.cpp include/gioco.h lib/gioco.cpp exceptions/exceptions.h)
+add_executable(Battleship include/nave.h lib/nave.cpp include/corazzata.h include/supporto.h include/sottomarino.h lib/corazzata.cpp lib/supporto.cpp lib/sottomarino.cpp utilities/coordinata.cpp include/coordinata.h include/griglia.h lib/griglia.cpp include/giocatore.h lib/giocatore.cpp include/gioco.h lib/gioco.cpp exceptions/exceptions.h include/coordinata.h include/corazzata.h include/giocatore.h include/gioco.h include/griglia.h include/nave.h include/sottomarino.h include/supporto.h utilities/coordinata.cpp utilities/main.cpp utilities/replay.cpp)

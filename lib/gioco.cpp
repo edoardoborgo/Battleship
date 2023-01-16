@@ -1,6 +1,7 @@
 #include "../include/gioco.h"
 #include <cstdlib>
 #include <ctime>
+#include <fstream>
 
 void Gioco::start_casuale() {
     srand(time(NULL) + rand());
@@ -31,6 +32,20 @@ Gioco::Gioco(bool scelta_bot_game, Giocatore *G1, Giocatore *G2) {
     //inizializzazione giocatori
     G1_ = G1;
     G2_ = G2;
+
+    //inizializzazione log
+    //apre e svuota il file o lo crea se non esiste
+    //TODO catch eccezioni scrittura
+    std::ofstream fout("log.txt");
+    if (bot_game_)
+        fout << "true\n";
+    else
+        fout << "false\n";
+    if (is_turno_g1())
+        fout << "true\n";
+    else
+        fout << "false\n";
+    fout.close();
 }
 
 void Gioco::azione(std::string origin, std::string target) {
@@ -55,8 +70,10 @@ void Gioco::azione(std::string origin, std::string target) {
                 //cancella gli avvistamenti sonar, cioè le Y
                 giocatore_attaccante->cancella_avvistamenti();
                 cambio_turno();
+                set_log((origin + target));
             } else if (origin == "XX" && target == "XX") {
                 print_griglie(giocatore_attaccante);
+                //set_log((origin + target));
             } else {
                 //azione di nave origin
                 //controllo sui parametri
@@ -85,20 +102,15 @@ void Gioco::azione(std::string origin, std::string target) {
                     num.push_back(origin[1]);
                     num.push_back(origin[2]);
                     battaglia_navale::Coordinate coord(stoi(num), target[0]);
-                    if (nave_scelta->azione(giocatore_difensore, coord)) {
-                        //colpita, stampo X in griglia attacco
-                        giocatore_attaccante->set_risultato(coord, 'X');
-                    } else {
-                        //non coplita, stampo O in griglia attacco
-                        giocatore_attaccante->set_risultato(coord, 'O');
-                    }
+                    nave_scelta->azione(giocatore_attaccante, giocatore_difensore, coord);
                     cambio_turno();
+                    set_log((origin + target));
                 }
             }
         }
     } else {
-        //eccezione di fine gioco
-        //calcolo corazze colpite per dire chi ha vinto
+        //catch
+        throw new Gioco_finito();
     }
 }
 
@@ -181,4 +193,17 @@ void Gioco::check(std::string parametro) {
     }
     std::string num;
     num.push_back(parametro[1]);
+}
+
+void Gioco::set_log(std::string mosse) {
+    //non controllo la lunghezza del comando passato perchè essendo già stato utilizzato per azione sono sicuro che sia accettabile
+    std::ofstream fout("log.txt", std::ios::app);
+    if (fout.good()) {
+        int i = 0;
+        while (mosse[i] != '\0') {
+            fout << mosse[i];
+        }
+        fout << "\n";
+    }
+    fout.close();
 }

@@ -34,6 +34,10 @@ namespace battaglia_navale {
         void set_x(int x);
 
         void set_y(int y);
+
+        battaglia_navale::Coordinate& operator=(const battaglia_navale::Coordinate& source){
+            return *this ;
+        }
     };
 }
 

@@ -3,6 +3,7 @@
 #define BATTLESHIP_GIOCO_H
 
 #include "giocatore.h"
+#include "../exceptions/exceptions.h"
 
 class Gioco {
 private:
@@ -20,6 +21,7 @@ private:
     void check(std::string parametro);
 
 public:
+    //TODO creare un costruttore che inizializza il player attivo come da specifica proveniente dal log
     Gioco(bool scelta_bot_game, Giocatore *G1, Giocatore *G2);
 
     void azione(std::string origin, std::string target);
@@ -29,6 +31,8 @@ public:
     bool is_turno_g1();
 
     bool is_bot_game();
+
+    void set_log(std::string mosse);
 };
 
 #endif //BATTLESHIP_GIOCO_H

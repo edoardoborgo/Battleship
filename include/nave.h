@@ -1,5 +1,6 @@
 #include "coordinata.h"
 #include <vector>
+#include <iostream>
 
 #ifndef NAVE_H
 #define NAVE_H
@@ -34,7 +35,7 @@ public:
     /*
      *  costruttore di default
      */
-    Nave() = default;
+    Nave();
 
     /*
      *  costruttore per navi con dimensione >= 1
@@ -67,7 +68,7 @@ public:
     /*
      *  azione: data una coordinata agisce sulla griglia avversaria in base al tipo di nave chiamante
      */
-    virtual bool azione(Giocatore *difensore, battaglia_navale::Coordinate &target);
+    virtual void azione(Giocatore *attaccante, Giocatore *difensore, battaglia_navale::Coordinate &target) =0;
 
     /*
      * aggiorna_griglia: metodo che aggiorna tutte le coordinate della nave, per poi
@@ -87,6 +88,10 @@ public:
     bool is_affondata() const;
 
     std::vector<Tupla> get_corazza() const;
+
+    virtual void get_francesco(){
+        std::cout<<"francesco";
+    }
 };
 
 #include "giocatore.h"

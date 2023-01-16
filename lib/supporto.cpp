@@ -65,8 +65,8 @@ void Supporto::muovi(battaglia_navale::Coordinate &target,
             throw std::invalid_argument("BoatNotFoundException");
         }
     }
-    Nave appo_nave = *nave_origin;
-    if (is_posizionabile(appo_nave, attaccante)) {
+    //Nave appo_nave = *nave_origin;
+    if (is_posizionabile((*nave_origin), attaccante)) {
         //il posto è libero
         aggiorna_coord(target);
     } else {
@@ -129,7 +129,6 @@ void Supporto::azione(Giocatore difensore, battaglia_navale::Coordinate &target)
             }
         }
     }
-
 }
 
 

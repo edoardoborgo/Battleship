@@ -32,7 +32,7 @@ Corazzata::Corazzata(battaglia_navale::Coordinate &prua, battaglia_navale::Coord
 }
 
 //recupero griglia del difensore, controllo se c'è una nave, se true diminuisco corazza e stampo 'X', se false 'O'
-bool Corazzata::azione(Giocatore *difensore, battaglia_navale::Coordinate &target) {
+void Corazzata::azione(Giocatore *attaccante, Giocatore *difensore, battaglia_navale::Coordinate &target) {
     std::vector<Nave *> navi = difensore->get_navi(); //recupero le navi dell'avversario
     //per ogni nave confronto l'entità Tupla che rappresenta un elemento di corazza per vedere se corrisponde al target scelto dall'attacante
     for (int i = 0; i < navi.size(); i++) {
@@ -42,10 +42,11 @@ bool Corazzata::azione(Giocatore *difensore, battaglia_navale::Coordinate &targe
                 //target trovato
                 //accedo alla nave, tramite set_corazza cambio lo stato della Tupla in posizione coordinata target: diventa minuscolo solo se era maiuscolo
                 navi[i]->set_corazza(target);
-                return true;
+                attaccante->set_risultato(target, 'X');
+                return;
             }
         }
     }
     //target non trovato
-    return false;
+    attaccante->set_risultato(target, 'O');
 }

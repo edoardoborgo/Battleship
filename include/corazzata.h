@@ -15,9 +15,31 @@ private:
         char stato = 'C';
     };
 public:
+    Corazzata() { dimensione_ = 5; }
+
     Corazzata(battaglia_navale::Coordinate &prua, battaglia_navale::Coordinate &poppa);
 
-    bool azione(Giocatore *difensore, battaglia_navale::Coordinate &target);
+    void azione(Giocatore *attaccante, Giocatore *difensore, battaglia_navale::Coordinate &target);
+
+    Corazzata& operator=(const Corazzata& source){
+        return *this ;
+    }
+
+    void get_francesco(){
+        std::cout<<"francesco ma corazzato";
+    }
+
+    Corazzata(const Corazzata&){
+
+    }
+
+    /*Corazzata& operator = (const Corazzata& source)    //assignment operator
+    {
+        if (this == &source)    //avoid self-assignment
+            return *this;
+        m_id = source.m_id;
+        return *this;
+    }*/
 };
 
 #endif //BATTLESHIP_CORAZZATA_H
