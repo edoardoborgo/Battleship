@@ -8,6 +8,22 @@ battaglia_navale::Coordinate::Coordinate(const int x, const char y) {
     }
 }
 
+battaglia_navale::Coordinate::Coordinate(std::string coordinata) {
+    if(toupper(coordinata[0]) > 64 && toupper(coordinata[0]) < 77 ){
+        y_ = toupper(coordinata[0]) - 65;
+    }
+    else if((int)coordinata[1] < 1)
+    {
+        if((int)coordinata[2] < 3){
+            x_ = (int)coordinata[2] +10;
+        }
+    }
+    else if((int) coordinata[1] > 1 && (int) coordinata[1] < 10)
+    {
+        x_ == (int) coordinata[1];
+    }
+}
+
 bool battaglia_navale::Coordinate::operator==(const battaglia_navale::Coordinate &coord) {
     if (x_ == coord.x_ && y_ == coord.y_)
         return true;

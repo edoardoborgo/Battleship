@@ -1,78 +1,112 @@
-/*#include <vector>
 #include <iostream>
+#include "../include/gioco.h"
+#include "../include/corazzata.h"
+#include "../include/supporto.h"
+
 
 using namespace std;
 
-int main(){
-  int righe = 12;
-  int colonne = 12;
-  std::vector<std::vector<char>> tabellone;
-  char c = '-';
-  for (int col = 0; col < colonne; col++) {
-    std::vector<char> v_righe;
-    for (int row = 0; row < righe; row++) {
-      v_righe.push_back(c);
+vector<string> split(string mossa){
+    int i = 0;
+    string aux;
+    vector<string> coordinate;
+    while(mossa[i] != '\n'){
+        if(mossa[i] != 32){
+            aux += mossa[i];
+        }
+        else{
+            coordinate.push_back(aux);
+        }
+        i++;
     }
-    tabellone.push_back(v_righe);
-  }
-
-  char row = 65;
-  cout << "  --------------------------------------------------" << endl;
-  for (int i = 0; i < tabellone.size(); i++){
-    cout << row << ' ' << '|';
-      for(int j = 0; j < tabellone[i].size(); j++){
-        cout << " " << tabellone[i][j] << " " << '|';
-      }
-    cout << endl;
-    row++;
-  }
-  cout << "  --------------------------------------------------" << endl;
-  cout << "    1   2   3   4   5   6   7   8   9  10   11  12  " << endl;
-  
-}
-*/
-
-#include <iostream>
-#include <vector>
-
-std::string choose_move(){
-    srand(time(NULL)+rand());
-    const int to_ascii_number = 48;
-    const int to_ascii_upper_case = 65;
-    //random tra 0 e 7, %8 genera 8 numeri a partire da zero
-
-    //scegli nave e poi scegli la mossa a seconda della nave
-
-    //recupero coord centrale della nave i-esima
-    std::string mossa = "";
-    int carattere = rand()%12;
-    int numero = rand()%100;
-    mossa += (char)(carattere+to_ascii_upper_case);
-    if (numero<10){
-        mossa+="0";
-        mossa += (char)(numero+to_ascii_number);
-    }else{
-        mossa += std::to_string(numero);
-    }
-    mossa += " ";
-    int carattere2 = rand()%12;
-    int numero2 = rand()%100;
-    mossa += (char)(carattere2+to_ascii_upper_case);
-    if (numero2<10){
-        mossa+="0";
-        mossa += (char)(numero2+to_ascii_number);
-    }else{
-        mossa += std::to_string(numero2);
-    }
-    //mossa += "K";
-    return mossa;
+    return coordinate;
 }
 
-int main()
+void set_coordinate(string input,string &origin,string &target)
 {
-    for(int i=0; i<10; i++){
-        std::cout << choose_move() << std::endl;
+    vector<string> coordinate = split(input);
+    origin = coordinate[0];
+    target = coordinate[1];
+}
+
+int main(int argc, char* argv[]){
+    //problemi: 1)parametri tramite reference, 2)corazzata non ha un operator= che restituisce la reference all'oggetto (forse)
+    battaglia_navale::Coordinate x = battaglia_navale::Coordinate(1,'A');
+    battaglia_navale::Coordinate y = battaglia_navale::Coordinate(1,'A');
+    Corazzata c1(x,y);
+
+    Corazzata c2(battaglia_navale::Coordinate(1,'A'), battaglia_navale::Coordinate(1,'A'));
+
+    Corazzata c2 = Corazzata(x,y);
+    Nave* ptr = &c1;
+
+    ptr->get_francesco();
+
+    if(argc != 2 ){
+        return 0;
     }
 
-    return 0;
+    bool bot = false;
+    Giocatore *g1;
+    Giocatore *g2 = new Computer();
+    string input;
+    bool check = false;
+
+    /*
+     ----------------------------------------------------------------------------------------------------------
+     capisco che tipo di gioco è
+     ----------------------------------------------------------------------------------------------------------
+     */
+
+    if (argv[1][0] == 'p') {
+        g1 = new Giocatore();
+    } else {
+        g1 = new Computer();
+        bot = true;
+    }
+
+    Gioco *game = new Gioco(bot, g1, g2);
+
+    /*
+     ----------------------------------------------------------------------------------------------------------
+     inserimento delle navi
+     ----------------------------------------------------------------------------------------------------------
+     */
+    std::vector<Nave *> navi;
+
+    for (int i = 0; i < 8; ++i) {
+        for (int j = 0; j < 3; ++j) {
+            string prua, poppa;
+            cout << "inserisci le coordinate di prua e poppa della corazzata n " + j;
+            cin >> input;
+            set_coordinate(input, prua, poppa);
+            battaglia_navale::Coordinate x = battaglia_navale::Coordinate(prua );
+            battaglia_navale::Coordinate y = battaglia_navale::Coordinate(poppa);
+            navi.push_back(Corazzata(x,y));
+            g1->add_nave(Corazzata(x,y));
+
+        }
+    }
+
+
+
+
+
+    /*while(true){
+            if(game->is_turno_g1()){
+                    cout<<"è il turno del giocatore 1, fare la mossa";
+                    cin>>input;
+                    set_coordinate(input,origin,target);
+            }
+            else{
+                g2.
+            }
+        }
+    } catch (std::exception e) {
+
+    }*/
+
 }
+
+
+

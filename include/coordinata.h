@@ -16,6 +16,8 @@ namespace battaglia_navale {
 
         Coordinate(const int x, const char y);
 
+        Coordinate(std::string coordinata);
+
         bool operator==(const battaglia_navale::Coordinate &coord);
 
         bool operator>=(const battaglia_navale::Coordinate &coord);
