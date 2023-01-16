@@ -12,7 +12,7 @@ private:
     std::vector<Nave *> navi;
 
     //controllo se le coordinate della nave sono libere nella "griglia"
-    bool is_posizionabile(Nave &nave);
+    bool is_posizionabile(Nave* nave);
 
 public:
     //costruttore

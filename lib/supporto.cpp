@@ -74,6 +74,8 @@ void Supporto::muovi(battaglia_navale::Coordinate &target,
     }
 }
 
+
+
 void Supporto::modifica_range(battaglia_navale::Coordinate target, battaglia_navale::Coordinate &start_heal,
                               battaglia_navale::Coordinate &finish_heal)  //todo rifare il metodo con le variabili giuste e dare un nome sensato
 //todo verificare se il metodo è giusto anche sul lato logico

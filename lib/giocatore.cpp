@@ -1,8 +1,8 @@
 #include "../include/giocatore.h"
 
-bool Giocatore::is_posizionabile(Nave &nave) {
+bool Giocatore::is_posizionabile(Nave* nave) {
     bool flag = true;
-    std::vector<Nave::Tupla> corazza_input = nave.get_corazza();
+    std::vector<Nave::Tupla> corazza_input = nave->get_corazza();
     for (int i = 0; i < corazza_input.size() && flag; i++) {
         for (int j = 0; j < navi.size() && flag; j++) {
             std::vector<Nave::Tupla> corazza_test = navi[j]->get_corazza();
@@ -22,7 +22,7 @@ void Giocatore::add_nave(Nave * nave) { //TODO initializer list
         //le navi sono già state tutte aggiunte
         if (is_posizionabile(nave)) {
             //posizionamento corretto, aggiungo la nave
-            navi.push_back(&nave);
+            navi.push_back(nave);
         } else {
             //posizionamento scorretto, lancio un'eccezione da gestire alla chiamata della funzione; la nave viene eliminata e ricreata nel main
             throw std::invalid_argument("Aggiunta di nave non andata a buon fine.");

@@ -1,4 +1,5 @@
 //file creato da Giovanni Giancola 2041830
+#include <string>
 
 #ifndef BATTLESHIP_COORDINATA_H
 #define BATTLESHIP_COORDINATA_H
