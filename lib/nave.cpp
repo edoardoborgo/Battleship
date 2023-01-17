@@ -1,5 +1,40 @@
 #include "../include/nave.h"
 
+Nave::Nave(){};
+
+Nave::Nave(battaglia_navale::Coordinate &prua, battaglia_navale::Coordinate &poppa, char simbolo, int dimensione){
+    dimensione_ = dimensione;
+    simbolo_ = simbolo;
+    if (Nave::is_nave(prua, poppa, dimensione_)) {
+        battaglia_navale::Coordinate appo_coord;
+        for (int i = 0; i < dimensione_; i++) {
+            if (is_orizzontale()) {
+                if (prua.get_x() < poppa.get_x()) {
+                    appo_coord.set_x(prua.get_x() + i);
+                    appo_coord.set_y(prua.get_y());
+                } else {
+                    appo_coord.set_x(poppa.get_x() + i);
+                    appo_coord.set_y(poppa.get_y());
+                }
+            } else {
+                if (prua.get_y() < poppa.get_y()) {
+                    appo_coord.set_x(prua.get_x());
+                    appo_coord.set_y(prua.get_y() + i);
+                } else {
+                    appo_coord.set_x(poppa.get_x());
+                    appo_coord.set_y(poppa.get_y() + i);
+                }
+            }
+            Nave::Tupla appo_tupla{appo_coord, simbolo_};
+            corazza_.push_back(appo_tupla);
+        }
+        Nave::coordinata_centro_ = Nave::calcolo_centro(prua, poppa);
+    }
+}
+
+Nave::Nave(battaglia_navale::Coordinate &prua){
+
+}
 bool Nave::is_nave(battaglia_navale::Coordinate &prua, battaglia_navale::Coordinate &poppa, int ideal_length) {
     if ((prua.get_x() >= 0 && poppa.get_x() >= 0) && (prua.get_x() < 12 && poppa.get_x() < 12) &&
         (prua.get_y() >= 0 && poppa.get_y() >= 0) && (prua.get_y() < 12 && poppa.get_y() < 12)) {

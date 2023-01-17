@@ -40,7 +40,7 @@ public:
     /*
      *  costruttore per navi con dimensione >= 1
      */
-    Nave(battaglia_navale::Coordinate &prua, battaglia_navale::Coordinate &poppa);
+    Nave(battaglia_navale::Coordinate &prua, battaglia_navale::Coordinate &poppa, char simbolo, int dimensione);
 
     /*
      *  costruttore per navi con dimensione = 1

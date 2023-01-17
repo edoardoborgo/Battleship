@@ -16,6 +16,7 @@ vector<string> split(string mossa){
         }
         else{
             coordinate.push_back(aux);
+            //aux = ""; (?)
         }
         i++;
     }
@@ -29,13 +30,63 @@ void set_coordinate(string input,string &origin,string &target)
     target = coordinate[1];
 }
 
-int main(int argc, char* argv[]){
-    //problemi: 1)parametri tramite reference, 2)corazzata non ha un operator= che restituisce la reference all'oggetto (forse)
-    battaglia_navale::Coordinate x = battaglia_navale::Coordinate(1,'A');
-    battaglia_navale::Coordinate y = battaglia_navale::Coordinate(1,'A');
-    Corazzata c1(x,y);
+if(argc != 2) return 0;
+    char p1 = argv[1][0];
+    char p2 = argv[1][1];
+    bool is_bot_game = false;
+    if(!(p1 == 'p' || p1 == 'c') || p2 != 'c') {
+        std::cout << "Invalid argument. Pleasy use 'pc' or 'cc'.";
+        return 0;
+    }
+    else if(p1 == 'c') is_bot_game = true;
+    gameplay::Game game {is_bot_game};
+    game.play();
+    return 0;
+}
+ */
+int main(int argc, char** argv){
+    Corazzata c1 =Corazzata();
+    std::cout<<"dim:"<<c1.get_dimensione();
+    std::cout<<"worka";
 
-    Corazzata c2(battaglia_navale::Coordinate(1,'A'), battaglia_navale::Coordinate(1,'A'));
+    /*Giocatore *G1;
+    Computer C1 = Computer();
+    G1 = &C1;*/
+
+    /*
+     ----------------------------------------------------------------------------------------------------------
+     capisco che tipo di gioco è
+     ----------------------------------------------------------------------------------------------------------
+     */
+
+    /*if(argc != 2){ return 0;}
+    char p1 = argv[1][0];
+    char p2 = argv[1][1];
+    bool scelta_bot_game=false;
+
+    if(!(p1 == 'c' || p1 == 'p') || p2 !='c') {
+        std::cout << "Invalid Argument. Per favore inserisci 'pc' o 'cc'.";
+        return 0;
+    }
+    else if(p1 == 'c') {
+        scelta_bot_game = true;
+    }
+
+    Giocatore *G2;
+    if(scelta_bot_game){
+        Computer appo_computer = Computer();
+        G2 = &appo_computer;
+    }else{
+        Giocatore appo_giocatore = Giocatore();
+        G2 = &appo_giocatore;
+    }
+    Gioco(scelta_bot_game, G1, G2);
+
+    while(true){
+
+    }*/
+
+    /*Corazzata c2(battaglia_navale::Coordinate(1,'A'), battaglia_navale::Coordinate(1,'A'));
 
     Corazzata c2 = Corazzata(x,y);
     Nave* ptr = &c1;

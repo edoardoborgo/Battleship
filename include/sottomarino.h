@@ -9,7 +9,7 @@
 class Sottomarino : public Nave {
  public:
   char simbolo_ = 'E';
-  int dimensione_;
+  int dimensione_ = 1;
  private:
   Sottomarino(battaglia_navale::Coordinate &prua);
   void azione(Giocatore* attaccante, Giocatore* difensore, battaglia_navale::Coordinate &target);
