@@ -22,8 +22,6 @@ void Sottomarino::azione(Giocatore *attaccante, Giocatore *difensore,
     }
 }
 
-
-
 std::vector<battaglia_navale::Coordinate> Sottomarino::scan_(Giocatore *difensore,
                                                   battaglia_navale::Coordinate &target) { //problema con la nominazione del giocatore (che namespace/classe prendo?)
     std::vector<battaglia_navale::Coordinate> vector_scan_;

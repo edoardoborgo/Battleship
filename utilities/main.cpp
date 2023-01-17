@@ -2,8 +2,7 @@
 #include "../include/gioco.h"
 #include "../include/corazzata.h"
 #include "../include/supporto.h"
-
-
+/*
 using namespace std;
 
 vector<string> split(string mossa){
@@ -13,8 +12,7 @@ vector<string> split(string mossa){
     while(mossa[i] != '\n'){
         if(mossa[i] != 32){
             aux += mossa[i];
-        }
-        else{
+        } else {
             coordinate.push_back(aux);
             //aux = ""; (?)
         }
@@ -103,28 +101,13 @@ int main(int argc, char** argv){
     string input;
     bool check = false;
 
-    /*
-     ----------------------------------------------------------------------------------------------------------
-     capisco che tipo di gioco è
-     ----------------------------------------------------------------------------------------------------------
-     */
 
-    if (argv[1][0] == 'p') {
-        g1 = new Giocatore();
-    } else {
-        g1 = new Computer();
-        bot = true;
-    }
-
-    Gioco *game = new Gioco(bot, g1, g2);
-
-    /*
      ----------------------------------------------------------------------------------------------------------
      inserimento delle navi
      ----------------------------------------------------------------------------------------------------------
-     */
-    std::vector<Nave *> navi;
 
+    std::vector<Nave *> navi;
+    string input;
     for (int i = 0; i < 8; ++i) {
         for (int j = 0; j < 3; ++j) {
             string prua, poppa;
@@ -134,10 +117,11 @@ int main(int argc, char** argv){
             battaglia_navale::Coordinate x = battaglia_navale::Coordinate(prua );
             battaglia_navale::Coordinate y = battaglia_navale::Coordinate(poppa);
             navi.push_back(Corazzata(x,y));
-            g1->add_nave(Corazzata(x,y));
+            g1->add_nave(navi[i]);
 
         }
     }
+     */
 
 
 
@@ -158,6 +142,51 @@ int main(int argc, char** argv){
     }*/
 
 }
+
+/*
+void Game::play()
+    {
+        if(!is_bot_game) std::cout << "Use the command XX XX to print a snapshot of the chessboard." << std::endl;
+        this->log_file.open("./game_log.txt"); // opens the log file
+        do
+        {
+            chessgame::PieceColor color = this->getCurrentPlayer()->getColor();
+            std::cout << "\nTurn n.: " << this->n_moves + 1 << (color == chessgame::WHITE ? " - WHITE" : " - BLACK") << " moves." << std::endl;
+            bool invalid_move = true;
+            do
+            {
+                // player's move for its turn
+                std::array<chessgame::Coordinates, 2> move = this->getCurrentPlayer()->think();
+                if(move[0].symbol == "XX" && move[1].symbol == "XX") { // special command as by instructions
+                    std::cout << this->board.snapshot() << std::endl;
+                    continue;
+                }
+                invalid_move = !this->playerMove(move);
+                if(!invalid_move) {
+                    chessgame::Piece* p = this->board.get_piece(move[1]);
+                    if(p != nullptr) {
+                        std::cout << "-> Moved: " << p->getSymbol() << " from " << move[0].symbol << " to " << move[1].symbol << std::endl;
+                    }
+                    else std::cout << "ATTENTION: moved from a void tile!" << std::endl; // for debugging purpose
+                }
+            } while (invalid_move); // this cycle keeps going until a valid move has been entered
+
+            // resets seed generator if bot player
+            if(!this->getCurrentPlayer()->is_human)
+                dynamic_cast<chessgame::Bot*>(this->getCurrentPlayer())->resetBotSeed();
+
+            this->n_moves++;
+            this->stall_counter++;
+
+            std::cout << "********************** End of turn **********************" << std::endl;
+
+            this->current_turn = !this->current_turn; // alternates turns
+        } while (!isGameOver());
+        // snapshot of the state of the chessboard at the end of the game
+        std::cout << this->board.snapshot() << std::endl;
+        this->log_file.close(); // closes the log file
+    }
+*/
 
 
 
