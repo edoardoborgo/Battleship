@@ -156,7 +156,6 @@ void Nave::aggiorna_coord(const battaglia_navale::Coordinate& target){
 }
 
 
-
 /*
 #include <iostream>
 #include <string>

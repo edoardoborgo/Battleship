@@ -13,7 +13,7 @@ int fpeek(FILE* file)
     return carattere;
 }
 
-int main(){
+int replayMain(){
 
     FILE* file;
     char riga[100];

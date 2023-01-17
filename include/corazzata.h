@@ -15,7 +15,7 @@ private:
         char stato = 'C';
     };
 public:
-    Corazzata() { dimensione_ = 5; }
+    Corazzata() : Nave() { dimensione_ = 5; }
 
     Corazzata(battaglia_navale::Coordinate &prua, battaglia_navale::Coordinate &poppa);
 

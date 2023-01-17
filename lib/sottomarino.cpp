@@ -1,12 +1,11 @@
 #include "../include/sottomarino.h"
 #include <vector>
 
-Sottomarino::Sottomarino(battaglia_navale::Coordinate &prua) {
-    Sottomarino::dimensione_ = 1;
-    corazza_.push_back(Nave::Tupla{prua, simbolo_});
+Sottomarino::Sottomarino(battaglia_navale::Coordinate &prua)
+    : Nave(prua,prua, 'E', 1) {
 }
 
-void set_scan(std::vector<battaglia_navale::Coordinate>& coords, Giocatore* attaccante){
+void Sottomarino::set_scan_(std::vector<battaglia_navale::Coordinate> coords, Giocatore* attaccante){
     std::vector<std::vector<char>> appo_griglia = attaccante->get_griglia_attacco();
     for (int i = 0; i < coords.size(); i++){
         battaglia_navale::Coordinate appo_coord(coords[i].get_x(), coords[i].get_y()+65);

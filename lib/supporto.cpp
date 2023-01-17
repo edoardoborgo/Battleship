@@ -2,15 +2,9 @@
 #include "../include/giocatore.h"
 #include <stdexcept>
 
-Supporto::Supporto(battaglia_navale::Coordinate &prua, battaglia_navale::Coordinate &poppa) {
-    dimensione_ = 3;
-    simbolo_ = 'S';
-    if (Nave::is_nave(prua, poppa, dimensione_)) {
-        corazza_.push_back(Nave::Tupla{prua, 'S'});
-        corazza_.push_back(Nave::Tupla{Nave::calcolo_centro(prua, poppa), 'S'});
-        corazza_.push_back(Nave::Tupla{poppa, 'S'});
+Supporto::Supporto(battaglia_navale::Coordinate &prua, battaglia_navale::Coordinate &poppa)
+    : Nave(prua, poppa, 'S', 3) {
 
-    }
 }
 
 void Supporto::set_corazza(battaglia_navale::Coordinate &coord) {
