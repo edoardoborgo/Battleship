@@ -19,7 +19,7 @@ void Gioco::cambio_turno() {
     }
 }
 
-Gioco::Gioco(bool scelta_bot_game, Giocatore *G1, Giocatore *G2) {
+Gioco::Gioco(bool scelta_bot_game, Giocatore *G1, Computer *G2) {
     //controllo della versione, non servono eccezioni per la versione passata perchè viene controllata nel main
     if (scelta_bot_game)
         bot_game_ = true;
@@ -48,6 +48,103 @@ Gioco::Gioco(bool scelta_bot_game, Giocatore *G1, Giocatore *G2) {
     fout.close();
 }
 
+Gioco::Gioco(bool scelta_bot_game, Computer *G1, Computer *G2) {
+  //controllo della versione, non servono eccezioni per la versione passata perchè viene controllata nel main
+  if (scelta_bot_game)
+    bot_game_ = true;
+  else if (!scelta_bot_game)
+    bot_game_ = false;
+
+  //inizializzazione turno
+  start_casuale();
+
+  //inizializzazione giocatori
+  G1_ = G1;
+  G2_ = G2;
+
+  //inizializzazione log
+  //apre e svuota il file o lo crea se non esiste
+  //DA FARE: catch eccezioni scrittura
+  std::ofstream fout("log.txt");
+  if (bot_game_)
+    fout << "true\n";
+  else
+    fout << "false\n";
+  if (is_turno_g1())
+    fout << "true\n";
+  else
+    fout << "false\n";
+  fout.close();
+}
+
+bool Gioco::check_input(std::string input){
+  int lunghezza=0;
+  for(int i=0; input[i]!='\n'; i++){
+    lunghezza=i;
+  }
+  if(lunghezza==1){
+    if(input[0]=='0'){
+      return false;
+    }else{
+      //il numero non è zero
+      return true;
+    }
+  }else if(lunghezza==2){
+    if(input[0]=='0'){
+      if(input[1]!='0'){
+        return true;
+      }else{
+        return false;
+      }
+    }else{
+      //il numero non è zero
+      if(input[0]=='1'){
+        if(input[1]=='0' || input[1]=='1' || input[1]=='2'){
+          return true;
+        }else{
+          return false;
+        }
+      }else{
+        return false;
+      }
+    }
+  }else{
+    return false;
+  }
+}
+
+std::string Gioco::format(std::string input){
+  //calcolo la lunghezza di input
+  int lunghezza=0;
+  for(int i=0; input[i]!='\n'; i++){
+    lunghezza=i;
+  }
+  if(lunghezza==3){
+    //to upper case
+    if(input[0]>=97 && input[0]<=108){
+      input[0]=input[0]-32;
+    }
+    std::string appo = &input[1];
+    appo+=&input[2];
+    if(check_input(appo)){
+      return input;
+    }else{
+      throw std::invalid_argument("");
+    }
+  }else if(lunghezza==2){
+    std::string appo = &input[1];
+    std::string risultato;
+    if(check_input(appo)){
+      risultato=input[0]+'0'+input[1];
+      return risultato;
+    }else{
+      throw std::invalid_argument("");
+    }
+  }else{
+    throw std::invalid_argument("");
+  }
+}
+
 void Gioco::azione(std::string origin, std::string target) {
     if (numero_turno_attuale < numero_massimo_turni) {
         //controllo il turno e imposto la ref al giocatore attivo
@@ -60,6 +157,10 @@ void Gioco::azione(std::string origin, std::string target) {
             giocatore_attaccante = G2_;
             giocatore_difensore = G1_;
         }
+
+        //formattazione mosse e salvataggio, controllare il return
+        std::string f_origin = format(origin);
+        std::string f_target = format(target);
 
         //controlli sui parametri: qua o sul main?
         if ((origin.length() != 3 && origin.length() != 2) && (target.length() != 3 && target.length() != 2)) {
@@ -206,4 +307,34 @@ void Gioco::set_log(std::string mosse) {
         fout << "\n";
     }
     fout.close();
+}
+
+bool Gioco::is_game_over(){
+
+  if(is_bot_game() && numero_turno_attuale == numero_massimo_turni){
+    //funzione che scrive all'interno del log
+    std::cout << "Il gioco di bot ha raggiunto il numero massimo di mosse senza finire le navi, ricominciare" << std::endl;
+    return true;
+  }
+  std::vector<Nave*> appo_check_navi = this->get_giocatore_attuale()->get_navi();
+  int navi_vive = appo_check_navi.size();
+  for (int i = 0; i < appo_check_navi.size(); i++){
+    if (appo_check_navi[i]->is_affondata()){
+      navi_vive--;
+    }
+  }
+  if(navi_vive == 0){
+    return true;
+  }else {
+    return false;
+  }
+
+}
+
+Giocatore* Gioco::get_giocatore_attuale(){
+  if(is_turno_g1()){
+    return G1_;
+  } else {
+    return G2_;
+  }
 }

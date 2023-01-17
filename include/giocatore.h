@@ -16,7 +16,7 @@ private:
 
 public:
     //costruttore
-    Giocatore() =default;
+    Giocatore(){};
 
     //aggiunge una nave nella lista di navi
     void add_nave(Nave * nave);
@@ -35,13 +35,13 @@ public:
 };
 
 class Computer : public Giocatore{
-public: Computer(){}
+ public: Computer() : Giocatore(){}
     //metodo che restituisce origin e target
     //origin scelto tra le navi disonibili
     //target random
     //nel main tramite computer. get origin e computer.get target si recuperano le coordinate da passare a game per eseguire l'azione
-
     std::string choose_move();
+    void crea_nave(int dimensione);
 };
 
 #include "nave.h"

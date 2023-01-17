@@ -2,15 +2,17 @@
 #include "../include/gioco.h"
 #include "../include/corazzata.h"
 #include "../include/supporto.h"
-/*
+#include "../include/sottomarino.h"
+
 using namespace std;
 
 vector<string> split(string mossa){
     int i = 0;
     string aux;
+    int ascii_space = 32;
     vector<string> coordinate;
     while(mossa[i] != '\n'){
-        if(mossa[i] != 32){
+        if(mossa[i] != ascii_space){
             aux += mossa[i];
         } else {
             coordinate.push_back(aux);
@@ -28,36 +30,13 @@ void set_coordinate(string input,string &origin,string &target)
     target = coordinate[1];
 }
 
-if(argc != 2) return 0;
-    char p1 = argv[1][0];
-    char p2 = argv[1][1];
-    bool is_bot_game = false;
-    if(!(p1 == 'p' || p1 == 'c') || p2 != 'c') {
-        std::cout << "Invalid argument. Pleasy use 'pc' or 'cc'.";
-        return 0;
-    }
-    else if(p1 == 'c') is_bot_game = true;
-    gameplay::Game game {is_bot_game};
-    game.play();
-    return 0;
-}
- */
 int main(int argc, char** argv){
-    Corazzata c1 =Corazzata();
-    std::cout<<"dim:"<<c1.get_dimensione();
-    std::cout<<"worka";
+    if(argc != 2){ return 0;}
+    Computer  G2 = Computer();
 
-    /*Giocatore *G1;
-    Computer C1 = Computer();
-    G1 = &C1;*/
-
-    /*
-     ----------------------------------------------------------------------------------------------------------
-     capisco che tipo di gioco è
-     ----------------------------------------------------------------------------------------------------------
-     */
-
-    /*if(argc != 2){ return 0;}
+    /*------------------------------------------------------------------------------------------------
+     * TIPOLOGIA DI GIOCO
+     -------------------------------------------------------------------------------------------------*/
     char p1 = argv[1][0];
     char p2 = argv[1][1];
     bool scelta_bot_game=false;
@@ -70,60 +49,171 @@ int main(int argc, char** argv){
         scelta_bot_game = true;
     }
 
-    Giocatore *G2;
-    if(scelta_bot_game){
-        Computer appo_computer = Computer();
-        G2 = &appo_computer;
-    }else{
-        Giocatore appo_giocatore = Giocatore();
-        G2 = &appo_giocatore;
-    }
-    Gioco(scelta_bot_game, G1, G2);
-
-    while(true){
-
-    }*/
-
-    /*Corazzata c2(battaglia_navale::Coordinate(1,'A'), battaglia_navale::Coordinate(1,'A'));
-
-    Corazzata c2 = Corazzata(x,y);
-    Nave* ptr = &c1;
-
-    ptr->get_francesco();
-
-    if(argc != 2 ){
-        return 0;
-    }
-
-    bool bot = false;
-    Giocatore *g1;
-    Giocatore *g2 = new Computer();
     string input;
-    bool check = false;
+    string origin, target,prua,poppa;
+    battaglia_navale::Coordinate x,y;
+    int dimensione_corazzata = 5;
+    int dimensione_supporto = 3;
+    int dimensione_sottomarino = 1;
+    int numero_corazzate = 3;
+    int numero_suppporto = 3;
+    int numero_sottomarino = 2;
+
+    if(scelta_bot_game)
+    {
+      Computer G1 = Computer();
+      Gioco game = Gioco(scelta_bot_game,&G1,&G2);
+
+      G2.crea_nave(dimensione_corazzata);
+      G2.crea_nave(dimensione_corazzata);
+      G2.crea_nave(dimensione_corazzata);
+      G2.crea_nave(dimensione_supporto);
+      G2.crea_nave(dimensione_supporto);
+      G2.crea_nave(dimensione_supporto);
+      G2.crea_nave(dimensione_sottomarino);
+      G2.crea_nave(dimensione_sottomarino);
+
+      G1.crea_nave(dimensione_corazzata);
+      G1.crea_nave(dimensione_corazzata);
+      G1.crea_nave(dimensione_corazzata);
+      G1.crea_nave(dimensione_supporto);
+      G1.crea_nave(dimensione_supporto);
+      G1.crea_nave(dimensione_supporto);
+      G1.crea_nave(dimensione_sottomarino);
+      G2.crea_nave(dimensione_sottomarino);
 
 
-     ----------------------------------------------------------------------------------------------------------
-     inserimento delle navi
-     ----------------------------------------------------------------------------------------------------------
+        while(!game.is_game_over())
+        {
+          if(game.is_turno_g1())
+          {
+            input = G1.choose_move();
+            set_coordinate(input, origin,target);
+            game.azione(origin,target);
+          }
+          else{
+            input = G2.choose_move();
+            set_coordinate(input, origin, target);
+            game.azione(origin,target);
+          }
+        }
+        cout<< "Il gioco è finito";
+    }
+    else
+    {
+      bool flag = false;
+      Giocatore G1 = Giocatore();
+      Gioco game = Gioco(scelta_bot_game, &G1,&G2);
 
-    std::vector<Nave *> navi;
-    string input;
-    for (int i = 0; i < 8; ++i) {
-        for (int j = 0; j < 3; ++j) {
-            string prua, poppa;
-            cout << "inserisci le coordinate di prua e poppa della corazzata n " + j;
+
+      G2.crea_nave(dimensione_corazzata);
+      G2.crea_nave(dimensione_corazzata);
+      G2.crea_nave(dimensione_corazzata);
+      G2.crea_nave(dimensione_supporto);
+      G2.crea_nave(dimensione_supporto);
+      G2.crea_nave(dimensione_supporto);
+      G2.crea_nave(dimensione_sottomarino);
+      G2.crea_nave(dimensione_sottomarino);
+
+      std::vector<Nave *> navi(8);
+
+      /*------------------------------------------------------------------------------------------------
+       * INSERIMENTO DELLE NAVI CORAZZATE
+       *------------------------------------------------------------------------------------------------*/
+        int i = 0;
+          for (int j = 0; j < numero_corazzate; ++j) {
+            do {
+              try {
+                cout << "inserisci le coordinate di prua e poppa della corazzata n " + to_string(j) + "(lunghezza 5)";
+                cin >> input;
+                set_coordinate(input, prua, poppa);
+                x = battaglia_navale::Coordinate(prua);
+                y = battaglia_navale::Coordinate(poppa);
+                Corazzata c = Corazzata(x,y);
+                navi.push_back(&c);
+                G1.add_nave(navi[i]);
+              } catch (invalid_argument e) {
+                flag = true;
+                cout<<"Coordinate errate della nave o coordinate occupate, reinserire la nave";
+              }
+              i++;
+              flag = false;
+            }while(flag);
+          }
+        /*------------------------------------------------------------------------------------------------
+        * INSERIMENTO DELLE NAVI SUPPORTO
+        ------------------------------------------------------------------------------------------------*/
+      for (int j = 0; j < numero_suppporto; ++j) {
+        do {
+          try {
+            cout << "inserisci le coordinate di prua e poppa della nave da supporto n " + to_string(j) + "(lunghezza 5)";
             cin >> input;
             set_coordinate(input, prua, poppa);
-            battaglia_navale::Coordinate x = battaglia_navale::Coordinate(prua );
-            battaglia_navale::Coordinate y = battaglia_navale::Coordinate(poppa);
-            navi.push_back(Corazzata(x,y));
-            g1->add_nave(navi[i]);
+            x = battaglia_navale::Coordinate(prua);
+            y = battaglia_navale::Coordinate(poppa);
+            Supporto c = Supporto(x,y);
+            navi.push_back(&c);
+            G1.add_nave(navi[i]);
+          } catch (invalid_argument) {
+            flag = true;
+            cout<<"Coordinate errate della nave o coordinate occupate, reinserire la nave";
+          }
+          i++;
+          flag = false;
+        }while(flag);
+      }
+      /*------------------------------------------------------------------------------------------------
+    * INSERIMENTO DELLE NAVI SUPPORTO
+    ------------------------------------------------------------------------------------------------*/
 
-        }
     }
-     */
 
 
+
+
+
+    /*------------------------------------------------------------------------------------------------
+     * CREAZIONE DELLE NAVI
+     -------------------------------------------------------------------------------------------------*/
+    /*G1->crea_nave(5);
+    G1->crea_nave(5);
+    G1->crea_nave(5);*/
+
+    if(!scelta_bot_game)
+    {
+
+        for (int j = 0; j < 3; ++j) {
+          cout << "inserisci le coordinate di prua e di poppa della nave da supporto n " + to_string(j);
+          cin >> input;
+          set_coordinate(input,prua,poppa);
+          x = battaglia_navale::Coordinate(prua);
+          y = battaglia_navale::Coordinate(poppa);
+          Supporto s = Supporto(x,y);
+          navi.push_back(&s);
+          G1->add_nave(navi[i]);
+          i++;
+        }
+        for (int j = 0; j < 2; ++j){
+          cout << "inserisci le coordinate di prua e di poppa della nave da sottomarino n " + to_string(j);
+          cin >> input;
+          set_coordinate(input,prua,poppa);
+          x = battaglia_navale::Coordinate(prua);
+          y = battaglia_navale::Coordinate(poppa);
+          Sottomarino s = Sottomarino(x);
+          navi.push_back(&s);
+          G1->add_nave(navi[i]);
+          i++
+        }
+      }
+    }else{
+
+    }
+}
+
+/*
+Cose da fa:
+
+ */
 
 
 
@@ -141,7 +231,6 @@ int main(int argc, char** argv){
 
     }*/
 
-}
 
 /*
 void Game::play()
@@ -186,7 +275,15 @@ void Game::play()
         std::cout << this->board.snapshot() << std::endl;
         this->log_file.close(); // closes the log file
     }
+
+
 */
 
-
-
+/*Giocatore* G1;
+    if(scelta_bot_game){
+        Computer appo_computer = Computer();
+        G1 = &appo_computer;
+    }else{
+        Giocatore appo_giocatore = Giocatore();
+        G1 = &appo_giocatore;
+    }*/

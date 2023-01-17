@@ -1,10 +1,8 @@
 #include "../include/supporto.h"
-#include "../include/giocatore.h"
 #include <stdexcept>
 
 Supporto::Supporto(battaglia_navale::Coordinate &prua, battaglia_navale::Coordinate &poppa)
     : Nave(prua, poppa, 'S', 3) {
-
 }
 
 void Supporto::set_corazza(battaglia_navale::Coordinate &coord) {
@@ -30,11 +28,11 @@ vado a verificare se le cooridinate a destra e a sinistra (essendo orizzontale) 
 se il match avviene, non posso spostare la nave e quindi libero = false
 */
 
-bool Supporto::is_posizionabile(Nave &nave, Giocatore &attaccante) {
+bool Supporto::is_posizionabile(Nave &nave, Giocatore* attaccante) {
     bool flag = true;
     std::vector<Nave::Tupla> corazza_input = nave.get_corazza();
     for (int i = 0; i < corazza_input.size() && flag; i++) {
-        std::vector<Nave *> navi = attaccante.get_navi();
+        std::vector<Nave *> navi = attaccante->get_navi();
         for (int j = 0; j < navi.size() && flag; j++) {
             std::vector<Nave::Tupla> corazza_test = navi[j]->get_corazza();
             for (int k = 0; k < navi[j]->get_corazza().size() && flag; k++) {
@@ -47,10 +45,10 @@ bool Supporto::is_posizionabile(Nave &nave, Giocatore &attaccante) {
 }
 
 void Supporto::muovi(battaglia_navale::Coordinate &target,
-                     Giocatore &attaccante) {
+                     Giocatore* attaccante) {
     Nave *nave_origin;
     std::vector<Nave::Tupla> corazza_input;
-    std::vector<Nave *> navi = attaccante.get_navi();
+    std::vector<Nave *> navi = attaccante->get_navi();
     for (int i = 0; i < navi.size(); i++) {
         battaglia_navale::Coordinate appo_coord = navi[i]->get_coordinata_centro();
         if (appo_coord == coordinata_centro_)
@@ -101,16 +99,16 @@ void Supporto::modifica_range(battaglia_navale::Coordinate target, battaglia_nav
     }
 }
 
-void Supporto::azione(Giocatore difensore, battaglia_navale::Coordinate &target) {
+void Supporto::azione(Giocatore* difensore, Giocatore* attaccante, battaglia_navale::Coordinate &target) {
 
-    muovi(target, difensore);
+    muovi(target, attaccante);
 
     battaglia_navale::Coordinate start_heal(target.get_x() - 1, (char) (target.get_y() - 1 + 65));
     battaglia_navale::Coordinate finish_heal(target.get_x() + 1, (char) (target.get_y() + 1 + 65));
 
     modifica_range(target, start_heal, finish_heal);
 
-    std::vector<Nave *> navi = difensore.get_navi(); //recupero le navi dell'avversario
+    std::vector<Nave *> navi = difensore->get_navi(); //recupero le navi dell'avversario
 
     for (int i = 0; i < navi.size(); ++i) {
         std::vector<Tupla> aux = navi[i]->get_corazza();

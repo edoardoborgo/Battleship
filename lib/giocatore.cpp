@@ -1,4 +1,7 @@
 #include "../include/giocatore.h"
+#include "../include/corazzata.h"
+#include "../include/supporto.h"
+#include "../include/sottomarino.h"
 
 bool Giocatore::is_posizionabile(Nave* nave) {
     bool flag = true;
@@ -95,4 +98,71 @@ std::string Computer::choose_move(){
     }
     mossa += "K";
     return mossa;
+}
+
+
+void Computer::crea_nave(int dimensione) {
+  const int to_ascii_number = 48;
+  const int to_ascii_upper_case = 65;
+  srand(time(NULL) + rand());
+  int x;
+  char y;
+  battaglia_navale::Coordinate prua,poppa;
+  bool orizzontale;
+  bool flag = true;
+  Nave *n;
+
+  do{
+    try{
+      if(dimensione ==1)
+      {
+        x = rand() % 12;
+        y = rand() % 12 + to_ascii_number;
+        prua = battaglia_navale::Coordinate(x,y);
+        Sottomarino s = Sottomarino(prua);
+        n=&s;
+        add_nave(n);
+      }
+      else if(dimensione == 3 || dimensione == 5){
+        orizzontale = rand() % 2;
+        if(orizzontale)
+        {
+          x = rand() % (12-dimensione);
+          y = rand() % 12 + to_ascii_number;
+          prua = battaglia_navale::Coordinate(x,y);
+          poppa = battaglia_navale::Coordinate(x+dimensione,y);
+        }
+        else{
+          y = rand() % (12-dimensione) + to_ascii_upper_case;
+          x = rand() % 12 + to_ascii_number;
+          prua = battaglia_navale::Coordinate(x,y);
+          poppa = battaglia_navale::Coordinate(x,y+dimensione);
+        }
+        if(dimensione == 5)
+        {
+          Corazzata c = Corazzata(prua, poppa);
+          n = &c;
+        }
+        else {
+          Supporto s = Supporto(prua, poppa);
+          n = &s;
+        }
+      }
+      add_nave(n);
+      flag = false;
+    } catch (std::invalid_argument e) {
+      flag  = true;
+    }
+  }while(flag);
+
+
+
+
+
+
+
+
+
+
+
 }

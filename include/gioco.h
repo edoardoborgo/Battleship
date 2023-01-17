@@ -9,7 +9,8 @@ class Gioco {
 private:
     bool bot_game_;
     bool turno_g1_;
-    Giocatore *G1_, *G2_;
+    Giocatore *G1_;
+    Computer * G2_;
     const int numero_massimo_turni = 40;
     int numero_turno_attuale = 0;
 
@@ -20,9 +21,12 @@ private:
 
     void check(std::string parametro);
 
+    bool check_input(std::string input);
+    std::string format(std::string input);
 public:
     //TODO creare un costruttore che inizializza il player attivo come da specifica proveniente dal log
-    Gioco(bool scelta_bot_game, Giocatore *G1, Giocatore *G2);
+    Gioco(bool scelta_bot_game, Giocatore *G1, Computer *G2);
+    Gioco(bool scelta_bot_name, Computer *G1, Computer *G2);
 
     void azione(std::string origin, std::string target);
 
@@ -33,6 +37,10 @@ public:
     bool is_bot_game();
 
     void set_log(std::string mosse);
+
+    bool is_game_over();
+
+    Giocatore* get_giocatore_attuale();
 };
 
 #endif //BATTLESHIP_GIOCO_H

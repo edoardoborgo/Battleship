@@ -7,10 +7,10 @@
 #define BATTLESHIP_SOTTOMARINO_H
 
 class Sottomarino : public Nave {
- public:
+ private:
   char simbolo_ = 'E';
   int dimensione_ = 1;
- private:
+ public:
   Sottomarino(battaglia_navale::Coordinate &prua);
   void azione(Giocatore* attaccante, Giocatore* difensore, battaglia_navale::Coordinate &target);
   std::vector<battaglia_navale::Coordinate> scan_(Giocatore* difensore, battaglia_navale::Coordinate &target);
@@ -18,7 +18,6 @@ class Sottomarino : public Nave {
   battaglia_navale::Coordinate get_centro();
   void aggiorna_griglia(battaglia_navale::Coordinate& origin, const battaglia_navale::Coordinate& target);
   bool muovi(battaglia_navale::Coordinate &target);
-
 };
 
 #endif //BATTLESHIP_SOTTOMARINO_H

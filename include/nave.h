@@ -14,6 +14,7 @@ private:
     char simbolo_;
     int dimensione_;
     bool affondata_;
+    const int to_lower_case = 32;
 
 protected:
     bool orizzontale_;
@@ -75,7 +76,6 @@ public:
     */
     void aggiorna_coord(const battaglia_navale::Coordinate& target);
 
-
     //getters
     char get_simbolo() const;
 
@@ -88,10 +88,6 @@ public:
     bool is_affondata() const;
 
     std::vector<Tupla> get_corazza() const;
-
-    virtual void get_francesco(){
-        std::cout<<"francesco";
-    }
 };
 
 #include "giocatore.h"
