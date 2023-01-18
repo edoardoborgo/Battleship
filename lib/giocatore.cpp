@@ -117,7 +117,7 @@ void Computer::crea_nave(int dimensione) {
       if(dimensione ==1)
       {
         x = rand() % 12;
-        y = rand() % 12 + to_ascii_number;
+        y = rand() % 12 + to_ascii_upper_case;
         prua = battaglia_navale::Coordinate(x,y);
         Sottomarino s = Sottomarino(prua);
         n=&s;
@@ -151,6 +151,7 @@ void Computer::crea_nave(int dimensione) {
       add_nave(n);
       flag = false;
     } catch (std::invalid_argument e) {
+      std::cout<<"ripeti"<<std::endl;
       flag  = true;
     }
   }while(flag);
