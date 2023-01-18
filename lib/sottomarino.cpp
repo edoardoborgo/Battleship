@@ -17,7 +17,7 @@ void Sottomarino::azione(Giocatore *attaccante, Giocatore *difensore, battaglia_
     if (muovi(target, attaccante)) {
         scan_(difensore, attaccante, target);
     } else {
-        //qualcosa, altrimenti manca il return eccezzione
+        throw std::invalid_argument("azione sottomarino non funzia");
     }
 }
 

@@ -69,7 +69,7 @@ public:
     /*
      *  azione: data una coordinata agisce sulla griglia avversaria in base al tipo di nave chiamante
      */
-    virtual void azione(Giocatore *attaccante, Giocatore *difensore, battaglia_navale::Coordinate &target) =0;
+    virtual void azione(Giocatore *attaccante, Giocatore *difensore, battaglia_navale::Coordinate &target) = 0;
 
     /*
      * aggiorna_griglia: metodo che aggiorna tutte le coordinate della nave, per poi

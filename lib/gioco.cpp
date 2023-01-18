@@ -162,7 +162,7 @@ void Gioco::azione(std::string origin, std::string target) {
         std::string f_target = format(target);
 
         //controlli sui parametri: qua o sul main?
-        if ((origin.length() != 3 && origin.length() != 2) && (target.length() != 3 && target.length() != 2)) {
+        if ((f_origin.length() != 3 && f_origin.length() != 2) && (f_target.length() != 3 && f_target.length() != 2)) {
             //lancio una eccezione, nel main viene chiesto di reinserire origin e target
         } else {
             //controllo mosse speciali altriementi invoco la funzione azione di origin chiamata da giocatore attivo
@@ -185,8 +185,8 @@ void Gioco::azione(std::string origin, std::string target) {
                 Nave *nave_scelta;
                 for (int i = 0; i < navi.size() && !trovato; i++) {
                     std::string num;
-                    for (int j = 0; j < origin.length(); j++)
-                        num.push_back(origin[j]);
+                    for (int j = 1; j < origin.length(); j++)
+                        num += origin[j];
                     if (navi[i]->get_coordinata_centro() == battaglia_navale::Coordinate(stoi(num), origin[0])) {
                         nave_scelta = navi[i];
                         trovato = true;

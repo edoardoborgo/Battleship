@@ -9,20 +9,28 @@ using namespace std;
 //if(cast<Computer>(oggetto)!=null_ptr)
 
 vector<string> split(string mossa) {
-  int i = 0;
-  string aux;
-  int ascii_space = 32;
-  vector<string> coordinate;
-  while (mossa[i] != '\n') {
-    if (mossa[i] != ascii_space) {
-      aux += mossa[i];
-    } else {
-      coordinate.push_back(aux);
-      //aux = ""; (?)
+    int i = 0;
+    string aux;
+    int ascii_space = 32;
+    vector<string> coordinate;
+    for (int j = 0; j <= mossa.length(); ++j) {
+        if (mossa[j] != ascii_space && mossa[j] != '\0') {
+            aux += mossa[j];
+        } else {
+            coordinate.push_back(aux);
+            aux = "";
+        }
     }
-    i++;
-  }
-  return coordinate;
+    /*while (mossa[i] != '\0') {
+        if (mossa[i] != ascii_space || i == mossa.length()-1) {
+            aux += mossa[i];
+        } else {
+            coordinate.push_back(aux);
+            aux = "";
+        }
+        i++;
+    }*/
+    return coordinate;
 }
 
 void set_coordinate(string input, string &origin, string &target) {

@@ -5,10 +5,20 @@ Nave::Nave()= default;
 Nave::Nave(battaglia_navale::Coordinate &prua, battaglia_navale::Coordinate &poppa, char simbolo, int dimensione){
     dimensione_ = dimensione;
     simbolo_ = simbolo;
-    if (Nave::is_nave(prua, poppa, dimensione_)) {
+    affondata_ = false;
+
+    if(prua.get_x() == poppa.get_x())
+    {
+        orizzontale_ = false;
+    }
+    else{
+        orizzontale_ = true;
+    }
+
+    if (Nave::is_nave(prua, poppa, dimensione_-1)) {
         battaglia_navale::Coordinate appo_coord;
         for (int i = 0; i < dimensione_; i++) {
-            if (is_orizzontale()) {
+            if (orizzontale_) {
                 if (prua.get_x() < poppa.get_x()) {
                     appo_coord.set_x(prua.get_x() + i);
                     appo_coord.set_y(prua.get_y());
@@ -79,12 +89,12 @@ Nave::calcolo_centro(battaglia_navale::Coordinate &prua, battaglia_navale::Coord
             return coordinata_centro_;
         }
         if (prua.get_y() < poppa.get_y()) {
-            coordinata_centro_.set_y((poppa.get_y() - prua.get_y()) / 2);
-            coordinata_centro_.set_x((poppa.get_x() - prua.get_x()) / 2);
+            coordinata_centro_.set_y((poppa.get_y() + prua.get_y()) / 2);
+            coordinata_centro_.set_x(poppa.get_x());
             return coordinata_centro_;
         } else {
-            coordinata_centro_.set_y((prua.get_y() - poppa.get_y()) / 2);
-            coordinata_centro_.set_x((prua.get_x() - poppa.get_x()) / 2);
+            coordinata_centro_.set_y((prua.get_y() + poppa.get_y()) / 2);
+            coordinata_centro_.set_x(prua.get_x());
             return coordinata_centro_;
         }
     } else { //altrimenti se e orizzontale lavora con le get_x()
@@ -94,12 +104,12 @@ Nave::calcolo_centro(battaglia_navale::Coordinate &prua, battaglia_navale::Coord
             return coordinata_centro_;
         }
         if (prua.get_x() < poppa.get_x()) {
-            coordinata_centro_.set_x((poppa.get_x() - prua.get_x()) / 2);
-            coordinata_centro_.set_y((poppa.get_y() - prua.get_y()) / 2);
+            coordinata_centro_.set_x((poppa.get_x() + prua.get_x()) / 2);
+            coordinata_centro_.set_y(poppa.get_y());
             return coordinata_centro_;
         } else {
-            coordinata_centro_.set_y((prua.get_x() - poppa.get_x()) / 2);
-            coordinata_centro_.set_x((prua.get_y() - poppa.get_y()) / 2);
+            coordinata_centro_.set_y((prua.get_x() + poppa.get_x()) / 2);
+            coordinata_centro_.set_x(prua.get_y());
             return coordinata_centro_;
         }
     }
@@ -134,6 +144,7 @@ int Nave::get_dimensione() const {
 }
 
 bool Nave::is_orizzontale() const {
+
     return orizzontale_;
 }
 
@@ -152,16 +163,16 @@ bool Nave::is_affondata() const {
     }
 }
 
-void Nave::aggiorna_coord(const battaglia_navale::Coordinate& target){
+void Nave::aggiorna_coord(const battaglia_navale::Coordinate& target, int dimensione_ideale){
     int indice = 0;
     if(is_orizzontale()){
-        for (int i = -((dimensione_-1)/2); i <= +((dimensione_-1)/2) && indice < dimensione_; i++){
+        for (int i = -((dimensione_-1)/2); i <= ((dimensione_-1)/2) && indice < dimensione_ideale; i++){
             corazza_[indice].coord.set_x(target.get_x()+i);
             corazza_[indice].coord.set_y(target.get_y());
             indice++;
         }
     } else {
-        for (int i = -((dimensione_-1)/2); i <= +((dimensione_-1)/2) && indice < dimensione_; i++){
+        for (int i = -((dimensione_-1)/2); i <= ((dimensione_-1)/2) && indice < dimensione_ideale; i++){
             corazza_[indice].coord.set_x(target.get_x());
             corazza_[indice].coord.set_y(target.get_y()+i);
             indice++;

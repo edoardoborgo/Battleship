@@ -8,14 +8,14 @@
 
 class Corazzata : public Nave {
 private:
-    char simbolo_;
-    int dimensione_ = 5;
+    //char simbolo_;
+    //int dimensione_;
     struct Tupla {
         battaglia_navale::Coordinate coord;
         char stato = 'C';
     };
 public:
-    Corazzata() : Nave() { dimensione_ = 5; }
+    Corazzata() : Nave() { }
 
     Corazzata(battaglia_navale::Coordinate &prua, battaglia_navale::Coordinate &poppa);
 
@@ -43,3 +43,5 @@ public:
 };
 
 #endif //BATTLESHIP_CORAZZATA_H
+
+/*dimensione_ = 5; simbolo_ = 'C';*/
