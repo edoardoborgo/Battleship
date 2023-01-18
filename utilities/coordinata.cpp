@@ -67,3 +67,5 @@ void battaglia_navale::Coordinate::set_x(int x) {
         throw std::invalid_argument("Coordinata non accettabile");
     }
 }
+
+

@@ -16,7 +16,7 @@ private:
 
 public:
     //costruttore
-    Giocatore(){};
+    Giocatore();
 
     //aggiunge una nave nella lista di navi
     void add_nave(Nave * nave);
@@ -32,6 +32,10 @@ public:
     std::vector<std::vector<char>> get_griglia_attacco();
 
     std::vector<std::vector<char>> get_griglia_difesa();
+
+    bool check_input(std::string input);
+
+    std::string format(std::string input);
 };
 
 class Computer : public Giocatore{

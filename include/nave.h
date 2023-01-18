@@ -74,7 +74,7 @@ public:
     /*
      * aggiorna_griglia: metodo che aggiorna tutte le coordinate della nave, per poi
     */
-    void aggiorna_coord(const battaglia_navale::Coordinate& target);
+    void aggiorna_coord(const battaglia_navale::Coordinate& target, int dimensione_ideale);
 
     //getters
     char get_simbolo() const;

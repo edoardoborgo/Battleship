@@ -38,8 +38,11 @@ namespace battaglia_navale {
 
         void set_y(int y);
 
-        battaglia_navale::Coordinate& operator=(const battaglia_navale::Coordinate& source){
-            return *this ;
+        battaglia_navale::Coordinate &operator=(battaglia_navale::Coordinate nuova_coordinata)
+        {
+            this->x_ = nuova_coordinata.get_x();
+            this->y_ = nuova_coordinata.get_y();
+            return *this;
         }
     };
 }

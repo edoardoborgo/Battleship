@@ -79,8 +79,8 @@ Gioco::Gioco(bool scelta_bot_game, Computer *G1, Computer *G2) {
 
 bool Gioco::check_input(std::string input){
   int lunghezza=0;
-  for(int i=0; input[i]!='\n'; i++){
-    lunghezza=i;
+  for(int i=0; i < input.length(); i++){
+    lunghezza++;
   }
   if(lunghezza==1){
     if(input[0]=='0'){
@@ -116,8 +116,8 @@ bool Gioco::check_input(std::string input){
 std::string Gioco::format(std::string input){
   //calcolo la lunghezza di input
   int lunghezza=0;
-  for(int i=0; input[i]!='\n'; i++){
-    lunghezza=i;
+  for(int i=0; input[i]!='\0'; i++){
+    lunghezza++;
   }
   if(lunghezza==3){
     //to upper case
@@ -125,7 +125,6 @@ std::string Gioco::format(std::string input){
       input[0]=input[0]-32;
     }
     std::string appo = &input[1];
-    appo+=&input[2];
     if(check_input(appo)){
       return input;
     }else{
@@ -171,7 +170,7 @@ void Gioco::azione(std::string origin, std::string target) {
                 //cancella gli avvistamenti sonar, cioè le Y
                 giocatore_attaccante->cancella_avvistamenti();
                 cambio_turno();
-                set_log((origin + target));
+                set_log((f_origin + f_target));
             } else if (origin == "XX" && target == "XX") {
                 print_griglie(giocatore_attaccante);
                 //set_log((origin + target));
@@ -205,7 +204,7 @@ void Gioco::azione(std::string origin, std::string target) {
                     battaglia_navale::Coordinate coord(stoi(num), target[0]);
                     nave_scelta->azione(giocatore_attaccante, giocatore_difensore, coord);
                     cambio_turno();
-                    set_log((origin + target));
+                    set_log((f_origin + f_target));
                 }
             }
         }

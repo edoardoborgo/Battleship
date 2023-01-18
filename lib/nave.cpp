@@ -36,8 +36,7 @@ Nave::Nave(battaglia_navale::Coordinate &prua){
 
 }
 bool Nave::is_nave(battaglia_navale::Coordinate &prua, battaglia_navale::Coordinate &poppa, int ideal_length) {
-    if ((prua.get_x() >= 0 && poppa.get_x() >= 0) && (prua.get_x() < 12 && poppa.get_x() < 12) &&
-        (prua.get_y() >= 0 && poppa.get_y() >= 0) && (prua.get_y() < 12 && poppa.get_y() < 12)) {
+    if ((prua.get_x() >= 0 && poppa.get_x() >= 0) && (prua.get_x() < 12 && poppa.get_x() < 12) && (prua.get_y() >= 0 && poppa.get_y() >= 0) && (prua.get_y() < 12 && poppa.get_y() < 12)) {
         if (prua.get_x() == poppa.get_x() && prua.get_y() == poppa.get_y()) {
             return true;
         } else {
@@ -166,6 +165,8 @@ void Nave::aggiorna_coord(const battaglia_navale::Coordinate& target){
             indice++;
         }
     }
+    coordinata_centro_.set_x(target.get_x());
+    coordinata_centro_.set_y(target.get_y());
 }
 
 
