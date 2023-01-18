@@ -6,6 +6,8 @@ battaglia_navale::Coordinate::Coordinate(const int x, const char y) {
         x_ = x;
         y_ = y - 65;
     }
+    else
+        throw std::invalid_argument("coordinate not valid");
 }
 
 battaglia_navale::Coordinate::Coordinate(std::string coordinata) {

@@ -30,6 +30,8 @@ Nave::Nave(battaglia_navale::Coordinate &prua, battaglia_navale::Coordinate &pop
         }
         Nave::coordinata_centro_ = Nave::calcolo_centro(prua, poppa);
     }
+    else
+        throw std::invalid_argument("nave non valida");
 }
 
 Nave::Nave(battaglia_navale::Coordinate &prua){

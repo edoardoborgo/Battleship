@@ -166,14 +166,4 @@ void Computer::crea_nave(int dimensione) {
         }
     } while (flag);
 
-
-
-
-
-
-
-
-
-
-
 }
