@@ -54,8 +54,7 @@ bool Nave::is_nave(battaglia_navale::Coordinate &prua, battaglia_navale::Coordin
         } else {
             if (prua.get_x() == poppa.get_x() || prua.get_y() == poppa.get_y()) {
                 if (prua.get_x() < poppa.get_x() || prua.get_x() > poppa.get_x()) {
-                    if ((poppa.get_x() - prua.get_x()) == ideal_length ||
-                        (prua.get_x() - poppa.get_x()) == ideal_length) {
+                    if ((poppa.get_x() - prua.get_x()) == ideal_length || (prua.get_x() - poppa.get_x()) == ideal_length) {
                         return true;
                     } else {
                         return false;

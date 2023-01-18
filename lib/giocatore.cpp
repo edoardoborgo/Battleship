@@ -85,7 +85,7 @@ std::string Computer::choose_move() {
     //variabile che indica
     const int to_ascii_upper_case = 65;
     //random tra 0 e 7, %8 genera 8 numeri a partire da zero
-    srand(time(NULL) + rand());
+
     //scegli nave e poi scegli la mossa a seconda della nave
     std::vector<Nave *> appo_navi = get_navi();
     Nave *nave_scelta;

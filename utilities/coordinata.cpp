@@ -4,7 +4,7 @@
 battaglia_navale::Coordinate::Coordinate(const int x, const char y) {
     if (controllo(x) && controllo(y - 65)) {
         x_ = x;
-        y_ = y - 65;
+        y_ = (int)(y - 65);
     }
     else
         throw std::invalid_argument("coordinate not valid");
