@@ -277,41 +277,20 @@ void Gioco::check(std::string parametro) {
 }
 
 void Gioco::set_log(std::string mosse) {
-    //non controllo la lunghezza del comando passato perchè essendo già stato utilizzato per azione sono sicuro che sia accettabile
-    std::string filename("../log.txt");
-    std::fstream fout;
-    fout.open(filename, std::ios_base::app);
-    if (fout.good()) {
-        int i = 0;
-        while (mosse[i] != '\0') {
-            fout << mosse[i];
-            i++;
+    if(salva_mosse_){
+        std::string filename("log.txt");
+        std::fstream fout;
+        fout.open(filename, std::ios_base::app);
+        if (fout.good()) {
+            int i = 0;
+            while (mosse[i] != '\0') {
+                fout << mosse[i];
+                i++;
+            }
+            fout << "\n";
+            fout.close();
         }
-        fout << "\n";
-        fout.close();
     }
-
-    /*char filename[ ] = "Text1.txt";
-
-    fstream uidlFile(filename, std::fstream::in | std::fstream::out | std::fstream::app);
-
-
-    if (uidlFile.is_open())
-    {
-        uidlFile << filename<<"\n---\n";
-        uidlFile.close();
-    }
-    else
-    {
-        cout << "Cannot open file";
-    }*/
-/*
- *  string filePath = "/somedir/log_"+getCurrentDateTime("date")+".txt";
-
-    ofstream ofs(filePath.c_str(), std::ios_base::out | std::ios_base::app );
-    ofs << now << '\t' << logMsg << '\n';
-    ofs.close();
- * */
 }
 
 bool Gioco::is_game_over(){
