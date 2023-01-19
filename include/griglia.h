@@ -27,6 +27,6 @@ namespace battaglia_navale {
         void cancella_avvistamenti();
     };
 
-}
+};
 
 #endif //BATTLESHIP_GRIGLIA_H

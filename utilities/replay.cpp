@@ -168,7 +168,7 @@ int main(int argc, char *argv[]) {
     }
 
     while (!game.is_game_over() && mossa_corrente<lista_mosse.size()-1) {
-           _sleep(100);
+           std::this_thread::sleep_for(std::chrono::seconds(1));
         do{
             try{
                 if (game.is_turno_g1()) {
@@ -189,8 +189,9 @@ int main(int argc, char *argv[]) {
             } catch (invalid_argument &e) {
                 flag = true;
                 cout<< *e.what() << endl;
-                cout << "eccezione"<<endl;
-            }
+                cout << "file di log non valido"<<endl;
+                return 1; //file di log non valido
+           }
         }while(flag);
     }
     std::cout << "Fine Gioco.";
