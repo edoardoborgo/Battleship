@@ -5,7 +5,6 @@ Nave::Nave()= default;
 Nave::Nave(battaglia_navale::Coordinate &prua, battaglia_navale::Coordinate &poppa, char simbolo, int dimensione){
     dimensione_ = dimensione;
     simbolo_ = simbolo;
-    affondata_ = false;
 
     if(prua.get_x() == poppa.get_x())
     {
@@ -15,6 +14,7 @@ Nave::Nave(battaglia_navale::Coordinate &prua, battaglia_navale::Coordinate &pop
         orizzontale_ = true;
     }
 
+    //se le coordinate possono creare una nave, in accordo con la dimensione, allora vengono settate tutte le coordinate e simboli della corazza
     if (Nave::is_nave(prua, poppa, dimensione_-1)) {
         battaglia_navale::Coordinate appo_coord{};
         for (int i = 0; i < dimensione_; i++) {
@@ -44,12 +44,14 @@ Nave::Nave(battaglia_navale::Coordinate &prua, battaglia_navale::Coordinate &pop
         throw std::invalid_argument("nave non valida");
 }
 
-Nave::Nave(battaglia_navale::Coordinate &prua){
+Nave::Nave(battaglia_navale::Coordinate &prua){}
 
-}
+
+
 bool Nave::is_nave(battaglia_navale::Coordinate &prua, battaglia_navale::Coordinate &poppa, int ideal_length) {
-    if ((prua.get_x() >= 0 && poppa.get_x() >= 0) && (prua.get_x() < 12 && poppa.get_x() < 12) && (prua.get_y() >= 0 && poppa.get_y() >= 0) && (prua.get_y() < 12 && poppa.get_y() < 12)) {
-        if (prua.get_x() == poppa.get_x() && prua.get_y() == poppa.get_y()) {
+    //controllo se le coordinate siano entro i limiti
+    if ((prua.get_x() >= 0 && poppa.get_x() >= 0) && (prua.get_x() < 12 && poppa.get_x() < 12) && (prua.get_y() >= 0 && poppa.get_y() >= 0) && (prua.get_y() < 12 && poppa.get_y() < 12))
+        //se le coordinate prua e poppa sono le essif (prua.get_x() == poppa.get_x() && prua.get_y() == poppa.get_y()) {
             return true;
         } else {
             if (prua.get_x() == poppa.get_x() || prua.get_y() == poppa.get_y()) {

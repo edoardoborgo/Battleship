@@ -1,3 +1,4 @@
+//Giovanni Giancola
 
 #ifndef BATTLESHIP_GRIGLIA_H
 #define BATTLESHIP_GRIGLIA_H
@@ -15,15 +16,16 @@ namespace battaglia_navale {
         std::vector<std::vector<char>> tabellone;
 
     public:
+        //costruttore di griglia
         Griglia();
 
+        //funzione che setta la 'X' (colpita) e la 'O' (mancata) all'interno della griglia di attacco
         void set_risultato(battaglia_navale::Coordinate coord, char stato);
-
-        void print_griglia();
 
         //get griglia così è possibile stamparle affiancate stampando in modo alternato la riga i-esima
         std::vector<std::vector<char>>& get_griglia();
 
+        //funzione che cancella le y presenti all'interno della griglia di attacco
         void cancella_avvistamenti();
     };
 

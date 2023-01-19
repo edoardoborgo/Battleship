@@ -1,7 +1,10 @@
+//Giovanni Giancola
+
 #include "../include/griglia.h"
 
+//Costruttore di griglia
 battaglia_navale::Griglia::Griglia() {
-    //inizializzazione vector_char<vector_char>
+    //inizializzazione vector_char<vector_char> (a.k.a
     char c = ' ';
     for (int col = 0; col < colonne; col++) {
         std::vector<char> v_righe;
@@ -11,23 +14,17 @@ battaglia_navale::Griglia::Griglia() {
         tabellone.push_back(v_righe);
     }
 }
+
+
 void battaglia_navale::Griglia::set_risultato(battaglia_navale::Coordinate coord, char stato) {
     tabellone[coord.get_x()][coord.get_y()] = stato;
 }
 
-void battaglia_navale::Griglia::print_griglia() {
-
-    for (auto & i : tabellone) {
-        for (char j : i) {
-            std::cout << j << '|';
-        }
-        std::cout << std::endl;
-    }
-}
 
 std::vector<std::vector<char>>& battaglia_navale::Griglia::get_griglia(){
     return tabellone;
 }
+
 
 void battaglia_navale::Griglia::cancella_avvistamenti(){
     for(int col=0; col<colonne; col++)

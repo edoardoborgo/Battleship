@@ -1,3 +1,5 @@
+//Giovanni Giancola
+
 #include "coordinata.h"
 #include <vector>
 #include <iostream>
@@ -13,7 +15,6 @@ public:
 private:
     char simbolo_;
     int dimensione_;
-    bool affondata_;
     const int to_lower_case = 32;
 
 protected:
@@ -57,26 +58,22 @@ public:
     static bool is_nave(battaglia_navale::Coordinate &prua, battaglia_navale::Coordinate &poppa, int ideal_length);
 
     /*
-     *  sposta_centro: sposta la coordinata centrale di una nave controllando che lo spostamento sia lecito, cioè senza sovrapposizioni con altre navi.
-     */
-    void sposta(battaglia_navale::Coordinate &centro);
-
-    /*
      *  set_corazza: data una coordinata controlla che faccia effettivamente parte della nave e segna come colpita quella posizione di corazza.
+     *  (rendendo il carattere minuscolo)
      */
     void set_corazza(battaglia_navale::Coordinate &coord);
 
     /*
-     *  azione: data una coordinata agisce sulla griglia avversaria in base al tipo di nave chiamante
+     *  azione: data una coordinata di destinazione agisce sulla griglia avversaria in base al tipo di nave chiamante
      */
     virtual void azione(Giocatore *attaccante, Giocatore *difensore, battaglia_navale::Coordinate &target) = 0;
 
     /*
-     * aggiorna_griglia: metodo che aggiorna tutte le coordinate della nave, per poi
+     * aggiorna_griglia: metodo che aggiorna tutte le coordinate della corazza nave, per poi aggiornarne anche il centro
     */
     void aggiorna_coord(const battaglia_navale::Coordinate& target, int dimensione_ideale);
 
-    //getters
+    //getters:
     char get_simbolo() const;
 
     battaglia_navale::Coordinate get_coordinata_centro() const;
@@ -88,13 +85,10 @@ public:
     bool is_affondata() const;
 
     std::vector<Tupla> get_corazza() const;
+
     virtual ~Nave()=default;
 };
 
 #include "giocatore.h"
 
 #endif //NAVE_H
-
-/*
-    occupate_coord =
-*/
