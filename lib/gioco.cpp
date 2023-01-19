@@ -32,20 +32,6 @@ Gioco::Gioco(bool scelta_bot_game, Giocatore *G1, Computer *G2) {
     //inizializzazione giocatori
     G1_ = G1;
     G2_ = G2;
-
-    //inizializzazione log
-    //apre e svuota il file o lo crea se non esiste
-    //TODO catch eccezioni scrittura
-    std::ofstream fout("log.txt");
-    if (bot_game_)
-        fout << "true\n";
-    else
-        fout << "false\n";
-    if (is_turno_g1())
-        fout << "true\n";
-    else
-        fout << "false\n";
-    fout.close();
 }
 
 Gioco::Gioco(bool scelta_bot_game, Computer *G1, Computer *G2) {
@@ -65,11 +51,8 @@ Gioco::Gioco(bool scelta_bot_game, Computer *G1, Computer *G2) {
   //inizializzazione log
   //apre e svuota il file o lo crea se non esiste
   //DA FARE: catch eccezioni scrittura
-  std::ofstream fout("log.txt");
-  if (bot_game_)
-    fout << "true\n";
-  else
-    fout << "false\n";
+  std::ofstream fout(nome_file_);
+
   if (is_turno_g1())
     fout << "true\n";
   else
@@ -128,7 +111,7 @@ std::string Gioco::format(std::string input){
     if(check_input(appo)){
       return input;
     }else{
-      throw std::invalid_argument("");
+      throw std::invalid_argument("giorgio");
     }
   }else if(lunghezza==2){
     std::string appo = &input[1];
@@ -137,10 +120,10 @@ std::string Gioco::format(std::string input){
       risultato=input[0]+'0'+input[1];
       return risultato;
     }else{
-      throw std::invalid_argument("");
+      throw std::invalid_argument("filippo");
     }
   }else{
-    throw std::invalid_argument("");
+    throw std::invalid_argument("marco");
   }
 }
 
@@ -158,36 +141,34 @@ void Gioco::azione(std::string origin, std::string target) {
         }
 
         //formattazione mosse e salvataggio, controllare il return
-        std::string f_origin = format(origin);
-        std::string f_target = format(target);
+        const std::string& f_origin = origin;
+        const std::string& f_target = target;
 
         //controlli sui parametri: qua o sul main?
         if ((f_origin.length() != 3 && f_origin.length() != 2) && (f_target.length() != 3 && f_target.length() != 2)) {
             //lancio una eccezione, nel main viene chiesto di reinserire origin e target
         } else {
             //controllo mosse speciali altriementi invoco la funzione azione di origin chiamata da giocatore attivo
-            if (origin == "AA" && target == "AA") {
+            if (f_origin == "AA" && f_target == "AA") {
                 //cancella gli avvistamenti sonar, cioè le Y
                 giocatore_attaccante->cancella_avvistamenti();
                 cambio_turno();
-                set_log((f_origin + f_target));
-            } else if (origin == "XX" && target == "XX") {
+                set_log((f_origin +" "+ f_target));
+            } else if (f_origin == "XX" && f_target == "XX") {
                 print_griglie(giocatore_attaccante);
-                //set_log((origin + target));
             } else {
-                //azione di nave origin
-                //controllo sui parametri
-                check(origin);
-                check(target);
                 //controllo che in origin di giocatore attaccante ci sia una nave
                 std::vector<Nave *> navi = giocatore_attaccante->get_navi();
                 bool trovato = false;
                 Nave *nave_scelta;
+
+                /*std::string num;
+                for (int j = 1; j < origin.length(); j++)
+                    num += origin[j];*/
+                battaglia_navale::Coordinate appo(origin);
+                battaglia_navale::Coordinate appo2(target);
                 for (int i = 0; i < navi.size() && !trovato; i++) {
-                    std::string num;
-                    for (int j = 1; j < origin.length(); j++)
-                        num += origin[j];
-                    if (navi[i]->get_coordinata_centro() == battaglia_navale::Coordinate(stoi(num), origin[0])) {
+                    if (navi[i]->get_coordinata_centro() == appo) {
                         nave_scelta = navi[i];
                         trovato = true;
                     }
@@ -195,7 +176,7 @@ void Gioco::azione(std::string origin, std::string target) {
                 if (!trovato) {
                     //non ci sono navi in origin
                     //TODO eccezione, nave non trovata, nel main viene chiesto di reinserire origin e target
-                    throw std::invalid_argument("");
+                    throw std::invalid_argument("giovanni");
                 } else {
                     //nave origin trovata
                     std::string num;
@@ -204,7 +185,7 @@ void Gioco::azione(std::string origin, std::string target) {
                     battaglia_navale::Coordinate coord(stoi(num), target[0]);
                     nave_scelta->azione(giocatore_attaccante, giocatore_difensore, coord);
                     cambio_turno();
-                    set_log((f_origin + f_target));
+                    set_log((appo.to_string()+" "+appo2.to_string()));
                 }
             }
         }
@@ -223,47 +204,47 @@ void Gioco::print_griglie(Giocatore *G) {
     char row = 65;
     for (int righe = 0; righe < 12; righe++) { //12 righe
         if (righe == 0) {
+            std::cout << "    1   2   3   4   5   6   7   8   9  10   11  12  ";
+            std::cout << "  ";
+            std::cout << "    1   2   3   4   5   6   7   8   9  10   11  12  " << std::endl;
             std::cout << "  -------------------------------------------------";
             std::cout << "  ";
             std::cout << "  -------------------------------------------------" << std::endl;
 
             std::cout << row << ' ' << '|';
             for (int colonne = 0; colonne < 12; colonne++) {
-                std::cout << " " << griglia_attacco[righe][colonne] << " " << '|';
+                std::cout << " " << griglia_attacco[colonne][righe] << " " << '|';
             }
             std::cout << "   ";
             std::cout << row << ' ' << '|';
             for (int colonne = 0; colonne < 12; colonne++) {
-                std::cout << " " << griglia_difesa[righe][colonne] << " " << '|';
+                std::cout << " " << griglia_difesa[colonne][righe] << " " << '|';
             }
             std::cout << std::endl;
         } else if (righe == 11) {
             std::cout << row << ' ' << '|';
             for (int colonne = 0; colonne < 12; colonne++) {
-                std::cout << " " << griglia_attacco[righe][colonne] << " " << '|';
+                std::cout << " " << griglia_attacco[colonne][righe] << " " << '|';
             }
             std::cout << "   ";
             std::cout << row << ' ' << '|';
             for (int colonne = 0; colonne < 12; colonne++) {
-                std::cout << " " << griglia_difesa[righe][colonne] << " " << '|';
+                std::cout << " " << griglia_difesa[colonne][righe] << " " << '|';
             }
             std::cout << std::endl;
 
             std::cout << "  -------------------------------------------------";
             std::cout << "  ";
             std::cout << "  -------------------------------------------------" << std::endl;
-            std::cout << "    1   2   3   4   5   6   7   8   9  10   11  12  ";
-            std::cout << "  ";
-            std::cout << "    1   2   3   4   5   6   7   8   9  10   11  12  " << std::endl;
         } else {
             std::cout << row << ' ' << '|';
             for (int colonne = 0; colonne < 12; colonne++) {
-                std::cout << " " << griglia_attacco[righe][colonne] << " " << '|';
+                std::cout << " " << griglia_attacco[colonne][righe] << " " << '|';
             }
             std::cout << "   ";
             std::cout << row << ' ' << '|';
             for (int colonne = 0; colonne < 12; colonne++) {
-                std::cout << " " << griglia_difesa[righe][colonne] << " " << '|';
+                std::cout << " " << griglia_difesa[colonne][righe] << " " << '|';
             }
             std::cout << std::endl;
         }
@@ -297,20 +278,44 @@ void Gioco::check(std::string parametro) {
 
 void Gioco::set_log(std::string mosse) {
     //non controllo la lunghezza del comando passato perchè essendo già stato utilizzato per azione sono sicuro che sia accettabile
-    std::ofstream fout("log.txt", std::ios::app);
+    std::string filename("../log.txt");
+    std::fstream fout;
+    fout.open(filename, std::ios_base::app);
     if (fout.good()) {
         int i = 0;
         while (mosse[i] != '\0') {
             fout << mosse[i];
+            i++;
         }
         fout << "\n";
+        fout.close();
     }
-    fout.close();
+
+    /*char filename[ ] = "Text1.txt";
+
+    fstream uidlFile(filename, std::fstream::in | std::fstream::out | std::fstream::app);
+
+
+    if (uidlFile.is_open())
+    {
+        uidlFile << filename<<"\n---\n";
+        uidlFile.close();
+    }
+    else
+    {
+        cout << "Cannot open file";
+    }*/
+/*
+ *  string filePath = "/somedir/log_"+getCurrentDateTime("date")+".txt";
+
+    ofstream ofs(filePath.c_str(), std::ios_base::out | std::ios_base::app );
+    ofs << now << '\t' << logMsg << '\n';
+    ofs.close();
+ * */
 }
 
 bool Gioco::is_game_over(){
-
-  if(is_bot_game() && numero_turno_attuale == numero_massimo_turni){
+  if(numero_turno_attuale == numero_massimo_turni){
     //funzione che scrive all'interno del log
     std::cout << "Il gioco di bot ha raggiunto il numero massimo di mosse senza finire le navi, ricominciare" << std::endl;
     return true;
@@ -327,7 +332,6 @@ bool Gioco::is_game_over(){
   }else {
     return false;
   }
-
 }
 
 Giocatore* Gioco::get_giocatore_attuale(){

@@ -29,7 +29,7 @@ public:
 
     void cancella_avvistamenti();
 
-    std::vector<std::vector<char>> get_griglia_attacco();
+    std::vector<std::vector<char>>& get_griglia_attacco();
 
     std::vector<std::vector<char>> get_griglia_difesa();
 

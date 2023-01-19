@@ -5,14 +5,11 @@
 #define BATTLESHIP_SUPPORTO_H
 
 class Supporto : public Nave {
- private:
-  //char simbolo_ ='S';
-  //int dimensione_ = 3;
- public:
-    Supporto(){};
-  Supporto(battaglia_navale::Coordinate &prua, battaglia_navale::Coordinate &poppa);
-  void azione(Giocatore* attaccante, Giocatore* difensore, battaglia_navale::Coordinate &target);
-  void set_corazza(battaglia_navale::Coordinate &coord);
+public:
+  Supporto()=default;
+  Supporto(battaglia_navale::Coordinate &prua, battaglia_navale::Coordinate &poppa);                                    //costruttore, viene
+  void azione(Giocatore* attaccante, Giocatore* difensore, battaglia_navale::Coordinate &target) override;
+  void set_corazza(battaglia_navale::Coordinate &coord); //TODO
   bool muovi(battaglia_navale::Coordinate &origin,battaglia_navale::Coordinate &target,Giocatore * attaccante);
   void modifica_range(battaglia_navale::Coordinate &start_heal,battaglia_navale::Coordinate &finish_heal);
   bool autocura(battaglia_navale::Coordinate coordinata);

@@ -27,8 +27,7 @@ void Sottomarino::scan_(Giocatore *difensore, Giocatore *attaccante, battaglia_n
     battaglia_navale::Coordinate start_scan_;
     battaglia_navale::Coordinate finish_scan_;
     std::vector<std::vector<char>> griglia_difesa_difensore = difensore->get_griglia_difesa();
-    //TODO funz. che ritorna la ref. al tabellone di attacco di attaccante, su cui salvare le Y
-    std::vector<std::vector<char>> griglia_attacco_attaccante = attaccante->get_griglia_attacco();
+    std::vector<std::vector<char>> &griglia_attacco_attaccante = attaccante->get_griglia_attacco();
     modifica_range(start_scan_, finish_scan_);
     for (int i = start_scan_.get_y(); i < finish_scan_.get_y(); i++) {
         for (int j = start_scan_.get_x(); j < finish_scan_.get_x(); j++) {
@@ -43,28 +42,26 @@ void Sottomarino::scan_(Giocatore *difensore, Giocatore *attaccante, battaglia_n
 bool Sottomarino::muovi(battaglia_navale::Coordinate &target, Giocatore *attaccante) {
     bool libero = true;
     if ((target.get_x() >= 0 && target.get_x() <= 11) && (target.get_y() >= 0 && target.get_y() <= 11)) {
-        int indice_this = 0;                                                                                                            // serve per sapere se nelle coordinate in cui devo spostare la nave sono libere
-        std::vector<Nave *> navi = attaccante->get_navi();                                                                   // recupero un vettore con tutte le mie navi per poi poter confrontare tutte le coordinate
+        int indice_this = 0;
+        std::vector<Nave *> navi = attaccante->get_navi();
         for (int i = 0; i < navi.size(); i++) {
             if (navi[i]->get_coordinata_centro() == this->get_coordinata_centro()) {
                 indice_this = i;
                 break;
             }
         }
-        if (is_orizzontale()) {                                                                                                // divido in due il controllo: se è orrizzontale oppure verticale
-            for (int i = 0; i <
-                            navi.size(); ++i) { // passo tutte le navi all interno dell array navi// prendo le coordinate della nave che sto prendendo in cosiderazione all`interno dell`array navi ,attraverso la funzione get_corazza e le salvo nell`array aux
+        if (is_orizzontale()) {
+            for (int i = 0; i < navi.size(); ++i) {
                 if (i != indice_this) {
                     std::vector<Tupla> aux = navi[i]->get_corazza();
-                    for (int j = 0; j < aux.size(); ++j) {                                                                     // passo tutte le coordinate della nave che ho preso in considerazione
-                        if (aux[j].coord.get_y() ==
-                            target.get_y()) {                                                                  // come prima cose se è orizzontale vado a verificare che la coordinata presa in considerazione abbia la stessa y della coordinata target, se non ce l`ha non effettuo i controlli sulla coordinata x (essendo orizzontale tutte le coordinate hannno la st
-                            libero = false;                                                                                // se il match avviene, non posso spostare la nave e quindi libero = false
+                    for (int j = 0; j < aux.size() && libero; ++j) {
+                        if (aux[j].coord.get_y() == target.get_y() && aux[j].coord.get_x() == target.get_x()) {
+                            libero = false;
                         }
                     }
                 }
             }
-        } else {                                                                                                              // se la nave è verticale l`unica cosa che vado a cambiare è il controllo che effettuo sulla coordinata presa in considerazione
+        } else {
             for (int i = 0; i < navi.size() && libero; ++i) {
                 if (i != indice_this) {
                     std::vector<Tupla> aux = navi[i]->get_corazza();
@@ -93,20 +90,20 @@ void Sottomarino::modifica_range(battaglia_navale::Coordinate &start_scan, batta
     int up = 0;
     int dw = 0;
 
-    if(target.get_x() <2)
+    if (target.get_x() < 3)
         sx = -target.get_x();
     else
         sx = -2;
-    if(target.get_x() >9)
-        dx = 11-target.get_x();
+    if (target.get_x() > 10)
+        dx = 12 - target.get_x();
     else
         dx = 2;
-    if(target.get_y() <2)
+    if (target.get_y() < 3)
         up = -target.get_y();
     else
         up = -2;
-    if(target.get_y() >9)
-        dw = 11-target.get_y();
+    if (target.get_y() > 10)
+        dw = 12 - target.get_y();
     else
         dw = 2;
 

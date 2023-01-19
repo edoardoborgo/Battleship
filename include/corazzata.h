@@ -13,7 +13,7 @@ private:
     struct Tupla {
         battaglia_navale::Coordinate coord;
         char stato = 'C';
-    };
+    };*/
 public:
     Corazzata() : Nave() { }
 
@@ -22,7 +22,7 @@ public:
     void azione(Giocatore *attaccante, Giocatore *difensore, battaglia_navale::Coordinate &target);
 
     Corazzata& operator=(const Corazzata& source){
-        return *this ;
+        return *this;
     }
 
     void get_francesco(){
@@ -43,5 +43,3 @@ public:
 };
 
 #endif //BATTLESHIP_CORAZZATA_H
-
-/*dimensione_ = 5; simbolo_ = 'C';*/

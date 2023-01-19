@@ -22,7 +22,7 @@ namespace battaglia_navale {
         void print_griglia();
 
         //get griglia così è possibile stamparle affiancate stampando in modo alternato la riga i-esima
-        std::vector<std::vector<char>> get_griglia();
+        std::vector<std::vector<char>>& get_griglia();
 
         void cancella_avvistamenti();
     };

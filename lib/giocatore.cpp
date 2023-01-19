@@ -94,6 +94,9 @@ std::string Computer::choose_move() {
     } while (nave_scelta->is_affondata());
     //recupero coord centrale della nave i-esima
     battaglia_navale::Coordinate coord_origin = nave_scelta->get_coordinata_centro();
+    //todo
+    coord_origin.set_x(coord_origin.get_x()+1);
+    //coord_origin.set_y(coord_origin.get_y()+1);
     //origin casuale da vector navi
     std::string mossa = "";
     mossa += (char)(coord_origin.get_y()+to_ascii_upper_case);
@@ -159,6 +162,7 @@ void Computer::crea_nave(int dimensione) {
                 }
             }
             add_nave(n);
+            set_log(prua.to_string() + " " + poppa.to_string());
             flag = false;
         } catch (std::invalid_argument e) {
             std::cout << "ripeti" << std::endl;

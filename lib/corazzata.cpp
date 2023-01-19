@@ -3,7 +3,6 @@
 
 Corazzata::Corazzata(battaglia_navale::Coordinate &prua, battaglia_navale::Coordinate &poppa)
     : Nave(prua, poppa, 'C', 5){
-    //simbolo_ = 'C';
 }
 
 //recupero griglia del difensore, controllo se c'è una nave, se true diminuisco corazza e stampo 'X', se false 'O'

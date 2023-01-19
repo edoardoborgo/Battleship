@@ -13,6 +13,8 @@ private:
     Computer * G2_;
     const int numero_massimo_turni = 40;
     int numero_turno_attuale = 0;
+    bool salva_mosse_ = true;
+    std::string nome_file_ = "../log.txt";
 
     //ritorna un valore casuale per dire chi inizia
     void start_casuale();
@@ -22,6 +24,7 @@ private:
     void check(std::string parametro);
 
     bool check_input(std::string input);
+
     std::string format(std::string input);
 public:
     //TODO creare un costruttore che inizializza il player attivo come da specifica proveniente dal log
@@ -36,7 +39,12 @@ public:
 
     bool is_bot_game();
 
-    void set_log(std::string mosse);
+    static void set_log(std::string mosse);
+
+    void set_salva_mosse(bool salva_mosse, std::string nome_file){
+        salva_mosse = salva_mosse;
+        nome_file_ = nome_file;
+    }
 
     bool is_game_over();
 

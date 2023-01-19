@@ -14,16 +14,11 @@ battaglia_navale::Coordinate::Coordinate(std::string coordinata) {
     if(toupper(coordinata[0]) > 64 && toupper(coordinata[0]) < 77 ){
         y_ = toupper(coordinata[0]) - 65;
     }
-    else if((int)coordinata[1] < 1)
-    {
-        if((int)coordinata[2] < 3){
-            x_ = (int)coordinata[2] +10;
-        }
-    }
-    else if((int) coordinata[1] > 1 && (int) coordinata[1] < 10)
-    {
-        x_ == (int) coordinata[1];
-    }
+    else
+        throw std::invalid_argument("y non valida");
+    std::string tmp = coordinata.substr(1,coordinata.length());
+    x_=std::stoi(tmp) - 1; //tira eccezione se error
+    if(x_<0||x_>11) throw std::invalid_argument("x non valida");
 }
 
 bool battaglia_navale::Coordinate::operator==(const battaglia_navale::Coordinate &coord) {

@@ -26,7 +26,7 @@ void battaglia_navale::Griglia::print_griglia() {
     }
 }
 
-std::vector<std::vector<char>> battaglia_navale::Griglia::get_griglia(){
+std::vector<std::vector<char>>& battaglia_navale::Griglia::get_griglia(){
     return tabellone;
 }
 
