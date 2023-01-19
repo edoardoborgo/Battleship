@@ -1,3 +1,5 @@
+//Edoardo Borgo
+
 #include "../include/gioco.h"
 #include <cstdlib>
 #include <ctime>
@@ -21,11 +23,9 @@ void Gioco::cambio_turno() {
 
 Gioco::Gioco(bool scelta_bot_game, Giocatore *G1, Computer *G2) {
     //controllo della versione, non servono eccezioni per la versione passata perchè viene controllata nel main
-
     bot_game_=scelta_bot_game;
     //inizializzazione turno
     start_casuale();
-
     //inizializzazione giocatori
     G1_ = G1;
     G2_ = G2;
@@ -64,7 +64,6 @@ Gioco::Gioco(bool scelta_bot_game, Computer *G1, Computer *G2) {
 
   //inizializzazione log
   //apre e svuota il file o lo crea se non esiste
-  //DA FARE: catch eccezioni scrittura
   std::ofstream fout(nome_file_);
 
   if (is_turno_g1())
@@ -154,15 +153,14 @@ void Gioco::azione(const std::string& origin,const std::string& target) {
             giocatore_difensore = G1_;
         }
 
-        //formattazione mosse e salvataggio, controllare il return
+        //formattazione mosse e salvataggio
         const std::string& f_origin = origin;
         const std::string& f_target = target;
 
-        //controlli sui parametri: qua o sul main?
         if ((f_origin.length() != 3 && f_origin.length() != 2) && (f_target.length() != 3 && f_target.length() != 2)) {
             //lancio una eccezione, nel main viene chiesto di reinserire origin e target
         } else {
-            //controllo mosse speciali altriementi invoco la funzione azione di origin chiamata da giocatore attivo
+            //controllo mosse speciali altrimenti invoco la funzione azione di origin chiamata da giocatore attivo
             if (f_origin == "AA" && f_target == "AA") {
                 //cancella gli avvistamenti sonar, cioè le Y
                 giocatore_attaccante->cancella_avvistamenti();
@@ -201,7 +199,6 @@ void Gioco::azione(const std::string& origin,const std::string& target) {
             }
         }
     } else {
-        //catch
         throw  Gioco_finito();
     }
 }

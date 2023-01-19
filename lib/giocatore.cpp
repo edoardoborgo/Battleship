@@ -1,9 +1,10 @@
+//Edoardo Borgo
+
 #include "../include/giocatore.h"
 #include "../include/corazzata.h"
 #include "../include/supporto.h"
 #include "../include/sottomarino.h"
 #include <fstream>
-
 
 Giocatore::Giocatore() {
     //inizializzazione del seme per la generazione casuale

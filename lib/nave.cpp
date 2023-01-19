@@ -1,3 +1,5 @@
+//Giovanni Giancola
+
 #include "../include/nave.h"
 
 Nave::Nave()= default;
@@ -50,8 +52,9 @@ Nave::Nave(battaglia_navale::Coordinate &prua){}
 
 bool Nave::is_nave(battaglia_navale::Coordinate &prua, battaglia_navale::Coordinate &poppa, int ideal_length) {
     //controllo se le coordinate siano entro i limiti
-    if ((prua.get_x() >= 0 && poppa.get_x() >= 0) && (prua.get_x() < 12 && poppa.get_x() < 12) && (prua.get_y() >= 0 && poppa.get_y() >= 0) && (prua.get_y() < 12 && poppa.get_y() < 12))
-        //se le coordinate prua e poppa sono le essif (prua.get_x() == poppa.get_x() && prua.get_y() == poppa.get_y()) {
+    if ((prua.get_x() >= 0 && poppa.get_x() >= 0) && (prua.get_x() < 12 && poppa.get_x() < 12) && (prua.get_y() >= 0 && poppa.get_y() >= 0) && (prua.get_y() < 12 && poppa.get_y() < 12)){
+        //se le coordinate prua e poppa sono uguali allora e' un sottomarino
+        if (prua.get_x() == poppa.get_x() && prua.get_y() == poppa.get_y()) {
             return true;
         } else {
             if (prua.get_x() == poppa.get_x() || prua.get_y() == poppa.get_y()) {
