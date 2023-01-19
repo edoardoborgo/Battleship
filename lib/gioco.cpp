@@ -31,6 +31,27 @@ Gioco::Gioco(bool scelta_bot_game, Giocatore *G1, Computer *G2) {
     G2_ = G2;
 }
 
+Gioco::Gioco(bool turno_G1, Giocatore *G1, Giocatore *G2){
+    turno_g1_=turno_G1;
+    G1_ = G1;
+    G2_ = G2;
+    salva_mosse_ = false;
+}
+
+Gioco::Gioco(bool turno_G1, Giocatore *G1, Giocatore *G2, std::string nome_file){
+    G1_ = G1;
+    G2_= G2;
+    turno_g1_ = turno_G1;
+    nome_file_ = nome_file;
+
+    std::ofstream fout(nome_file_);
+    if (is_turno_g1())
+        fout << "G1\n";
+    else
+        fout << "G2\n";
+    fout.close();
+}
+
 Gioco::Gioco(bool scelta_bot_game, Computer *G1, Computer *G2) {
   //controllo della versione, non servono eccezioni per la versione passata perchè viene controllata nel main
   bot_game_=scelta_bot_game;

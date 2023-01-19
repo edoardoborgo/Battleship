@@ -54,6 +54,21 @@ std::vector<std::vector<char>>& Giocatore::get_griglia_attacco() {
     return griglia_attacco.get_griglia();
 }
 
+void Giocatore::affonda_nave(battaglia_navale::Coordinate coord){
+
+    std::vector<Nave::Tupla> corazza;
+    for(int i = 0; i < navi.size(); i++){
+        corazza = navi[i]->get_corazza();
+        for(auto & j : corazza){
+            if(coord==j.coord){
+                delete navi[i];
+                auto nave_da_eliminare = navi.begin()+i;
+                navi.erase(nave_da_eliminare);
+            }
+        }
+    }
+}
+
 std::vector<std::vector<char>> Giocatore::get_griglia_difesa() {
     std::vector<std::vector<char>> appo_tabellone;
     int righe = 12;
@@ -170,7 +185,6 @@ void Computer::crea_nave(int dimensione) {
             flag = true;
         }
     } while (flag);
-
 }
 
 Giocatore::~Giocatore(){

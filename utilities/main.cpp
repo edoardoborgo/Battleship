@@ -82,16 +82,28 @@ int mainf(int argc, char **argv) {
         }
 
         while (!game.is_game_over()) {
-
-            if (game.is_turno_g1()) {
-                input = G1.choose_move();
-                set_coordinate(input, origin, target);
-                game.azione(origin, target);
-            } else {
-                input = G2.choose_move();
-                set_coordinate(input, origin, target);
-                game.azione(origin, target);
-            }
+            bool flag = false;
+            do{
+                try{
+                    if (game.is_turno_g1()) {
+                        input = G1.choose_move();
+                        set_coordinate(input, origin, target);
+                        game.azione(origin, target);
+                        flag = false;
+                        game.azione("XX","XX");
+                        cout<<endl<<"Computer 1"<<endl;
+                    } else {
+                        input = G2.choose_move();
+                        set_coordinate(input, origin, target);
+                        game.azione(origin, target);
+                        flag = false;
+                        game.azione("XX","XX");
+                        cout<<endl<<"Computer 2"<<endl;
+                    }
+                } catch (invalid_argument& e) {
+                    flag = true;
+                }
+            }while(flag);
         }
         cout << "Il gioco è finito";
     } else {

@@ -36,6 +36,12 @@ public:
     bool check_input(std::string input);
 
     std::string format(std::string input);
+
+    static void set_log(std::string mosse);
+
+    void affonda_nave(battaglia_navale::Coordinate coord);
+
+    ~Giocatore();
 };
 
 class Computer : public Giocatore{

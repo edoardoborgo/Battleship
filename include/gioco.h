@@ -10,7 +10,7 @@ private:
     bool bot_game_;
     bool turno_g1_;
     Giocatore *G1_;
-    Computer * G2_;
+    Giocatore *G2_;    // Cambiato giocatore 2 da computer a Giocatore
     const int numero_massimo_turni = 40;
     int numero_turno_attuale = 0;
     bool salva_mosse_ = true;
@@ -30,6 +30,8 @@ public:
     Gioco()=default;
     Gioco(bool scelta_bot_game, Giocatore *G1, Computer *G2);
     Gioco(bool scelta_bot_name, Computer *G1, Computer *G2);
+    Gioco(bool turno_G1,Giocatore *G1, Giocatore *G2);
+    Gioco(bool turno_G1,Giocatore *G1, Giocatore *G2, std::string nome_file);
 
     void azione(const std::string &origin,const std::string& target);
 
