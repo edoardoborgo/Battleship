@@ -64,21 +64,21 @@ int mainf(int argc, char **argv) {
         for (int c = 0; c < numero_navi[0]; c++) {
             G2.crea_nave(dimensione_navi[0]);
         }
-        for (int s = 0; s < numero_supporto; s++) {
-            G2.crea_nave(dimensione_supporto);
+        for (int s = 0; s < numero_navi[1]; s++) {
+            G2.crea_nave(dimensione_navi[1]);
         }
-        for (int e = 0; e < numero_sottomarino; e++) {
-            G2.crea_nave(dimensione_sottomarino);
+        for (int e = 0; e < numero_navi[2]; e++) {
+            G2.crea_nave(dimensione_navi[2]);
         }
         //creazione casuale delle navi di Computer2
         for (int c = 0; c < numero_navi[0]; c++) {
             G1.crea_nave(dimensione_navi[0]);
         }
-        for (int s = 0; s < numero_supporto; s++) {
-            G1.crea_nave(dimensione_supporto);
+        for (int s = 0; s < numero_navi[1]; s++) {
+            G1.crea_nave(dimensione_navi[1]);
         }
-        for (int e = 0; e < numero_sottomarino; e++) {
-            G1.crea_nave(dimensione_sottomarino);
+        for (int e = 0; e < numero_navi[2]; e++) {
+            G1.crea_nave(dimensione_navi[2]);
         }
 
         while (!game.is_game_over()) {

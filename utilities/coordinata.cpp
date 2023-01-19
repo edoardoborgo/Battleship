@@ -65,4 +65,15 @@ void battaglia_navale::Coordinate::set_x(int x) {
     }
 }
 
+std::string battaglia_navale::Coordinate::to_string() const{
+    std::string aux;
+    aux+= (std::to_string(y_ + 65));
+    if(x_< 9)
+    {
+        aux+="0";
+    }
+    aux += std::to_string(x_ + 1);
+    return aux;
+}
+
 

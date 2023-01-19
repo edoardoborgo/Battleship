@@ -172,10 +172,7 @@ void Gioco::azione(const std::string& origin,const std::string& target) {
                     throw std::invalid_argument("giovanni");
                 } else {
                     //nave origin trovata
-                    std::string num;
-                    num.push_back(origin[1]);
-                    num.push_back(origin[2]);
-                    battaglia_navale::Coordinate coord(stoi(num), target[0]);
+                    battaglia_navale::Coordinate coord(target);
                     nave_scelta->azione(giocatore_attaccante, giocatore_difensore, coord);
                     cambio_turno();
                     set_log((appo.to_string()+" "+appo2.to_string()));
@@ -227,7 +224,7 @@ void Gioco::print_griglie(Giocatore *G) {
             std::cout << std::endl;
 
             std::cout << "  -------------------------------------------------";
-            std::cout << "  ";
+            std::cout << "   ";
             std::cout << "  -------------------------------------------------" << std::endl;
         } else {
             std::cout << row << ' ' << '|';
@@ -253,20 +250,25 @@ bool Gioco::is_bot_game() const {
     return bot_game_;
 }
 
-void Gioco::check(std::string parametro) {
-    for (int i = 0; i < parametro.length(); i++) {
-        if (i == 0) {
-            if (!(parametro[0] >= 65 && parametro[0] <= 90)) {
-                //TODO eccezione da gestire nel main
+bool Gioco::check(std::string parametro) {
+        int i=0;
+        int primo_carattere;
+
+        if((parametro[i] == 65 || parametro[i] == 88) || (parametro[i] == 97 || parametro[i] == 120)) {
+            primo_carattere = parametro[i];
+            if (primo_carattere == 65 || primo_carattere == 88) {
+                if (parametro[i + 1] == (primo_carattere + 32) && parametro[i + 1] == primo_carattere)
+                    return true;
+                else
+                    return false;
+            } else {
+                if (parametro[i + 1] == (primo_carattere - 32) && parametro[i + 1] == primo_carattere)
+                    return true;
+                else
+                    return false;
             }
-        } else {
-            if (!(parametro[i] >= 48 && parametro[i] <= 57)) {
-                //TODO eccezione da gestire nel main
-            }
-        }
-    }
-    std::string num;
-    num.push_back(parametro[1]);
+        }else
+            return false;
 }
 
 void Gioco::set_log(std::string mosse) {
@@ -289,7 +291,6 @@ void Gioco::set_log(std::string mosse) {
 bool Gioco::is_game_over(){
   if(numero_turno_attuale == numero_massimo_turni){
     //funzione che scrive all'interno del log
-    std::cout << "Il gioco di bot ha raggiunto il numero massimo di mosse senza finire le navi, ricominciare" << std::endl;
     return true;
   }
   std::vector<Nave*> appo_check_navi = this->get_giocatore_attuale()->get_navi();

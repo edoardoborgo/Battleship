@@ -21,13 +21,13 @@ private:
 
     void cambio_turno();
 
-    void check(std::string parametro);
+    static bool check(std::string parametro);
 
     bool check_input(std::string input);
 
     std::string format(std::string input);
 public:
-    //TODO creare un costruttore che inizializza il player attivo come da specifica proveniente dal log
+    Gioco()=default;
     Gioco(bool scelta_bot_game, Giocatore *G1, Computer *G2);
     Gioco(bool scelta_bot_name, Computer *G1, Computer *G2);
 

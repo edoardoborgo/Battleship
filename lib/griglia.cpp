@@ -11,7 +11,6 @@ battaglia_navale::Griglia::Griglia() {
         tabellone.push_back(v_righe);
     }
 }
-
 void battaglia_navale::Griglia::set_risultato(battaglia_navale::Coordinate coord, char stato) {
     tabellone[coord.get_x()][coord.get_y()] = stato;
 }

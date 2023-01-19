@@ -120,7 +120,6 @@ void Nave::set_corazza(battaglia_navale::Coordinate &coord) {
             if (i.stato >= 65 && i.stato <= 90){
               i.stato = simbolo_ + 32;
             }
-
         }
     }
 }

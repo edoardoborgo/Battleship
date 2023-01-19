@@ -1,3 +1,5 @@
+//File creato da Giovanni Giancola
+
 #include "nave.h"
 #include "giocatore.h"
 #include <vector>
@@ -12,7 +14,7 @@ public:
      */
     Sottomarino(){}
     /*
-     * @brief: 
+     * @brief:
      *
      * @param:
      */

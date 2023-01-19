@@ -2,6 +2,7 @@
 #include "../include/corazzata.h"
 #include "../include/supporto.h"
 #include "../include/sottomarino.h"
+#include <fstream>
 
 Giocatore::Giocatore() {
     srand(time(nullptr) + rand());
@@ -49,7 +50,7 @@ void Giocatore::cancella_avvistamenti() {
     griglia_attacco.battaglia_navale::Griglia::cancella_avvistamenti();
 }
 
-std::vector<std::vector<char>> Giocatore::get_griglia_attacco() {
+std::vector<std::vector<char>>& Giocatore::get_griglia_attacco() {
     return griglia_attacco.get_griglia();
 }
 
@@ -109,7 +110,7 @@ std::string Computer::choose_move() {
     //target casuale
     mossa += " ";
     int carattere2 = rand()%12;
-    int numero2 = rand()%12;
+    int numero2 = rand()%12+1;
     mossa += (char)(carattere2+to_ascii_upper_case);
     if (numero2<10){
         mossa+="0";
