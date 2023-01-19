@@ -1,4 +1,4 @@
-
+//Edoardo Borgo
 #ifndef BATTLESHIP_GIOCO_H
 #define BATTLESHIP_GIOCO_H
 

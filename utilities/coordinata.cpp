@@ -1,6 +1,8 @@
+//Mattia Rosa
 #include <stdexcept>
 #include "../include/coordinata.h"
 
+// y viene passato come char perchè convertito dopo
 battaglia_navale::Coordinate::Coordinate( int x,  char y) {
     if (controllo(x) && controllo(y - 65)) {
         x_ = x;
@@ -65,6 +67,7 @@ void battaglia_navale::Coordinate::set_x(int x) {
     }
 }
 
+// Viene trasformata la coordinata nella stringa di template A01
 std::string battaglia_navale::Coordinate::to_string() const{
     std::string aux;
     aux+= (std::to_string(y_ + 65));

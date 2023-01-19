@@ -1,4 +1,4 @@
-//file creato da Giovanni Giancola 2041830
+//Mattia Rosa
 #include <string>
 
 #ifndef BATTLESHIP_COORDINATA_H
@@ -23,7 +23,7 @@ namespace battaglia_navale {
         bool operator>=(const battaglia_navale::Coordinate &coord) const;
 
         bool operator<=(const battaglia_navale::Coordinate &coord) const;
-
+        //controllo se l`argomento passato è all`interno della tabella
         static bool controllo(int x);
 
         std::string to_string() const;

@@ -1,3 +1,4 @@
+//Edoardo Borgo
 #include "nave.h"
 #include "coordinata.h"
 #include "griglia.h"

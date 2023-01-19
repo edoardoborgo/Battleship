@@ -1,3 +1,4 @@
+//Mattia Rosa
 #include <iostream>
 #include "../include/gioco.h"
 #include "../include/corazzata.h"
@@ -41,7 +42,9 @@ int mainf(int argc, char **argv) {
     //dimensione delle navi: [0] = dimensione corazzata, [1] = dimensione supporto, [2] = dimensione sottomarino
     std::vector<int> dimensione_navi{5, 3, 1};
 
-
+    /*------------------------------------------------------------------------------------------------
+     * Gioco CC
+     ------------------------------------------------------------------------------------------------*/
     if (scelta_bot_game) {
         Computer G1 = Computer();
         Gioco game = Gioco(scelta_bot_game, &G1, &G2);
@@ -90,24 +93,27 @@ int mainf(int argc, char **argv) {
                         set_coordinate(input, origin, target);
                         game.azione(origin, target);
                         flag = false;
-                        game.azione("XX","XX");
-                        cout<<endl<<"Computer 1"<<endl;
+                        //game.azione("XX","XX");
+                        //cout<<endl<<"Computer 1"<<endl;
                     } else {
                         input = G2.choose_move();
                         set_coordinate(input, origin, target);
                         game.azione(origin, target);
                         flag = false;
-                        game.azione("XX","XX");
-                        cout<<endl<<"Computer 2"<<endl;
+                        //game.azione("XX","XX");
+                        //cout<<endl<<"Computer 2"<<endl;
                     }
                 } catch (invalid_argument& e) {
+                    //nel caso in cui vengano sollevate eccezioni viene rieffettuato il turno
                     flag = true;
                 }
             }while(flag);
         }
         cout << "Il gioco è finito";
+    /*------------------------------------------------------------------------------------------------
+    * Gioco PC
+    ------------------------------------------------------------------------------------------------*/
     } else {
-        //non bot game
         bool flag = false;
         Giocatore G1 = Giocatore();
         Gioco game = Gioco(scelta_bot_game, &G1, &G2);
@@ -139,6 +145,7 @@ int mainf(int argc, char **argv) {
 
 
         int tipi_di_navi = 3;
+        //inserimento navi giocatore
         for(int i=0; i<tipi_di_navi; i++){
             for (int j = 0; j < numero_navi[i];) {
                 do {
@@ -166,12 +173,11 @@ int mainf(int argc, char **argv) {
                         flag = false;
                     } catch (invalid_argument& e) {
                         flag = true;
-                        cout<< "eccezione" << endl;
+                        //cout<< "eccezione" << endl;
                     }
                 } while (flag);
             }
         }
-        //flag = true;
         while (!game.is_game_over()) {
             do{
                 try{
@@ -183,96 +189,23 @@ int mainf(int argc, char **argv) {
                         game.azione(origin, target);
                         flag = false;
                     } else {
-                        cout<< "Turno pc, effettuato"<<endl;
                         input = G2.choose_move();
                         set_coordinate(input, origin, target);
                         game.azione(origin, target);
                         flag = false;
                     }
                 } catch (invalid_argument &e) {
+                    //nel caso in cui vengano sollevate eccezioni viene rieffettuato il turno
                     flag = true;
-                    cout<< *e.what() << endl;
-                    cout << "eccezione"<<endl;
+                    //cout<< *e.what() << endl;
+                    //cout << "eccezione"<<endl;
                 }
             }while(flag);
         }
-        std::cout << "worka";
+        //std::cout << "worka";
     }
     return 0;
 }
-
-
-
-/*while(true){
-        if(game->is_turno_g1()){
-                cout<<"è il turno del giocatore 1, fare la mossa";
-                cin>>input;
-                set_coordinate(input,origin,target);
-        }
-        else{
-            g2.
-        }
-    }
-} catch (std::exception e) {
-
-}*/
-
-
-/*
-void Game::play()
-    {
-        if(!is_bot_game) std::cout << "Use the command XX XX to print a snapshot of the chessboard." << std::endl;
-        this->log_file.open("./game_log.txt"); // opens the log file
-        do
-        {
-            chessgame::PieceColor color = this->getCurrentPlayer()->getColor();
-            std::cout << "\nTurn n.: " << this->n_moves + 1 << (color == chessgame::WHITE ? " - WHITE" : " - BLACK") << " moves." << std::endl;
-            bool invalid_move = true;
-            do
-            {
-                // player's move for its turn
-                std::array<chessgame::Coordinates, 2> move = this->getCurrentPlayer()->think();
-                if(move[0].symbol == "XX" && move[1].symbol == "XX") { // special command as by instructions
-                    std::cout << this->board.snapshot() << std::endl;
-                    continue;
-                }
-                invalid_move = !this->playerMove(move);
-                if(!invalid_move) {
-                    chessgame::Piece* p = this->board.get_piece(move[1]);
-                    if(p != nullptr) {
-                        std::cout << "-> Moved: " << p->getSymbol() << " from " << move[0].symbol << " to " << move[1].symbol << std::endl;
-                    }
-                    else std::cout << "ATTENTION: moved from a void tile!" << std::endl; // for debugging purpose
-                }
-            } while (invalid_move); // this cycle keeps going until a valid move has been entered
-
-            // resets seed generator if bot player
-            if(!this->getCurrentPlayer()->is_human)
-                dynamic_cast<chessgame::Bot*>(this->getCurrentPlayer())->resetBotSeed();
-
-            this->n_moves++;
-            this->stall_counter++;
-
-            std::cout << "********************** End of turn **********************" << std::endl;
-
-            this->current_turn = !this->current_turn; // alternates turns
-        } while (!isGameOver());
-        // snapshot of the state of the chessboard at the end of the game
-        std::cout << this->board.snapshot() << std::endl;
-        this->log_file.close(); // closes the log file
-    }
-
-
-*/
-
-/*Giocatore* G1;
-    if(scelta_bot_game){
-        Computer appo_computer = Computer();
-        G1 = &appo_computer;
-    }else{
-        Giocatore appo_giocatore = Giocatore();
-        G1 = &appo_giocatore;
-    }*/
 
 vector<string> split(string mossa) {
     string aux;
@@ -289,6 +222,7 @@ vector<string> split(string mossa) {
     return coordinate;
 }
 
+//divide le coordinate origin e target in due stringhe
 void set_coordinate(const string& input, string &origin, string &target) {
     vector<string> coordinate = split(input);
     origin = coordinate[0];

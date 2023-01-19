@@ -99,12 +99,15 @@ void Supporto::modifica_range(battaglia_navale::Coordinate &start_heal, battagli
     battaglia_navale::Coordinate target = this->get_coordinata_centro();
     bool flag = false;
     if (is_orizzontale()) {
+        //se sul lato in basso
         if (target.get_y() == 11) {
             start_heal.set_y(target.get_y()- 1);
             start_heal.set_x(target.get_x()- 1);
             finish_heal.set_y(target.get_y() - 1);
             finish_heal.set_x(target.get_x() + 1);
-        } else if (target.get_y() == 0) {
+        }
+        //se sul lato in alto
+        else if (target.get_y() == 0) {
             start_heal.set_y(target.get_y() + 1);
             start_heal.set_x(target.get_x() - 1);
             finish_heal.set_y(target.get_y() +1);
@@ -113,12 +116,15 @@ void Supporto::modifica_range(battaglia_navale::Coordinate &start_heal, battagli
             flag = true;
         }
     } else {
+        //se sul lato sx
         if (target.get_x() == 0) {
             start_heal.set_x(target.get_x() + 1);
             start_heal.set_y(target.get_y() - 1);
             finish_heal.set_y(target.get_y() + 1);
             finish_heal.set_x(target.get_x() + 1);
-        } else if (target.get_x() == 11) {
+        }
+        //se sul lato desto
+        else if (target.get_x() == 11) {
             start_heal.set_y(target.get_y() - 1);
             start_heal.set_x(target.get_x() - 1);
             finish_heal.set_y(target.get_y() + 1);
@@ -127,6 +133,7 @@ void Supporto::modifica_range(battaglia_navale::Coordinate &start_heal, battagli
             flag = true;
         }
     }
+    // in tutti gli altri casi
      if(flag)
     {
         start_heal.set_y(target.get_y() - 1);

@@ -190,7 +190,7 @@ void Gioco::azione(const std::string& origin,const std::string& target) {
                 if (!trovato) {
                     //non ci sono navi in origin
                     //TODO eccezione, nave non trovata, nel main viene chiesto di reinserire origin e target
-                    throw std::invalid_argument("giovanni");
+                    throw std::invalid_argument("nave non trovata");
                 } else {
                     //nave origin trovata
                     battaglia_navale::Coordinate coord(target);
