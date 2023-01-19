@@ -12,7 +12,7 @@ vector<string> split(string mossa);
 
 void set_coordinate(const string& input, string &origin, string &target);
 
-int mainf(int argc, char **argv) {
+int main(int argc, char **argv) {
     if (argc != 2) {
         std::cout << "-- E' necessario selezionare una versione: pc/cc --";
         return 0;

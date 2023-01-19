@@ -57,6 +57,7 @@ bool Nave::is_nave(battaglia_navale::Coordinate &prua, battaglia_navale::Coordin
         if (prua.get_x() == poppa.get_x() && prua.get_y() == poppa.get_y()) {
             return true;
         } else {
+            //altrimenti o e' una corazzata o una supporto
             if (prua.get_x() == poppa.get_x() || prua.get_y() == poppa.get_y()) {
                 if (prua.get_x() < poppa.get_x() || prua.get_x() > poppa.get_x()) {
                     if ((poppa.get_x() - prua.get_x()) == ideal_length || (prua.get_x() - poppa.get_x()) == ideal_length) {
@@ -84,6 +85,7 @@ bool Nave::is_nave(battaglia_navale::Coordinate &prua, battaglia_navale::Coordin
     }
 }
 
+//prendono le coordinate di prua e poppa e calcolano il centro (tenendo conto del verso)
 battaglia_navale::Coordinate
 Nave::calcolo_centro(battaglia_navale::Coordinate &prua, battaglia_navale::Coordinate &poppa) {
     if (!orizzontale_) { //se la nave e verticale lavora con le get_y()
@@ -119,6 +121,7 @@ Nave::calcolo_centro(battaglia_navale::Coordinate &prua, battaglia_navale::Coord
     }
 }
 
+//cambio di stato nella griglia di difesa cambiando da maiuscolo (= vivo) a minuscolo (= morto)
 void Nave::set_corazza(battaglia_navale::Coordinate &coord) {
     for (auto & i : corazza_) {
         if (i.coord == coord) {
@@ -166,9 +169,11 @@ bool Nave::is_affondata() const {
     }
 }
 
+
 void Nave::aggiorna_coord(const battaglia_navale::Coordinate& target, int dimensione_ideale){
     int indice = 0;
     if(is_orizzontale()){
+        // prendo -((dimensione - 1) / 2) perche' devo partire dalla posizione -(media della lunghezza) partendo dal centro
         for (int i = -((dimensione_-1)/2); i <= ((dimensione_-1)/2) && indice < dimensione_ideale; i++){
             corazza_[indice].coord.set_x(target.get_x()+i);
             corazza_[indice].coord.set_y(target.get_y());
@@ -181,6 +186,7 @@ void Nave::aggiorna_coord(const battaglia_navale::Coordinate& target, int dimens
             indice++;
         }
     }
+    //aggiornamento della variabile coordinate_centro_
     coordinata_centro_.set_x(target.get_x());
     coordinata_centro_.set_y(target.get_y());
 }
