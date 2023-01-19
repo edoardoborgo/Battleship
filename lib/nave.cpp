@@ -16,7 +16,7 @@ Nave::Nave(battaglia_navale::Coordinate &prua, battaglia_navale::Coordinate &pop
     }
 
     if (Nave::is_nave(prua, poppa, dimensione_-1)) {
-        battaglia_navale::Coordinate appo_coord;
+        battaglia_navale::Coordinate appo_coord{};
         for (int i = 0; i < dimensione_; i++) {
             if (orizzontale_) {
                 if (prua.get_x() < poppa.get_x()) {
@@ -115,10 +115,10 @@ Nave::calcolo_centro(battaglia_navale::Coordinate &prua, battaglia_navale::Coord
 }
 
 void Nave::set_corazza(battaglia_navale::Coordinate &coord) {
-    for (int i = 0; i < corazza_.size(); i++) {
-        if (corazza_[i].coord == coord) {
-            if (corazza_[i].stato >= 65 && corazza_[i].stato <= 90){
-              corazza_[i].stato = simbolo_ + 32;
+    for (auto & i : corazza_) {
+        if (i.coord == coord) {
+            if (i.stato >= 65 && i.stato <= 90){
+              i.stato = simbolo_ + 32;
             }
 
         }
@@ -150,8 +150,8 @@ bool Nave::is_orizzontale() const {
 bool Nave::is_affondata() const {
     int numero_corazze_totali = this->get_dimensione();
     std::vector<Nave::Tupla> appo_corazza = this->get_corazza();
-    for(int i = 0; i < appo_corazza.size(); i++){
-      if(appo_corazza[i].stato == (this->get_simbolo() + to_lower_case)){
+    for(auto & i : appo_corazza){
+      if(i.stato == (this->get_simbolo() + to_lower_case)){
         numero_corazze_totali--;
       }
     }

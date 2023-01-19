@@ -17,10 +17,10 @@ void battaglia_navale::Griglia::set_risultato(battaglia_navale::Coordinate coord
 }
 
 void battaglia_navale::Griglia::print_griglia() {
-    int num = 0;
-    for (int i = 0; i < tabellone.size(); i++) {
-        for (int j = 0; j < tabellone[i].size(); j++) {
-            std::cout << tabellone[i][j] << '|';
+
+    for (auto & i : tabellone) {
+        for (char j : i) {
+            std::cout << j << '|';
         }
         std::cout << std::endl;
     }

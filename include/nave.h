@@ -46,7 +46,7 @@ public:
     /*
      *  costruttore per navi con dimensione = 1
      */
-    Nave(battaglia_navale::Coordinate &prua);
+    explicit Nave(battaglia_navale::Coordinate &prua);
 
     /*
      *  is_nave: controlla se le coordinate di prua e poppa costituiscono una nave.
@@ -54,7 +54,7 @@ public:
      *      -le navi devono essere ortogonali al piano, non ci possono essere navi in obliquo
      *      -le dimensioni di ogni tipo di nave devono essere rispettate: corazzata=5, sottomarino=1, supporto=3
      */
-    bool is_nave(battaglia_navale::Coordinate &prua, battaglia_navale::Coordinate &poppa, int ideal_length);
+    static bool is_nave(battaglia_navale::Coordinate &prua, battaglia_navale::Coordinate &poppa, int ideal_length);
 
     /*
      *  sposta_centro: sposta la coordinata centrale di una nave controllando che lo spostamento sia lecito, cioè senza sovrapposizioni con altre navi.
@@ -88,6 +88,7 @@ public:
     bool is_affondata() const;
 
     std::vector<Tupla> get_corazza() const;
+    virtual ~Nave()=default;
 };
 
 #include "giocatore.h"

@@ -12,19 +12,21 @@ namespace battaglia_navale {
         int y_;
 
     public:
-        Coordinate(){}
+        Coordinate()=default;
 
-        Coordinate(const int x, const char y);
+        Coordinate(int x, char y);
 
-        Coordinate(std::string coordinata);
+        explicit Coordinate(std::string coordinata);
 
-        bool operator==(const battaglia_navale::Coordinate &coord);
+        bool operator==(const battaglia_navale::Coordinate &coord) const;
 
-        bool operator>=(const battaglia_navale::Coordinate &coord);
+        bool operator>=(const battaglia_navale::Coordinate &coord) const;
 
-        bool operator<=(const battaglia_navale::Coordinate &coord);
+        bool operator<=(const battaglia_navale::Coordinate &coord) const;
 
-        bool controllo(const int x);
+        static bool controllo(int x);
+
+        std::string to_string() const;
 
         int get_x() const {
             return x_;

@@ -1,7 +1,7 @@
 #include <stdexcept>
 #include "../include/coordinata.h"
 
-battaglia_navale::Coordinate::Coordinate(const int x, const char y) {
+battaglia_navale::Coordinate::Coordinate( int x,  char y) {
     if (controllo(x) && controllo(y - 65)) {
         x_ = x;
         y_ = (int)(y - 65);
@@ -21,28 +21,28 @@ battaglia_navale::Coordinate::Coordinate(std::string coordinata) {
     if(x_<0||x_>11) throw std::invalid_argument("x non valida");
 }
 
-bool battaglia_navale::Coordinate::operator==(const battaglia_navale::Coordinate &coord) {
+bool battaglia_navale::Coordinate::operator==(const battaglia_navale::Coordinate &coord) const {
     if (x_ == coord.x_ && y_ == coord.y_)
         return true;
     else
         return false;
 }
 
-bool battaglia_navale::Coordinate::operator>=(const battaglia_navale::Coordinate &coord) {
+bool battaglia_navale::Coordinate::operator>=(const battaglia_navale::Coordinate &coord) const{
     if (x_ >= coord.x_ && y_ >= coord.y_)
         return true;
     else
         return false;
 }
 
-bool battaglia_navale::Coordinate::operator<=(const battaglia_navale::Coordinate &coord) {
+bool battaglia_navale::Coordinate::operator<=(const battaglia_navale::Coordinate &coord) const {
     if (x_ <= coord.x_ && y_ <= coord.y_)
         return true;
     else
         return false;
 }
 
-bool battaglia_navale::Coordinate::controllo(const int var) {
+bool battaglia_navale::Coordinate::controllo(int var) {
     if (var >= 0 && var <= 11)
         return true;
     else

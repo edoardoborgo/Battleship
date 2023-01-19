@@ -28,7 +28,7 @@ void Giocatore::add_nave(Nave *nave) { //TODO initializer list
     if (navi.size() < 8) {
         //le navi sono già state tutte aggiunte
         if (is_posizionabile(nave)) {
-            //posizionamento corretto, aggiungo la nave
+            //posizionamento corretto, aggiungo la navee
             navi.push_back(nave);
         } else {
             //posizionamento scorretto, lancio un'eccezione da gestire alla chiamata della funzione; la nave viene eliminata e ricreata nel main
@@ -66,13 +66,13 @@ std::vector<std::vector<char>> Giocatore::get_griglia_difesa() {
         appo_tabellone.push_back(v_righe);
     }
 
-    for (int i = 0; i < navi.size(); i++) {
-        if (!navi[i]->is_affondata()) {
-            std::vector<Nave::Tupla> corazza = navi[i]->get_corazza();
-            for (int j = 0; j < corazza.size(); j++) {
-                int x_coord = corazza[j].coord.get_x();
-                int y_coord = corazza[j].coord.get_y();
-                appo_tabellone[x_coord][y_coord] = corazza[j].stato;
+    for (auto & i : navi) {
+        if (!i->is_affondata()) {
+            std::vector<Nave::Tupla> corazza = i->get_corazza();
+            for (auto & j : corazza) {
+                int x_coord = j.coord.get_x();
+                int y_coord = j.coord.get_y();
+                appo_tabellone[x_coord][y_coord] = j.stato;
             }
         }
     }
@@ -127,7 +127,7 @@ void Computer::crea_nave(int dimensione) {
 
     int x;
     char y;
-    battaglia_navale::Coordinate prua, poppa;
+    battaglia_navale::Coordinate prua{}, poppa{};
     bool orizzontale;
     bool flag = true;
     Nave *n;
@@ -164,10 +164,32 @@ void Computer::crea_nave(int dimensione) {
             add_nave(n);
             set_log(prua.to_string() + " " + poppa.to_string());
             flag = false;
-        } catch (std::invalid_argument e) {
+        } catch (std::invalid_argument &e) {
             std::cout << "ripeti" << std::endl;
             flag = true;
         }
     } while (flag);
 
+}
+
+Giocatore::~Giocatore(){
+    for (auto & i : navi) {
+        delete i;
+    }
+}
+
+void Giocatore::set_log(std::string mosse) {
+    //non controllo la lunghezza del comando passato perchè essendo già stato utilizzato per azione sono sicuro che sia accettabile
+    std::string filename("../log.txt");
+    std::fstream fout;
+    fout.open(filename, std::ios_base::app);
+    if (fout.good()) {
+        int i = 0;
+        while (mosse[i] != '\0') {
+            fout << mosse[i];
+            i++;
+        }
+        fout << "\n";
+    }
+    fout.close();
 }

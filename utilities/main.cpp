@@ -7,34 +7,11 @@
 
 using namespace std;
 
-vector<string> split(string mossa) {
-    int i = 0;
-    string aux;
-    int ascii_space = 32;
-    vector<string> coordinate;
-    for (int j = 0; j <= mossa.length(); ++j) {
-        if (mossa[j] != ascii_space && mossa[j] != '\0') {
-            aux += mossa[j];
-        } else {
-            coordinate.push_back(aux);
-            aux = "";
-        }
-    }
-    /*while (mossa[i] != '\0') {
-        if (mossa[i] != ascii_space || i == mossa.length()-1) {
-            aux += mossa[i];
-        } else {
-            coordinate.push_back(aux);
-            aux = "";
-        }
-        i++;
-    }*/
-    return coordinate;
-}
+vector<string> split(string mossa);
 
 void set_coordinate(const string& input, string &origin, string &target);
 
-int main(int argc, char **argv) {
+int mainf(int argc, char **argv) {
     if (argc != 2) {
         std::cout << "-- E' necessario selezionare una versione: pc/cc --";
         return 0;

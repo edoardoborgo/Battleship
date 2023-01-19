@@ -19,7 +19,7 @@ public:
 
     Corazzata(battaglia_navale::Coordinate &prua, battaglia_navale::Coordinate &poppa);
 
-    void azione(Giocatore *attaccante, Giocatore *difensore, battaglia_navale::Coordinate &target);
+    void azione(Giocatore *attaccante, Giocatore *difensore, battaglia_navale::Coordinate &target) override ;
 
     Corazzata& operator=(const Corazzata& source){
         return *this;

@@ -31,13 +31,13 @@ public:
     Gioco(bool scelta_bot_game, Giocatore *G1, Computer *G2);
     Gioco(bool scelta_bot_name, Computer *G1, Computer *G2);
 
-    void azione(std::string origin, std::string target);
+    void azione(const std::string &origin,const std::string& target);
 
-    void print_griglie(Giocatore *G);
+    static void print_griglie(Giocatore *G);
 
-    bool is_turno_g1();
+    bool is_turno_g1() const;
 
-    bool is_bot_game();
+    bool is_bot_game() const;
 
     void set_log(std::string mosse);
 
@@ -49,6 +49,8 @@ public:
     bool is_game_over();
 
     Giocatore* get_giocatore_attuale();
+
+    ~Gioco();
 };
 
 #endif //BATTLESHIP_GIOCO_H

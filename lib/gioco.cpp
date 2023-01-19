@@ -4,7 +4,7 @@
 #include <fstream>
 
 void Gioco::start_casuale() {
-    srand(time(NULL) + rand());
+    srand(time(nullptr) + rand());
     int numero_casuale = rand() % 100 + 1;
     if (numero_casuale % 2 == 0)
         turno_g1_ = true;
@@ -21,11 +21,8 @@ void Gioco::cambio_turno() {
 
 Gioco::Gioco(bool scelta_bot_game, Giocatore *G1, Computer *G2) {
     //controllo della versione, non servono eccezioni per la versione passata perchè viene controllata nel main
-    if (scelta_bot_game)
-        bot_game_ = true;
-    else if (!scelta_bot_game)
-        bot_game_ = false;
 
+    bot_game_=scelta_bot_game;
     //inizializzazione turno
     start_casuale();
 
@@ -36,11 +33,7 @@ Gioco::Gioco(bool scelta_bot_game, Giocatore *G1, Computer *G2) {
 
 Gioco::Gioco(bool scelta_bot_game, Computer *G1, Computer *G2) {
   //controllo della versione, non servono eccezioni per la versione passata perchè viene controllata nel main
-  if (scelta_bot_game)
-    bot_game_ = true;
-  else if (!scelta_bot_game)
-    bot_game_ = false;
-
+  bot_game_=scelta_bot_game;
   //inizializzazione turno
   start_casuale();
 
@@ -117,7 +110,7 @@ std::string Gioco::format(std::string input){
     std::string appo = &input[1];
     std::string risultato;
     if(check_input(appo)){
-      risultato=input[0]+'0'+input[1];
+      risultato=input[0]+"0"+input[1];
       return risultato;
     }else{
       throw std::invalid_argument("filippo");
@@ -127,7 +120,7 @@ std::string Gioco::format(std::string input){
   }
 }
 
-void Gioco::azione(std::string origin, std::string target) {
+void Gioco::azione(const std::string& origin,const std::string& target) {
     if (numero_turno_attuale < numero_massimo_turni) {
         //controllo il turno e imposto la ref al giocatore attivo
         Giocatore *giocatore_attaccante;
@@ -191,7 +184,7 @@ void Gioco::azione(std::string origin, std::string target) {
         }
     } else {
         //catch
-        throw new Gioco_finito();
+        throw  Gioco_finito();
     }
 }
 
@@ -252,11 +245,11 @@ void Gioco::print_griglie(Giocatore *G) {
     }
 }
 
-bool Gioco::is_turno_g1() {
+bool Gioco::is_turno_g1() const {
     return turno_g1_;
 }
 
-bool Gioco::is_bot_game() {
+bool Gioco::is_bot_game() const {
     return bot_game_;
 }
 
@@ -301,8 +294,8 @@ bool Gioco::is_game_over(){
   }
   std::vector<Nave*> appo_check_navi = this->get_giocatore_attuale()->get_navi();
   int navi_vive = appo_check_navi.size();
-  for (int i = 0; i < appo_check_navi.size(); i++){
-    if (appo_check_navi[i]->is_affondata()){
+  for (auto & i : appo_check_navi){
+    if (i->is_affondata()){
       navi_vive--;
     }
   }
@@ -319,4 +312,10 @@ Giocatore* Gioco::get_giocatore_attuale(){
   } else {
     return G2_;
   }
+}
+
+Gioco::~Gioco()
+{
+    delete G1_;
+    delete G2_;
 }

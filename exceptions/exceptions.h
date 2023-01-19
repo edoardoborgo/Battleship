@@ -6,17 +6,17 @@
 
 class Gioco_finito : public std::exception {
 public:
-    Gioco_finito() {};
+    Gioco_finito():std::exception() {};
 };
 
 class Nave_non_posizionabile : public std::exception {
 public:
-    Nave_non_posizionabile() {};
+    Nave_non_posizionabile():std::exception() {};
 };
 
 class Coordinata_non_valida : public std::exception {
 public:
-    Coordinata_non_valida() {};
+    Coordinata_non_valida():std::exception() {};
 };
 
 #endif //BATTLESHIP_EXCEPTIONS_H
