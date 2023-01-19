@@ -4,12 +4,15 @@
 #include "../include/sottomarino.h"
 #include <fstream>
 
+
 Giocatore::Giocatore() {
+    //inizializzazione del seme per la generazione casuale
     srand(time(nullptr) + rand());
 }
 
 bool Giocatore::is_posizionabile(Nave *nave) {
     bool flag = true;
+    //controllo se le coordinate che compongono la nave si sovrappongono alle coordinate di altre navi già posizionate
     std::vector<Nave::Tupla> corazza_input = nave->get_corazza();
     for (int i = 0; i < corazza_input.size() && flag; i++) {
         for (int j = 0; j < navi.size() && flag; j++) {
@@ -23,16 +26,15 @@ bool Giocatore::is_posizionabile(Nave *nave) {
     return flag;
 }
 
-void Giocatore::add_nave(Nave *nave) { //TODO initializer list
+void Giocatore::add_nave(Nave *nave) {
     //so già che mi viene passata una nave perchè le condizioni di nave vengono controllate nel costruttore
-    //controllo che non si sovrapponga ad altre navi usando la funzione is_posizionabile che mi dice se il posizionamento è andato a buon fine o no
     if (navi.size() < 8) {
-        //le navi sono già state tutte aggiunte
+        //controllo che non si sovrapponga ad altre navi usando la funzione is_posizionabile che mi dice se il posizionamento è andato a buon fine o no
         if (is_posizionabile(nave)) {
-            //posizionamento corretto, aggiungo la navee
+            //posizionamento corretto, aggiungo la nave
             navi.push_back(nave);
         } else {
-            //posizionamento scorretto, lancio un'eccezione da gestire alla chiamata della funzione; la nave viene eliminata e ricreata nel main
+            //posizionamento scorretto, lancio un'eccezione da gestire alla chiamata della funzione, la nave viene eliminata e ricreata nel main.
             throw std::invalid_argument("Aggiunta di nave non andata a buon fine.");
         }
     }
@@ -55,7 +57,6 @@ std::vector<std::vector<char>>& Giocatore::get_griglia_attacco() {
 }
 
 void Giocatore::affonda_nave(battaglia_navale::Coordinate coord){
-
     std::vector<Nave::Tupla> corazza;
     for(int i = 0; i < navi.size(); i++){
         corazza = navi[i]->get_corazza();
@@ -74,6 +75,7 @@ std::vector<std::vector<char>> Giocatore::get_griglia_difesa() {
     int righe = 12;
     int colonne = 12;
     char c = ' ';
+    //inizializzazione del tabellone
     for (int col = 0; col < colonne; col++) {
         std::vector<char> v_righe;
         for (int row = 0; row < righe; row++) {
@@ -81,7 +83,7 @@ std::vector<std::vector<char>> Giocatore::get_griglia_difesa() {
         }
         appo_tabellone.push_back(v_righe);
     }
-
+    //scorro le navi, se non sono affondate inserisco nelle posizioni occupate da essa il suo carattere identificativo
     for (auto & i : navi) {
         if (!i->is_affondata()) {
             std::vector<Nave::Tupla> corazza = i->get_corazza();
@@ -95,42 +97,47 @@ std::vector<std::vector<char>> Giocatore::get_griglia_difesa() {
     return appo_tabellone;
 }
 
-std::string Computer::choose_move() {
-    //variabile che indica il valore per passare dal valore int al char corrispondente nella tabella ascii
-    const int to_ascii_number = 48;
-    //variabile che indica
-    const int to_ascii_upper_case = 65;
-    //random tra 0 e 7, %8 genera 8 numeri a partire da zero
 
-    //scegli nave e poi scegli la mossa a seconda della nave
+std::string Computer::choose_move() {
+    //variabile che indica lo shift per passare dal valore int al corrispondente char nella tabella ascii
+    const int to_ascii_number = 48;
+    //variabile che indica lo shift per passare dal carattere minuscolo al corrispondente carattere maiuscolo nella tabella ascii
+    const int to_ascii_upper_case = 65;
+
     std::vector<Nave *> appo_navi = get_navi();
     Nave *nave_scelta;
+    //scelgo randomicamente una nave, nel caso sia affondata ne scelgo un'altra
     do {
+        //rand()%8: genera numeri tra 0 e 7
         nave_scelta = appo_navi[rand() % 8];
     } while (nave_scelta->is_affondata());
-    //recupero coord centrale della nave i-esima
+    //recupero la coordinata centrale della nave i-esima
     battaglia_navale::Coordinate coord_origin = nave_scelta->get_coordinata_centro();
-    //todo
+    //aggiungo +1 per tornare al range di numeri utilizzati nella stampa delle griglie
     coord_origin.set_x(coord_origin.get_x()+1);
-    //coord_origin.set_y(coord_origin.get_y()+1);
-    //origin casuale da vector navi
+    //generazione della mossa string
     std::string mossa = "";
     mossa += (char)(coord_origin.get_y()+to_ascii_upper_case);
+    //se il valore x di coordinata origin è minore 10 inserisco un carattere '0' per formattare l'output e poi inserisco il numero
     if (coord_origin.get_x()<10){
         mossa+="0";
         mossa += (char)(coord_origin.get_x()+to_ascii_number);
     }else{
+        //se non è necessaria formattazione inserisco il numero senza caratteri speciali
         mossa += std::to_string(coord_origin.get_x());
     }
-    //target casuale
+    //generazione di coordinata target casuale
     mossa += " ";
     int carattere2 = rand()%12;
+    //aggiungo +1 per tornare al range di numeri utilizzati nella stampa delle griglie
     int numero2 = rand()%12+1;
     mossa += (char)(carattere2+to_ascii_upper_case);
+    //se il valore x di coordinata target è minore 10 inserisco un carattere '0' per formattare l'output e poi inserisco il numero
     if (numero2<10){
         mossa+="0";
         mossa += (char)(numero2+to_ascii_number);
     }else{
+        //se non è necessaria formattazione inserisco il numero senza caratteri speciali
         mossa += std::to_string(numero2);
     }
     return mossa;
@@ -138,7 +145,9 @@ std::string Computer::choose_move() {
 
 
 void Computer::crea_nave(int dimensione) {
+    //variabile che indica lo shift per passare dal valore int al corrispondente char nella tabella ascii
     const int to_ascii_number = 48;
+    //variabile che indica lo shift per passare dal carattere minuscolo al corrispondente carattere maiuscolo nella tabella ascii
     const int to_ascii_upper_case = 65;
 
     int x;
@@ -146,29 +155,37 @@ void Computer::crea_nave(int dimensione) {
     battaglia_navale::Coordinate prua{}, poppa{};
     bool orizzontale;
     bool flag = true;
+
     Nave *n;
     do {
         try {
+            //condizione per generare una nave in base al parametro lunghezza
             if (dimensione == 1) {
+                //generazione sottomaribo
                 x = rand() % 12;
+                //generazione char tra 'A' e 'N'
                 y = rand() % 12 + 'A';
                 prua = battaglia_navale::Coordinate(x, y);
                 auto* s = new Sottomarino(prua);
                 n = s;
             } else if (dimensione == 3 || dimensione == 5) {
+                //generazione supporto/corazzata
+                //randomizzo il parametro orizzontale generando un numero casuale e controllando se è pari o dispari tramite il resto della divisione intera
                 orizzontale = rand() % 2;
                 if (orizzontale) {
+                    //limito la generazione del parametro x in base alla lunghezza della nave da posizionare
                     x = rand() % (12 - dimensione);
                     y = rand() % 12 + to_ascii_upper_case;
                     prua = battaglia_navale::Coordinate(x, y);
                     poppa = battaglia_navale::Coordinate(x + dimensione - 1, y);
                 } else {
+                    //limito la generazione del parametro y in base alla lunghezza della nave da posizionare
                     y = rand() % (12 - dimensione) + to_ascii_upper_case;
                     x = rand() % 12;
                     prua = battaglia_navale::Coordinate(x, y);
                     poppa = battaglia_navale::Coordinate(x, y + dimensione - 1);
                 }
-
+            
                 if (dimensione == 5) {
                     auto* c = new Corazzata(prua, poppa);
                     n = c;

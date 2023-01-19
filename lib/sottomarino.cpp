@@ -1,6 +1,7 @@
 #include "../include/sottomarino.h"
 #include <vector>
 
+//costruttore di sottomarino che richiama il costruttore della classe base (nave)
 Sottomarino::Sottomarino(battaglia_navale::Coordinate &prua)
         : Nave(prua, prua, 'E', 1) {
 }
