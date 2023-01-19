@@ -185,7 +185,7 @@ void Computer::crea_nave(int dimensione) {
                     prua = battaglia_navale::Coordinate(x, y);
                     poppa = battaglia_navale::Coordinate(x, y + dimensione - 1);
                 }
-            
+                //a seconda della dimensione richiesta genero la relativa nave
                 if (dimensione == 5) {
                     auto* c = new Corazzata(prua, poppa);
                     n = c;
@@ -194,11 +194,13 @@ void Computer::crea_nave(int dimensione) {
                     n = s;
                 }
             }
+            //tramite add_nave controllo se la nave è posizionabile: se le coordinate della nave sono libere la nave viene aggiunta
             add_nave(n);
+            //tramite set_log inserisco la mossa origin target nel file di log
             set_log(prua.to_string() + " " + poppa.to_string());
             flag = false;
         } catch (std::invalid_argument &e) {
-            std::cout << "ripeti" << std::endl;
+            //nel caso in cui venga lanciata un'eccezione rieseguo il ciclo
             flag = true;
         }
     } while (flag);
