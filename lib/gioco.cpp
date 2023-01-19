@@ -73,73 +73,6 @@ Gioco::Gioco(bool scelta_bot_game, Computer *G1, Computer *G2) {
   fout.close();
 }
 
-bool Gioco::check_input(std::string input){
-  int lunghezza=0;
-  for(int i=0; i < input.length(); i++){
-    lunghezza++;
-  }
-  if(lunghezza==1){
-    if(input[0]=='0'){
-      return false;
-    }else{
-      //il numero non è zero
-      return true;
-    }
-  }else if(lunghezza==2){
-    if(input[0]=='0'){
-      if(input[1]!='0'){
-        return true;
-      }else{
-        return false;
-      }
-    }else{
-      //il numero non è zero
-      if(input[0]=='1'){
-        if(input[1]=='0' || input[1]=='1' || input[1]=='2'){
-          return true;
-        }else{
-          return false;
-        }
-      }else{
-        return false;
-      }
-    }
-  }else{
-    return false;
-  }
-}
-
-std::string Gioco::format(std::string input){
-  //calcolo la lunghezza di input
-  int lunghezza=0;
-  for(int i=0; input[i]!='\0'; i++){
-    lunghezza++;
-  }
-  if(lunghezza==3){
-    //to upper case
-    if(input[0]>=97 && input[0]<=108){
-      input[0]=input[0]-32;
-    }
-    std::string appo = &input[1];
-    if(check_input(appo)){
-      return input;
-    }else{
-      throw std::invalid_argument("giorgio");
-    }
-  }else if(lunghezza==2){
-    std::string appo = &input[1];
-    std::string risultato;
-    if(check_input(appo)){
-      risultato=input[0]+"0"+input[1];
-      return risultato;
-    }else{
-      throw std::invalid_argument("filippo");
-    }
-  }else{
-    throw std::invalid_argument("marco");
-  }
-}
-
 void Gioco::azione(const std::string& origin,const std::string& target) {
     if (numero_turno_attuale < numero_massimo_turni) {
         //controllo il turno e imposto la ref al giocatore attivo
@@ -174,9 +107,6 @@ void Gioco::azione(const std::string& origin,const std::string& target) {
                 bool trovato = false;
                 Nave *nave_scelta;
 
-                /*std::string num;
-                for (int j = 1; j < origin.length(); j++)
-                    num += origin[j];*/
                 battaglia_navale::Coordinate appo(origin);
                 battaglia_navale::Coordinate appo2(target);
                 for (int i = 0; i < navi.size() && !trovato; i++) {
@@ -187,7 +117,6 @@ void Gioco::azione(const std::string& origin,const std::string& target) {
                 }
                 if (!trovato) {
                     //non ci sono navi in origin
-                    //TODO eccezione, nave non trovata, nel main viene chiesto di reinserire origin e target
                     throw std::invalid_argument("nave non trovata");
                 } else {
                     //nave origin trovata

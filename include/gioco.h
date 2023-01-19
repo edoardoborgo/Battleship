@@ -32,6 +32,7 @@ private:
     std::string format(std::string input);
 
 public:
+    //costruttori in base alla tipologia di gioco
     Gioco()=default;
     Gioco(bool scelta_bot_game, Giocatore *G1, Computer *G2);
     Gioco(bool scelta_bot_name, Computer *G1, Computer *G2);
@@ -58,6 +59,9 @@ public:
      */
     bool is_bot_game() const;
 
+    /*
+     *  set_log: stampa la mossa sul file log
+     */
     void set_log(std::string mosse);
 
     void set_salva_mosse(bool salva_mosse, std::string nome_file){
@@ -65,6 +69,9 @@ public:
         nome_file_ = nome_file;
     }
 
+    /*
+     *  is_game_over: indica se il gioco è finito
+     */
     bool is_game_over();
 
     Giocatore* get_giocatore_attuale();
